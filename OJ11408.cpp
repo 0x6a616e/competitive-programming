@@ -5,15 +5,16 @@ using namespace std;
 
 int MAX = 5000001;
 vector<bool> criba(MAX, true);
+vector<int> primos;
 vector<int> calculos(MAX, -1);
 
 int solve(int i) {
-        int p = 2;
+        int p = 0;
         int m = i;
         if (calculos[i] == -1) {
-                for (p; !(criba[p] && i % p == 0); p++);
-                for (m; m % p == 0; m /= p);
-                calculos[i] = p + solve(m);
+                for (p; i % primos[p] != 0; p++);
+                for (m; m % primos[p] == 0; m /= primos[p]);
+                calculos[i] = primos[p] + solve(m);
         }
         return calculos[i];
 }
@@ -22,6 +23,7 @@ int main()
 {
         for (int i = 2; i < MAX; i++)
                 if (criba[i]) {
+                        primos.push_back(i);
                         calculos[i] = i;
                         for (int j = 2; i * j <= MAX; j++)
                                 criba[i * j] = false;

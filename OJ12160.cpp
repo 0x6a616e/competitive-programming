@@ -22,9 +22,7 @@ int main()
                 for (int i = 0; i < R; i++)
                         cin >> Ri[i];
                 
-                if (L == U)
-                        cout << "0\n";
-                else {
+                if (L != U) {
                         progreso.push(L);
                         while (!progreso.empty()) {
                                 L = progreso.front();
@@ -40,6 +38,12 @@ int main()
                                 }
                         }
                 }
+
+                if (usos[U] == 0)
+                        cout << "Case " << caso << ": Permanently Locked\n";
+                else
+                        cout << "Case " << caso << ": " << usos[U] << '\n';
         }
+        
         return 0;
 }
