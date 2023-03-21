@@ -1,31 +1,26 @@
 #include <iostream>
 #include <iomanip>
-#include <vector>
-#include <algorithm>
+#include <ext/pb_ds/assoc_container.hpp>
 
+using namespace __gnu_pbds;
 using namespace std;
+
+typedef tree<int,null_type,less<int>,rb_tree_tag, tree_order_statistics_node_update> indexed_set;
 
 int main()
 {
-        cin.tie(nullptr);
-        ios_base::sync_with_stdio(false);
-        
-        int N, num, pos, acum = 0;
-        vector<int>::iterator it;
-        vector<int> nums;
+        int N, score, acum = 0;
+        indexed_set rankings;
 
         cin >> N;
 
-        nums.reserve(N);
-        
-        for (int i = 0; i < N; ++i) {
-                cin >> num;
-                it = lower_bound(nums.begin(), nums.end(), num);
-                pos = nums.end() - it + 1;
-                nums.emplace(it, num);
-                acum += pos;
+        for (int i = 0; i < N; i++) {
+                cin >> score;
+                rankings.insert(score);
+                acum += (rankings.size() - rankings.order_of_key(score));
         }
-        cout << fixed << setprecision(2) << acum / (float) N << '\n';
+
+        cout << fixed << setprecision(2) << acum / (float) rankings.size() << '\n';
         
         return 0;
 }
