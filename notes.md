@@ -73,7 +73,9 @@ Something similar to ***integer division*** happens when multiplying two ints in
 Sometimes the problem can get an answer bigger than what the data types can manage, so the statement usually asks for the answer to be given as the modulo of another number, there is an interesting property of the modulo when working with addition, substraction and multiplication.
 
 $$ ( a + b ) \bmod m = ( a \bmod m + b \bmod m ) \bmod m $$
+
 $$ ( a - b ) \bmod m = ( a \bmod m - b \bmod m ) \bmod m $$
+
 $$ ( a * b ) \bmod m = ( a \bmod m * b \bmod m ) \bmod m $$
 
 This property is that we can get the modulo after every operation so the number never becomes too big. Also, if there are substractions in the code, a way to avoid having a negative remainder is adding ***m*** if the remainder is under 0
@@ -95,7 +97,9 @@ if (abs(a - b) < 1e-9) {
 Useful formulas for the sum of consecutive numbers, there is a general approach but is way too complex for me so I hope is enough with this three.
 
 $$ 1 + 2 + 3 + \dots + n = \frac{n(n + 1)}{2} $$
+
 $$ 1^2 + 2^2 + 3^2 + \dots + n^2 = \frac{n(n + 1)(2n + 1)}{6} $$
+
 $$ 1^3 + 2^3 + 3^3 + \dots + n^3 = \left[\frac{n(n + 1)}{2}\right]^2 $$
 
 ### Arithmetic progression
@@ -134,6 +138,7 @@ $$ \prod_{x=1}^{n} x = 1 * 2 * 3 * \dots * n $$
 Or recursiveky as.
 
 $$ 0! = 1 $$
+
 $$ n! = n * (n - 1)! $$
 
 ### Fibonacci numbers
@@ -141,7 +146,9 @@ $$ n! = n * (n - 1)! $$
 This one can be defined recursively as.
 
 $$ f(0) = 0 $$
+
 $$ f(1) = 1 $$
+
 $$ f(n) = f(n - 1) + f(n - 2) $$
 
 There is closed-form formula for calculating Fibonacci numbers.
