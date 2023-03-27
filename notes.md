@@ -198,13 +198,12 @@ El siguiente subarreglo produce una suma de 10:
 |----|---|---|----|---|---|----|---|
 |    | ^ | ^ |  ^ | ^ | ^ |    |   |
 
-Asumimos que un subarreglo vacio esta permitido, por lo que la suma máxima siempre será al menos 0. Ahora, para resolverlo en O(n) partimos de la idea de que para cada posición queremos calcular la suma máxima posible hasta ahí, entonces la del arreglo completo será la mayor de todas esas sumas.
-We assume that an empty subarray is allowed, so the maximum subarray sum is always at least 0. Surprisingly, it is possible to solve the problem in O(n) time, which means that just one loop is enough. The idea is to calculate, for each array position, the maximum sum of a subarray that ends at that position. After this, the answer for the problem is the maximum of those sums. Consider the subproblem of finding the maximum-sum subarray that ends at position k. There are two possibilities:
+Asumimos que un subarreglo vacio esta permitido, por lo que la suma máxima siempre será al menos 0. Ahora, para resolverlo en O(n) partimos de la idea de que para cada posición queremos calcular la suma máxima posible hasta ahí, entonces la del arreglo completo será la mayor de todas esas sumas. Consideramos dos posibilidades para la máxima suma del arreglo que termina en la posición *k*:
 
-1. The subarray only contains the element at position k.
-2. The subarray consists of a subarray that ends at position k - 1, followed by the element at position k.
+1. El subarreglo solo contiene el elemento de la posición k.
+2. El subarreglo consiste de un subarreglo que termina en la posición k - 1, seguido del elemento en la posición k.
 
-In the latter case, since we want to find a subarray with maximum sum, the subarray that ends at position k - 1 should also have the maximum sum. Thus, we can solve the problem efficiently by calculating the maximum subarray sum for each ending position from left to right. The following code implements the algorithm:
+En el segundo caso, dado que queremos encontrar un subarreglo con la máxima suma, el subarreglo que termina en la posición k - 1 debería tener también la máxima suma para ese punto. Entonces podemos resolver el problema al calcular la máxima suma de subarreglos para cada posición de izquierda a derecha. El siguiente código demuestra una implementación de este algoritmo:
 
 ~~~C++
 int best = 0, sum = 0;
@@ -215,59 +214,62 @@ for (int k = 0; k < n; k++) {
 cout << best << '\n';
 ~~~
 
-The algorithm only contains one loop that goes through the input, so the time complexity is O(n). This is also the best possible time complexity, because any algorithm for the problem has to examine all array elements at least once.
+Este algoritmo solo tiene un ciclo, por lo que la complejidad es O(n). Esta es la mejor complejidad posible, ya que cualquier algoritmo para este problema tiene que analizar todos los datos al menos una vez.
 
-## Sorting in C++
+## Ordenando en C++
 
-It is almost never a good idea to use a home-made sorting algorithm in a contest, because there are good implementations available in programming languages. For example, the C++ standard library contains the function sort that can be easily used for sorting arrays and other data structures. The following code sorts a vector in increasing order:
-
-~~~C++
-vector<int> v = {4,2,5,3,5,8,3};
-sort(v.begin(),v.end());
-~~~
-
-After the sorting, the contents of the vector will be [ 2, 3, 3, 4, 5, 5, 8 ]. The default sorting order is increasing, but a reverse order is possible as follows:
+Casi nunca es una buena idea usar algoritmos de ordenamiento que hayas hecho a mano, esto porque ya hay buenas implementaciones en los lenguajes de programación. Por ejemplo, la STL de C++ ya tiene una función *sort* que puede ser usada para ordenar (es una combinación de quicksort, heapsort, insertion sort), también existe *stable_sort* en caso de que se necesite un ordenamiento estable. Aquí hay un ejemplo de esta función en acción.
 
 ~~~C++
-sort(v.rbegin(),v.rend());
+vector<int> v = { 4, 2, 5, 3, 5, 8, 3 };
+sort(v.begin(), v.end());
 ~~~
 
-### User-defined structs
+Después de este ordenamiento, el contenido del vector será [ 2, 3, 3, 4, 5, 5, 8 ]. Por defecto se ordena de menor a mayor, pero una forma de implementar un orden inverso es:
 
-User-defined structs do not have a comparison operator automatically. The operator should be defined inside the struct as a function operator<, whose parameter is another element of the same type. The operator should return *true* if the element is smaller than the parameter, and *false* otherwise. For example, the following struct *P* contains the x and y coordinates of a point. The comparison operator is defined so that the points are sorted primarily by the x coordinate and secondarily by the y coordinate.
+~~~C++
+sort(v.rbegin(), v.rend());
+~~~
+
+### Estructuras definidas por el usuario
+
+Las estructuras que nosotros hagamos no tienen un operador de comparación automaticamente. Este operador se puede definir dentro de la estructura como una función de nombre *operator<* cuyo parametro debe ser un elemento del mismo tipo, debe devolver *true* si el elemento es más pequeño que el parametro y *falso* si no es así. Un ejemplo:
 
 ~~~C++
 struct P {
     int x, y;
     bool operator<(const P &p) {
-        if (x != p.x) return x < p.x;
-        else return y < p.y;
+        if (x != p.x)
+            return x < p.x;
+        else
+            return y < p.y;
     }
 };
 ~~~
 
-### Comparison functions
+### Funciones de comparación
 
-It is also possible to give an external comparison function to the sort function as a callback function. For example, the following comparison function *comp* sorts strings primarily by length and secondarily by alphabetical order:
+También se puede dar como parametro una función externa para que se use dentro del *sort*. Por ejemplo:
 
 ~~~C++
 bool comp(string a, string b) {
-    if (a.size() != b.size()) return a.size() < b.size();
+    if (a.size() != b.size())
+        return a.size() < b.size();
     return a < b;
 }
 ~~~
 
-Now a vector of strings can be sorted as follows:
+Ahora usando esa función para un vector de strings:
 
 ~~~C++
 sort(v.begin(), v.end(), comp);
 ~~~
 
-## Binary search
+## Búsqueda binaria
 
-### Manual approach
+### Forma manual
 
-There are two ways to implement binary search by ourselves
+Hay dos formas de implementar la búsqueda binaria por nuestra cuenta.
 
 ~~~C++
 int a = 0, b = n - 1;
@@ -276,29 +278,34 @@ while (a <= b) {
     if (array[k] == x) {
         // x found at index k
     }
-    if (array[k] > x) b = k-1;
-    else a = k+1;
+    if (array[k] > x)
+        b = k-1;
+    else
+        a = k+1;
 }
 ~~~
 
-And.
+Y.
 
 ~~~C++
 int k = 0;
-for (int b = n/2; b >= 1; b /= 2) {
-    while (k + b < n && array[k + b] <= x) k += b;
+for (int b = n / 2; b >= 1; b /= 2) {
+    while (k + b < n && array[k + b] <= x)
+        k += b;
 }
 if (array[k] == x) {
     // x found at index k
 }
 ~~~
 
-### C++ functions
+### Funciones de C++
 
-The C++ standard library contains the following functions that are based on binary search and work in logarithmic time:
+La libreria estandar de C++ contiene las siguientes funciones que estan basadas en búsqueda binaria y por lo tanto funcionan en tiempo logaritmico:
 
-* lower_bound returns a pointer to the first array element whose value is at least x.
-* upper_bound returns a pointer to the first array element whose value is larger than x.
-* equal_range returns both above pointers.
+* lower_bound devuelve un apuntador al primer elemento que vale al menos x.
+* upper_bound devuelve un apuntador al primer elemento que vale más que x. 
+* equal_range devuelve los dos apuntadores de arriba.
 
-The functions assume that the array is sorted. If there is no such element, the pointer points to the element after the last array element. 
+Estas funciones asumen que el arreglo esta ordenado. Si no encuentran el elemento devuelven un apuntador pasado el último elemento.
+
+
