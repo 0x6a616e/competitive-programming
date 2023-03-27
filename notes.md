@@ -3,11 +3,11 @@ geometry: margin=2.54cm
 output: pdf_document
 ---
 
-# Competitive Programming Notes
+# Notas programación competitiva
 
-## Template for C++
+## Plantilla para C++
 
-Code template for any program in C++.
+Plantilla para cualquier programa en C++.
 
 ~~~C++
 #include <bits/stdc++.h>
@@ -23,54 +23,54 @@ int main()
 }
 ~~~
 
-Main advantage of this template is that the ***include*** used here brings the whole C++ standard library. Because I always use ***cin*** and ***cout***, this helps to optimize the IO operations, specially helpful when the problem involves a lot o reading/printing. Also worth noting that ***'\\n'*** is faster than ***endl***.
+La principal ventaja de esta plantilla es que el ***include*** que usa trae toda la libreria estándar, Yo siempre uso ***cin*** y ***cout*** así que esta plantilla incluye optimizaciones para el manejo de entrada. También hay que recordar que ***'\\n'*** es más rápido que ***endl***.
 
-## Compilation command for C++
+## Comando para compilar los programas de C++
 
-Is encouraged to use this command to compile C++ programs.
+Recomiendo este comando para compilar, a menos que el concurso sugiera uno.
 
 ~~~bash
-g++ -std=c++11 -O2 -Wall test.cpp
+g++ -O2 -Wall test.cpp
 ~~~
 
-This command uses the standard for C++11, optimizes the code (O2) and shows warnings of possible errors.
+Con esto se optimiza el código además de indicar que se muestren la mayoría de advertencias.
 
-## Working with files
+## Manejo de archivos
 
-If the contest requires you to read/write from/to a file, you can use the following commands at the beginning of your code.
+Si el concurso requiere que se lea o escriba en archivos, se puede agregar esto al principio.
 
 ~~~C++
 freopen("input.txt", "r", stdin);
 freopen("output.txt", "w", stdout);
 ~~~
 
-With this instructions there is no need to further modify the code.
+Con esto ya no se ocupan modificar más cosas.
 
-## Some data types and their ranges
+## Tipos de dato y sus rangos
 
-| Data Type              | Size (in bytes) | Range                           |
-|:----------------------:|:---------------:|:-------------------------------:|
-| short int              | 2               | -32,768 to 32,767               |
-| unsigned short int     | 2               | 0 to 65,535                     |
-| unsigned int           | 4               | 0 to 4,294,967,295              |
-| int                    | 4               | -2,147,483,648 to 2,147,483,647 |
-| long long int          | 8               | -(2^63) to (2^63) - 1           |
-| unsigned long long int | 8               | 0 to 18,446,744,073,709,551,615 |
-| float                  | 4               | -3.4 × 10^38 to 3.4 × 10^38     |
-| double                 | 8               | -1.7 × 10^308 to 1.7 × 10^308   |
-| long double            | 12              | -1.1 × 10^4932 to 1.1 × 10^4932 |
+| Tipo de dato           | Tamaño (en bytes) | Rango                           |
+|:----------------------:|:-----------------:|:-------------------------------:|
+| short int              | 2                 | -32,768 to 32,767               |
+| unsigned short int     | 2                 | 0 to 65,535                     |
+| unsigned int           | 4                 | 0 to 4,294,967,295              |
+| int                    | 4                 | -2,147,483,648 to 2,147,483,647 |
+| long long int          | 8                 | -(2^63) to (2^63) - 1           |
+| unsigned long long int | 8                 | 0 to 18,446,744,073,709,551,615 |
+| float                  | 4                 | -3.4 × 10^38 to 3.4 × 10^38     |
+| double                 | 8                 | -1.7 × 10^308 to 1.7 × 10^308   |
+| long double            | 12                | -1.1 × 10^4932 to 1.1 × 10^4932 |
 
-Something about ***long long*** that we have to take into account is its prefix.
+Algo a considerar sobre *long long* es que tiene un prefijo.
 
 ~~~C++
 long long x = 123456789123456789LL;
 ~~~
 
-Something similar to ***integer division*** happens when multiplying two ints into a long long, where even when the variable is long long, because they are ints the result is also an int.
+También pasa algo parecido a la división entera cuando se multiplican dos enteros hacia un *long long*, pasa que, a pesar de que esa variable es *long long*, el resultado de multiplicar dos enteros es un entero, y no se guarda bien. 
 
-## Big numbers and modulo
+## Números grandes y el módulo
 
-Sometimes the problem can get an answer bigger than what the data types can manage, so the statement usually asks for the answer to be given as the modulo of another number, there is an interesting property of the modulo when working with addition, substraction and multiplication.
+A veces el problema pide que se de la respuesta módulo de algún número (cuando la respuesta puede ser muy grande), esto se puede manejar con una de las propiedades del módulo cuando se trata de adición, substracción o multiplicación.
 
 $$ ( a + b ) \bmod m = ( a \bmod m + b \bmod m ) \bmod m $$
 
@@ -78,23 +78,23 @@ $$ ( a - b ) \bmod m = ( a \bmod m - b \bmod m ) \bmod m $$
 
 $$ ( a * b ) \bmod m = ( a \bmod m * b \bmod m ) \bmod m $$
 
-This property is that we can get the modulo after every operation so the number never becomes too big. Also, if there are substractions in the code, a way to avoid having a negative remainder is adding ***m*** if the remainder is under 0
+Gracias a esta propiedad podemos estar sacando el módulo después de cada operación, por lo que el número nunca se hace demasiado grande. También, en caso de que haya restas, podemos evitar terminar con un residuo negativo si le sumamos *m* en caso de que el residuo sea menor a 0.
 
-## Floating point numbers
+## Números flotantes
 
-Most of the time using ***double*** will suffice the needs of the problem, if that is not the case we can use ***long double***. Something important about floating points is that sometimes can be risky to compare them with the ***==*** operator, so in cases like this we can assume that two numbers are equal if the difference between them is less than a small number, it can look like this.
+En la mayoría de los casos con usar ***double*** es suficiente, si eso no basta se puede usar ***long double***. Pero algo a tener en cuenta cuando se usan números flotantes es que compararlos con *==* no siempre funciona, esto por pequeños *errores* de precisión, por lo que una forma de compararlos es ver si la diferencia entre ellos es lo suficientemente pequeña.
 
-~~~C+++
+~~~C++
 if (abs(a - b) < 1e-9) {
     // a and b are equal
 }
 ~~~
 
-## Math
+## Matemáticas
 
-### Simple progression
+### Sucesión simple
 
-Useful formulas for the sum of consecutive numbers, there is a general approach but is way too complex for me so I hope is enough with this three.
+Fórmulas útiles para calcular la suma de números consecutivos, hay una fórmula mucho más general pero no la entendí.
 
 $$ 1 + 2 + 3 + \dots + n = \frac{n(n + 1)}{2} $$
 
@@ -102,25 +102,25 @@ $$ 1^2 + 2^2 + 3^2 + \dots + n^2 = \frac{n(n + 1)(2n + 1)}{6} $$
 
 $$ 1^3 + 2^3 + 3^3 + \dots + n^3 = \left[\frac{n(n + 1)}{2}\right]^2 $$
 
-### Arithmetic progression
+### Sucesión aritmetica
 
-Another one is a ***arithmetic progression***, which is a sequence where the difference between the numbers stays the same, like this.
+Otra cosa es una sucesión aritmetica, donde la diferencia entre dos números cualesquiera es la misma.
 
 $$ 3, 7, 11, 15 $$
 
-In this progression each number increases by 4 units, in this cases there is this formula.
+En esta sucesión aumentan de 4 en 4. La formula se ve así.
 
 $$ a + \dots + b = \frac{n(a + b)}{2} $$
 
-In this formula ***a*** is the first number, ***b*** is the last number and ***n*** is the amount of numbers.
+Es esta fórmula *a* es el primer número, *b* el segundo y *n* es la cantidad de números, se puede ver que en la fórmula no se considera el tamaño de los saltos.
 
-### Geometric progression
+### Sucesión geometrica
 
-This progression is a sequence of numbers where the ratio between any two consecutive numbers is the same. It can be expressed as follows.
+Esta sucesión es una secuencia de números donde la proporción entre dos números consecutivos es la misma.
 
 $$ a + ak + ak^2 + \dots + b = \frac{bk - a}{k - 1} $$
 
-### Truth table
+### Tabla de verdad
 
 | A | B | not A | not B | A and B | A or B | A implies B | A equals B |
 |:-:|:-:|:-----:|:-----:|:-------:|:------:|:-----------:|:----------:|
@@ -131,19 +131,19 @@ $$ a + ak + ak^2 + \dots + b = \frac{bk - a}{k - 1} $$
 
 ### Factorial
 
-It can be defined as.
+Se puede definir iterativamente.
 
 $$ \prod_{x=1}^{n} x = 1 * 2 * 3 * \dots * n $$
 
-Or recursiveky as.
+O recursivamente.
 
 $$ 0! = 1 $$
 
 $$ n! = n * (n - 1)! $$
 
-### Fibonacci numbers
+### Números de Fibonacci.
 
-This one can be defined recursively as.
+Se define recursivamente así.
 
 $$ f(0) = 0 $$
 
@@ -151,13 +151,13 @@ $$ f(1) = 1 $$
 
 $$ f(n) = f(n - 1) + f(n - 2) $$
 
-There is closed-form formula for calculating Fibonacci numbers.
+También hay una fórmula directa para calcularlos.
 
 $$ f(n) = \frac{(1 + \sqrt{5})^n - (1 - \sqrt{5})^n}{2^n\sqrt{5}} $$
 
-### Logarithms
+### Logaritmos
 
-A logarithm says.
+Propiedades de los logaritmos.
 
 $$ log_k(x) = a \implies k^a = x $$
 
@@ -166,3 +166,138 @@ $$ log_k(ab) = log_k(a) + log_k(b) $$
 $$ log_k(x^n) = n * log_k(x) $$
 
 $$ log_k(\frac{a}{b}) = log_k(a) - log_k(b) $$
+
+Otra propiedad interesante es que la cantidad de digitos de un entero *x* en base *b* es:
+
+$$ log_b(x) + 1 $$
+
+## Estimando la eficiencia
+
+Aquí hay una tabla para tener una idea de la complejidad necesaria según el tamaño de la entrada.
+
+| tamaño de entrada | complejidad requerida |
+|:------------------|:----------------------|
+| n <= 10           | O(n!)                 |
+| n <= 20           | O(2^n)                |
+| n <= 500          | O(n^3)                |
+| n <= 5000         | O(n^2)                |
+| n <= 10^6         | O(n*logn) o O(n)      |
+| n es grande       | O(1) o O(logn)        |
+
+Esto no es para tomarlo como la verdad absoluta, pero puede servir para descartar ideas sin desperdiciar tiempo.
+
+## Max subarray sum
+
+This section discusses a classic problem that has a straightforward O(n^3) solution. However, by designing a better algorithm, it is possible to solve the problem in O(n^2) time and even in O(n) time. Given an array of n numbers, our task is to calculate the maximum subarray sum, i.e., the largest possible sum of a sequence of consecutive values in the array. The problem is interesting when there may be negative values in the array. For example, in the array.
+
+| -1 | 2 | 4 | -3 | 5 | 2 | -5 | 2 |
+
+The following subarray produces the maximum sum 10:
+
+| -1 | 2 | 4 | -3 | 5 | 2 | -5 | 2 |
+|----|---|---|----|---|---|----|---|
+|    | ^ | ^ |  ^ | ^ | ^ |    |   |
+
+We assume that an empty subarray is allowed, so the maximum subarray sum is always at least 0. Surprisingly, it is possible to solve the problem in O(n) time, which means that just one loop is enough. The idea is to calculate, for each array position, the maximum sum of a subarray that ends at that position. After this, the answer for the problem is the maximum of those sums. Consider the subproblem of finding the maximum-sum subarray that ends at position k. There are two possibilities:
+
+1. The subarray only contains the element at position k.
+2. The subarray consists of a subarray that ends at position k - 1, followed by the element at position k.
+
+In the latter case, since we want to find a subarray with maximum sum, the subarray that ends at position k - 1 should also have the maximum sum. Thus, we can solve the problem efficiently by calculating the maximum subarray sum for each ending position from left to right. The following code implements the algorithm:
+
+~~~C++
+int best = 0, sum = 0;
+for (int k = 0; k < n; k++) {
+    sum = max(array[k],sum+array[k]);
+    best = max(best,sum);
+}
+cout << best << '\n';
+~~~
+
+The algorithm only contains one loop that goes through the input, so the time complexity is O(n). This is also the best possible time complexity, because any algorithm for the problem has to examine all array elements at least once.
+
+## Sorting in C++
+
+It is almost never a good idea to use a home-made sorting algorithm in a contest, because there are good implementations available in programming languages. For example, the C++ standard library contains the function sort that can be easily used for sorting arrays and other data structures. The following code sorts a vector in increasing order:
+
+~~~C++
+vector<int> v = {4,2,5,3,5,8,3};
+sort(v.begin(),v.end());
+~~~
+
+After the sorting, the contents of the vector will be [ 2, 3, 3, 4, 5, 5, 8 ]. The default sorting order is increasing, but a reverse order is possible as follows:
+
+~~~C++
+sort(v.rbegin(),v.rend());
+~~~
+
+### User-defined structs
+
+User-defined structs do not have a comparison operator automatically. The operator should be defined inside the struct as a function operator<, whose parameter is another element of the same type. The operator should return *true* if the element is smaller than the parameter, and *false* otherwise. For example, the following struct *P* contains the x and y coordinates of a point. The comparison operator is defined so that the points are sorted primarily by the x coordinate and secondarily by the y coordinate.
+
+~~~C++
+struct P {
+    int x, y;
+    bool operator<(const P &p) {
+        if (x != p.x) return x < p.x;
+        else return y < p.y;
+    }
+};
+~~~
+
+### Comparison functions
+
+It is also possible to give an external comparison function to the sort function as a callback function. For example, the following comparison function *comp* sorts strings primarily by length and secondarily by alphabetical order:
+
+~~~C++
+bool comp(string a, string b) {
+    if (a.size() != b.size()) return a.size() < b.size();
+    return a < b;
+}
+~~~
+
+Now a vector of strings can be sorted as follows:
+
+~~~C++
+sort(v.begin(), v.end(), comp);
+~~~
+
+## Binary search
+
+### Manual approach
+
+There are two ways to implement binary search by ourselves
+
+~~~C++
+int a = 0, b = n - 1;
+while (a <= b) {
+    int k = (a + b) / 2;
+    if (array[k] == x) {
+        // x found at index k
+    }
+    if (array[k] > x) b = k-1;
+    else a = k+1;
+}
+~~~
+
+And.
+
+~~~C++
+int k = 0;
+for (int b = n/2; b >= 1; b /= 2) {
+    while (k + b < n && array[k + b] <= x) k += b;
+}
+if (array[k] == x) {
+    // x found at index k
+}
+~~~
+
+### C++ functions
+
+The C++ standard library contains the following functions that are based on binary search and work in logarithmic time:
+
+* lower_bound returns a pointer to the first array element whose value is at least x.
+* upper_bound returns a pointer to the first array element whose value is larger than x.
+* equal_range returns both above pointers.
+
+The functions assume that the array is sorted. If there is no such element, the pointer points to the element after the last array element. 
