@@ -186,18 +186,19 @@ Aquí hay una tabla para tener una idea de la complejidad necesaria según el ta
 
 Esto no es para tomarlo como la verdad absoluta, pero puede servir para descartar ideas sin desperdiciar tiempo.
 
-## Max subarray sum
+## Suma máxima de subarreglo
 
-This section discusses a classic problem that has a straightforward O(n^3) solution. However, by designing a better algorithm, it is possible to solve the problem in O(n^2) time and even in O(n) time. Given an array of n numbers, our task is to calculate the maximum subarray sum, i.e., the largest possible sum of a sequence of consecutive values in the array. The problem is interesting when there may be negative values in the array. For example, in the array.
+Aquí se habla de un problema clásico cuya solución más *directa* es O(n^3), pero que pensandola mejor se puede lograr reducir a O(n). Dado un arreglo de n númeors, hay que calcular cual es la suma máxima de una subsección, osea la suma más grande de una secuencia consecutiva de valores en el arreglo, esto se vuelve más interesante si el arreglo puede tener números negativos. Aquí hay un ejemplo.
 
 | -1 | 2 | 4 | -3 | 5 | 2 | -5 | 2 |
 
-The following subarray produces the maximum sum 10:
+El siguiente subarreglo produce una suma de 10:
 
 | -1 | 2 | 4 | -3 | 5 | 2 | -5 | 2 |
 |----|---|---|----|---|---|----|---|
 |    | ^ | ^ |  ^ | ^ | ^ |    |   |
 
+Asumimos que un subarreglo vacio esta permitido, por lo que la suma máxima siempre será al menos 0. Ahora, para resolverlo en O(n) partimos de la idea de que para cada posición queremos calcular la suma máxima posible hasta ahí, entonces la del arreglo completo será la mayor de todas esas sumas.
 We assume that an empty subarray is allowed, so the maximum subarray sum is always at least 0. Surprisingly, it is possible to solve the problem in O(n) time, which means that just one loop is enough. The idea is to calculate, for each array position, the maximum sum of a subarray that ends at that position. After this, the answer for the problem is the maximum of those sums. Consider the subproblem of finding the maximum-sum subarray that ends at position k. There are two possibilities:
 
 1. The subarray only contains the element at position k.
