@@ -171,6 +171,12 @@ Otra propiedad interesante es que la cantidad de digitos de un entero *x* en bas
 
 $$ log_b(x) + 1 $$
 
+### Promedio
+
+Se puede sumar o restar un número a un promedio ya calculado sin tener que recalcular la suma original
+
+$$ s = \frac{a_1 + \dots + a_n}{n} $$
+
 ## Estimando la eficiencia
 
 Aquí hay una tabla para tener una idea de la complejidad necesaria según el tamaño de la entrada.
