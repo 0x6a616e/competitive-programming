@@ -177,6 +177,10 @@ Se puede sumar o restar un número a un promedio ya calculado sin tener que reca
 
 $$ s = \frac{a_1 + \dots + a_n}{n} $$
 
+$$ s' = \frac{a_1 + \dots + a_n + a_{n + 1}}{n + 1} = \frac{ns + a_{n + 1}}{n + 1} = \frac{(n + 1)s + a_{n + 1}}{n + 1} - \frac{s}{n + 1} = s + \frac{a_{n + 1} - s}{n + 1} $$
+
+$$ s'' = \frac{a_1 + \dots + a_{n - 1}}{n - 1} = \frac{ns - a_{n}}{n - 1} = \frac{(n - 1)s + a_{n}}{n - 1} + \frac{s}{n - 1} = s + \frac{s - a_{n}}{n - 1} $$
+
 ## Estimando la eficiencia
 
 Aquí hay una tabla para tener una idea de la complejidad necesaria según el tamaño de la entrada.
