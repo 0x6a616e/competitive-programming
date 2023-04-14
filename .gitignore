@@ -1,0 +1,7 @@
+# Ignore binary files
+*.out
+*.exe
+
+# Ignore I/O files
+input.txt
+output.txt
