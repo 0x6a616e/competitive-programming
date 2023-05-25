@@ -33,17 +33,15 @@ bool posible(string bolt, string fila, char movement) {
 }
 
 int solve(string bolt, vector<string> &maze, vector<vector<int>> &memo, int ar, int ac) {
-        if (ar == maze.size()) {
-                return true;
-        }
-        for (char i: { 'u', 'r', 'd', 'l' }) {
-                if (i == 'u' && ar == 0) {
-                        continue;
-                }
-                if ( i == 'r') {
-
+        if (memo[ar][ac] == -1) {
+                if (ar == maze.size()) {
+                        memo[ar][ac] = 1;
+                } else {
+                        memo[ar][ac] = 0;
+                        
                 }
         }
+        return memo[ar][ac];
 }
 
 int main()
