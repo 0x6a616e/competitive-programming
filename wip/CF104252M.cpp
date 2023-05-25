@@ -33,12 +33,27 @@ bool posible(string bolt, string fila, char movement) {
 }
 
 int solve(string bolt, vector<string> &maze, vector<vector<int>> &memo, int ar, int ac) {
+        if (ar == maze.size()) {
+                memo[ar][ac] = 1;
+        }
         if (memo[ar][ac] == -1) {
-                if (ar == maze.size()) {
-                        memo[ar][ac] = 1;
-                } else {
-                        memo[ar][ac] = 0;
-                        
+                memo[ar][ac] = 0;
+                for (char i: { 'u', 'r', 'd', 'l' }) {
+                        if (i == 'u' && ar == 0) {
+                                continue;
+                        }
+                        if (i == 'u' && (ar == 1 || posible(bolt, maze[ar - 2], i))) {
+                                memo[ar][ac] = max(memo[ar][ac], solve(bolt, maze, memo, ar - 1, ac));
+                        }
+                        if (i == 'r' && (!ar || posible(bolt, maze[ar - 1], i))) {
+                                memo[ar][ac] = max(memo[ar][ac], solve(move(bolt, i), maze, memo, ar, (ac + 1) % maze[0].size()));
+                        }
+                        if (i == 'd' && posible(bolt, maze[ar], i)) {
+                                memo[ar][ac] = max(memo[ar][ac], solve(bolt, maze, memo, ar + 1, ac));
+                        }
+                        if (i == 'l' && (!ar || posible(bolt, maze[ar - 1], i))) {
+                                memo[ar][ac] = max(memo[ar][ac], solve(move(bolt, i), maze, memo, ar, (ac - 1 < 0 ? maze[0].size() - ac + 1 : ac - 1)));
+                        }
                 }
         }
         return memo[ar][ac];
@@ -57,7 +72,7 @@ int main()
         cin >> R >> C;
 
         maze.resize(R);
-        memo.resize(R + 1, vector<int> (C, -1));
+        memo.resize(R + 3, vector<int> (C + 3, -1));
 
         cin >> bolt;
 
@@ -71,7 +86,15 @@ int main()
         if (solve(bolt, maze, memo, ar, ac)) {
                 cout << "Y\n";
         } else {
-                cout << "N\n";
+                memo.clear();
+                memo.resize(R + 3, vector<int> (C + 3, -1));
+                ar = 0;
+                ac = 0;
+                if (solve(move(bolt, 'f'), maze, memo, ar, ac)) {
+                        cout << "Y\n";
+                } else {
+                        cout << "N\n";
+                }
         }
 
         return 0;
