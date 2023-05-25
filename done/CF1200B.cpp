@@ -1,3 +1,5 @@
+// https://codeforces.com/problemset/problem/1200/B
+
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -22,12 +24,11 @@ int main()
 
         for (p = 0; p < n - 1; p++) {
             if (cols[p] + k > cols[p + 1]) {
-                m += (cols[p] - (cols[p + 1] - k));
+                m += min(cols[p] - (cols[p + 1] - k), cols[p]);
             } else if (cols[p] + k < cols[p + 1]) {
                 if (m >= (cols[p + 1] - k - cols[p])) {
                     m -= (cols[p + 1] - k - cols[p]);
                 } else {
-                    
                     break;
                 }
             }
