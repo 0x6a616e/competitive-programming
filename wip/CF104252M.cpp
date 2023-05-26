@@ -52,7 +52,7 @@ int solve(string bolt, vector<string> &maze, vector<vector<int>> &memo, int ar, 
                                 memo[ar][ac] = max(memo[ar][ac], solve(bolt, maze, memo, ar + 1, ac));
                         }
                         if (i == 'l' && (!ar || posible(bolt, maze[ar - 1], i))) {
-                                memo[ar][ac] = max(memo[ar][ac], solve(move(bolt, i), maze, memo, ar, (ac - 1 < 0 ? maze[0].size() - ac + 1 : ac - 1)));
+                                memo[ar][ac] = max(memo[ar][ac], solve(move(bolt, i), maze, memo, ar, (ac == 0 ? maze[0].size() - 1 : ac - 1)));
                         }
                 }
         }
@@ -72,7 +72,7 @@ int main()
         cin >> R >> C;
 
         maze.resize(R);
-        memo.resize(R + 3, vector<int> (C + 3, -1));
+        memo.resize(R + 3, vector<int> (C, -1));
 
         cin >> bolt;
 
@@ -87,7 +87,7 @@ int main()
                 cout << "Y\n";
         } else {
                 memo.clear();
-                memo.resize(R + 3, vector<int> (C + 3, -1));
+                memo.resize(R + 3, vector<int> (C, -1));
                 ar = 0;
                 ac = 0;
                 if (solve(move(bolt, 'f'), maze, memo, ar, ac)) {
