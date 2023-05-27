@@ -693,6 +693,28 @@ while (a.size() > 1 && a.back() == 0)
 
 # Estructuras de datos
 
+## Policy Based Data Structures
+
+Es una estructura muy útil, es bàsicamente un *set* (con inserción y borrado en O(log n)) pero con índices.
+
+~~~C++
+#include <ext/pb_ds/assoc_container.hpp>
+
+using namespace __gnu_pbds;
+using namespace std;
+
+typedef tree<pair<unsigned long long, int>, null_type, less<pair<unsigned long long, int>>, rb_tree_tag, tree_order_statistics_node_update> indexed_set;
+~~~
+
+Esta implementación es para un multiset, por eso se almacena un *pair*, pero si se necesita que no haya repeticiones se sustituye el *pair* por el tipo de dato. También esta ordenado de menor a mayor, si se necesita lo opuesto se cambia el *less*
+
+~~~C++
+indexed_set is;
+
+is.order_of_key(key); // Regresa el índice que esa key tendría dentro del set, exista o no
+is.find_by_order(order); // Regresa un apuntador al índice que se uso como parametro
+~~~
+
 ## Minimum stack / Minimum queue
 
 Aquí hay modificaciones al stack y a la fila para además de tener sus características poder acceder al menor elemento en $O(1)$.
