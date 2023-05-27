@@ -695,7 +695,7 @@ while (a.size() > 1 && a.back() == 0)
 
 ## Policy Based Data Structures
 
-Es una estructura muy útil, es bàsicamente un *set* (con inserción y borrado en O(log n)) pero con índices.
+Es una estructura muy útil, es básicamente un *set* (con inserción y borrado en O(log n)) pero con índices.
 
 ~~~C++
 #include <ext/pb_ds/assoc_container.hpp>
@@ -703,7 +703,12 @@ Es una estructura muy útil, es bàsicamente un *set* (con inserción y borrado 
 using namespace __gnu_pbds;
 using namespace std;
 
-typedef tree<pair<unsigned long long, int>, null_type, less<pair<unsigned long long, int>>, rb_tree_tag, tree_order_statistics_node_update> indexed_set;
+typedef tree<
+    pair<unsigned long long, int>,
+    null_type,
+    less<pair<unsigned long long, int>>,
+    rb_tree_tag,
+    tree_order_statistics_node_update> indexed_set;
 ~~~
 
 Esta implementación es para un multiset, por eso se almacena un *pair*, pero si se necesita que no haya repeticiones se sustituye el *pair* por el tipo de dato. También esta ordenado de menor a mayor, si se necesita lo opuesto se cambia el *less*
