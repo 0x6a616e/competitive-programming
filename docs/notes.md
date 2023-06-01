@@ -245,7 +245,7 @@ $$ log_b(x) + 1 $$
 
 ## Promedio
 
-Se puede sumar o restar un número a un promedio ya calculado sin tener que recalcular la suma original
+Se puede sumar o restar un número a un promedio ya calculado sin tener que recalcular la suma original.
 
 $$ s = \frac{a_1 + \dots + a_n}{n} $$
 
@@ -396,7 +396,7 @@ vector<long long> trial_division4(long long n) {
 
 ## Función Phi
 
-Cuenta la cantidad de enteros entre 1 y $n$ (inclusiva) que son coprimos con $n$ (dos números son coprimos si su máximo común divisor es 1)
+Cuenta la cantidad de enteros entre 1 y $n$ (inclusiva) que son coprimos con $n$ (dos números son coprimos si su máximo común divisor es 1).
 
 Implementación para cualquier n.
 
@@ -570,6 +570,7 @@ n         = 01011000
 ## Desplazamientos
 
 - $\gg$ : Desplaza el número a la derecha removiendo los últimos bits, esto es efectivamente lo mismo que dividir a la mitad. Ejemplo: $5 \gg 2 = 101_2 \gg 2 = 1_2 = 1$ o lo que es igual a $\frac{5}{2^2}$. Aunque sea una división es mucho más rápido que dividir tradicionalmente.
+
 - $\ll$ : Desplaza el número a la izquierda añadiendo bits vacios, es lo mismo a duplicar un número. Ejemplo: $5 \ll 2 = 101_2 \ll 2 = 10100_2 = 20$ o lo que es igual a $5*2^2$.
 
 ## Trucos útiles
@@ -616,7 +617,7 @@ Esto no incluye la submascara equivalente a 0.
 
 # Manejo de números grandes
 
-Para el manejo de números grandes se va a usar un arreglo donde se guarden sus "digitos"
+Para el manejo de números grandes se va a usar un arreglo donde se guarden sus "digitos".
 
 ~~~C++
 // Base a usar
@@ -655,7 +656,6 @@ for (size_t i=0; i<b.size() || carry; ++i) {
 }
 while (a.size() > 1 && a.back() == 0)
     a.pop_back();
-
 
 // Multiplicar a por un entero b pequeño (b < base) y guardar en a
 int carry = 0;
@@ -701,7 +701,6 @@ Es una estructura muy útil, es básicamente un *set* (con inserción y borrado 
 #include <ext/pb_ds/assoc_container.hpp>
 
 using namespace __gnu_pbds;
-using namespace std;
 
 typedef tree<
     pair<unsigned long long, int>,
@@ -711,7 +710,7 @@ typedef tree<
     tree_order_statistics_node_update> indexed_set;
 ~~~
 
-Esta implementación es para un multiset, por eso se almacena un *pair*, pero si se necesita que no haya repeticiones se sustituye el *pair* por el tipo de dato. También esta ordenado de menor a mayor, si se necesita lo opuesto se cambia el *less*
+Esta implementación es para un multiset, por eso se almacena un *pair*, pero si se necesita que no haya repeticiones se sustituye el *pair* por el tipo de dato. También esta ordenado de menor a mayor, si se necesita lo opuesto se cambia el *less*.
 
 ~~~C++
 indexed_set is;
@@ -767,116 +766,6 @@ if (s2.empty()) {
 }
 int remove_element = s2.top().first;
 s2.pop();
-~~~
-
-## Sparse tree
-
-Es un árbol cuyo principal uso es calcular el mínimo en un rango de elementos en $O(1)$, pero con la desventaja de que es inmutable porque los cálculos son hechos al principio.
-
-Se necesita una función para el logaritmo.
-
-~~~C++
-// Calcular logaritmo
-int log2_floor(unsigned long i) {
-    return bit_width(i) - 1;
-}
-~~~
-
-~~~C++
-// MAXN es la máxima longitud de arreglo y K tiene que ser mayor o igual al log_2 de MAXN
-int st[K + 1][MAXN];
-
-copy(array.begin(), array.end(), st[0]);
-
-// Precalcular
-for (int i = 1; i <= K; i++)
-    for (int j = 0; j + (1 << i) <= N; j++)
-        st[i][j] = min(st[i - 1][j], st[i - 1][j + (1 << (i - 1))]);
-
-// Calular el mínimo en el rango [L, R]
-int i = log2_floor(R - L + 1);
-int minimum = min(st[i][L], st[i][R - (1 << i) + 1]);
-~~~
-
-## Árbol de Fenwick
-
-Implementación para range update / point query (No probe el crear a partir de un vector).
-
-~~~C++
-struct FenwickTree {
-    vector<int> bit;  // binary indexed tree
-    int n;
-        
-    FenwickTree(int n) {
-        this->n = n + 1;
-        bit.assign(n + 1, 0);
-    }
-        
-    FenwickTree(vector<int> const &a) : FenwickTree(a.size()) {
-        for (int i = 0; i < n; i++) {
-            bit[i] += a[i];
-            int r = i | (i + 1);
-            if (r < n)
-                bit[r] += bit[i];
-        }
-    }
-
-    void add(int idx, int val) {
-        for (++idx; idx < n; idx += idx & -idx)
-            bit[idx] += val;
-    }
-
-    void range_add(int l, int r, int val) {
-        add(l, val);
-        add(r + 1, -val);
-    }
-
-    int point_query(int idx) {
-        int ret = 0;
-        for (++idx; idx > 0; idx -= idx & -idx)
-            ret += bit[idx];
-        return ret;
-    }
-};
-~~~
-
-Para point update / range query
-
-~~~C++
-struct FenwickTree {
-    vector<int> bit;  // binary indexed tree
-    int n;
-        
-    FenwickTree(int n) {
-        this->n = n + 1;
-        bit.assign(n + 1, 0);
-    }
-        
-    FenwickTree(vector<int> const &a) : FenwickTree(a.size()) {
-        for (int i = 0; i < n; i++) {
-            bit[i] += a[i];
-            int r = i | (i + 1);
-            if (r < n)
-                bit[r] += bit[i];
-        }
-    }
-
-    int sum(int r) {
-        int ret = 0;
-        for (; r >= 0; r = (r & (r + 1)) - 1)
-            ret += bit[r];
-        return ret;
-    }
-
-    int sum(int l, int r) {
-        return sum(r) - sum(l - 1);
-    }
-
-    void add(int idx, int delta) {
-        for (; idx < n; idx = idx | (idx + 1))
-            bit[idx] += delta;
-    }
-};
 ~~~
 
 # Problemas clásicos
