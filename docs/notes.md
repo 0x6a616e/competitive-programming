@@ -3,6 +3,8 @@ geometry: margin=2.54cm
 output: pdf_document
 ---
 
+\newpage
+
 # C++
 
 ## Plantilla
@@ -49,7 +51,7 @@ Con esto ya no se ocupan modificar más cosas.
 ## Tipos de dato y sus rangos
 
 | Tipo de dato           | Tamaño (en bytes) | Rango                           |
-|:----------------------:|:-----------------:|:-------------------------------:|
+|:-----------------------|:------------------|:--------------------------------|
 | short int              | 2                 | -32,768 to 32,767               |
 | unsigned short int     | 2                 | 0 to 65,535                     |
 | unsigned int           | 4                 | 0 to 4,294,967,295              |
@@ -70,7 +72,7 @@ También pasa algo parecido a la división entera cuando se multiplican dos ente
 
 ## Números flotantes
 
-En la mayoría de los casos con usar *double* es suficiente, si eso no basta se puede usar *long double*. Pero algo a tener en cuenta cuando se usan números flotantes es que compararlos con *==* no siempre funciona, esto por pequeños *errores* de precisión, por lo que una forma de compararlos es ver si la diferencia entre ellos es lo suficientemente pequeña.
+En la mayoría de los casos con usar *double* es suficiente, si eso no basta se puede usar *long double*. Pero algo a tener en cuenta cuando se usan números flotantes es que compararlos con $==$ no siempre funciona, esto por pequeños *errores* de precisión, por lo que una forma de compararlos es ver si la diferencia entre ellos es lo suficientemente pequeña.
 
 ~~~C++
 if (abs(a - b) < 1e-9) {
@@ -82,30 +84,22 @@ if (abs(a - b) < 1e-9) {
 
 Aquí hay una tabla para tener una idea de la complejidad necesaria según el tamaño de la entrada.
 
-| tamaño de entrada | complejidad requerida |
-|:------------------|:----------------------|
-| n <= 10           | O(n!)                 |
-| n <= 20           | O(2^n)                |
-| n <= 500          | O(n^3)                |
-| n <= 5000         | O(n^2)                |
-| n <= 10^6         | O(n*logn) o O(n)      |
-| n es grande       | O(1) o O(logn)        |
+| tamaño de entrada | complejidad requerida  |
+|:------------------|:-----------------------|
+| $n \leq 10$       | $O(n!)$                |
+| $n \leq 20$       | $O(2^n)$               |
+| $n \leq 500$      | $O(n^3)$               |
+| $n \leq 5000$     | $O(n^2)$               |
+| $n \leq 10^6$     | $O(n*log(n))$ o $O(n)$ |
+| $n$ es grande     | $O(1)$ o $O(log(n))$   |
 
 Esto no es para tomarlo como la verdad absoluta, pero puede servir para descartar ideas sin desperdiciar tiempo.
 
 # Matemáticas
 
-## Módulo
+## Aritmética modular
 
-A veces el problema pide que se de la respuesta módulo de algún número (cuando la respuesta puede ser muy grande), esto se puede manejar con una de las propiedades del módulo cuando se trata de adición, substracción o multiplicación.
-
-$$ (a + b) \bmod m = (a \bmod m + b \bmod m) \bmod m $$
-
-$$ (a - b) \bmod m = (a \bmod m - b \bmod m) \bmod m $$
-
-$$ (a * b) \bmod m = (a \bmod m * b \bmod m) \bmod m $$
-
-Gracias a esta propiedad podemos estar sacando el módulo después de cada operación, por lo que el número nunca se hace demasiado grande. También, en caso de que haya restas, podemos evitar terminar con un residuo negativo si le sumamos *m* en caso de que el residuo sea menor a 0.
+WIP.
 
 ## Sucesión simple
 
@@ -166,7 +160,7 @@ $$ f(1) = 1 $$
 
 $$ f(n) = f(n - 1) + f(n - 2) $$
 
-También hay una fórmula directa para calcularlos.
+También hay una fórmula directa para calcularlos, pero es poco práctica porque requiere un gran nivel de precisión.
 
 $$ f(n) = \frac{(1 + \sqrt{5})^n - (1 - \sqrt{5})^n}{2^n\sqrt{5}} $$
 
@@ -185,44 +179,48 @@ int fib(int n) {
 }
 ~~~
 
-Y hay una de hacerlo en $O(log n)$.
+Y hay una de hacerlo en $O(log(n))$.
 
 ~~~C++
 struct matrix {
     long long mat[2][2];
-    matrix friend operator *(const matrix &a, const matrix &b){
+    matrix friend operator *(const matrix &a, const matrix &b) {
         matrix c;
         for (int i = 0; i < 2; i++) {
-          for (int j = 0; j < 2; j++) {
-              c.mat[i][j] = 0;
-              for (int k = 0; k < 2; k++) {
-                  c.mat[i][j] += a.mat[i][k] * b.mat[k][j];
-              }
-          }
+            for (int j = 0; j < 2; j++) {
+                c.mat[i][j] = 0;
+                for (int k = 0; k < 2; k++) {
+                    c.mat[i][j] += a.mat[i][k] * b.mat[k][j];
+                }
+            }
         }
         return c;
     }
 };
 
 matrix matpow(matrix base, long long n) {
-    matrix ans{ {
-      {1, 0},
-      {0, 1}
-    } };
+    matrix ans{
+        {
+            { 1, 0 },
+            { 0, 1 }
+        }
+    };
     while (n) {
-        if(n&1)
-            ans = ans*base;
-        base = base*base;
+        if(n & 1)
+            ans = ans * base;
+        base = base * base;
         n >>= 1;
     }
     return ans;
 }
 
 long long fib(int n) {
-    matrix base{ {
-      {1, 1},
-      {1, 0}
-    } };
+    matrix base{
+        {
+            { 1, 1 },
+            { 1, 0 }
+        }
+    };
     return matpow(base, n).mat[0][1];
 }
 ~~~
@@ -255,7 +253,7 @@ $$ s'' = \frac{a_1 + \dots + a_{n - 1}}{n - 1} = \frac{ns - a_{n}}{n - 1} = \fra
 
 ## Exponenciación binaria
 
-Es una forma de calcular $a^n$ usando $O(log n)$ multiplicaciones en lugar de $O(n)$. No solo sirve para la aritmetica, ya que se puede aplicar a cualquier operación que tenga propiedad asociativa, es decir.
+Es una forma de calcular $a^n$ usando $O(log_2(n))$ multiplicaciones en lugar de $O(n)$. No solo sirve para la aritmetica, ya que se puede aplicar a cualquier operación que tenga propiedad asociativa, es decir.
 
 $$ (X * Y) * Z = X * (Y * Z) $$
 
@@ -265,7 +263,7 @@ Por ejemplo:
 
 $$ 3^{13} = 3^{1101_2} = 3^8 * 3^4 * 3^1 $$
 
-Y debido a que $n$ tiene $log_2 n + 1$ digitos en base 2, solo se necesitan $O(log n)$ multiplicaciones.
+Y debido a que $n$ tiene $log_2(n) + 1$ digitos en base 2, solo se necesitan $O(log_2(n))$ multiplicaciones.
 
 Esto tiene una implementación recursiva y una iterativa, aunque las dos tienen la misma complejidad, la iterativa es más rápida en la práctica por no tener que manejar el stack.
 
@@ -302,13 +300,13 @@ long long binpow(long long a, long long b, long long m) {
 
 ### Generar
 
-La criba de Eratóstenes es una forma de calcular los números primos en el intervalo de $[1 ; n]$ con complejidad $O(n log log n)$.
+La criba de Eratóstenes es una forma de calcular los números primos en el intervalo de $[1 ; n]$ con complejidad $O(n*log(log(n)))$.
 
 Su implementación es:
 
 ~~~C++
 int n;
-vector<bool> is_prime(n+1, true);
+vector<bool> is_prime(n + 1, true);
 is_prime[0] = is_prime[1] = false;
 for (int i = 2; i * i <= n; i++) {
     if (is_prime[i]) {
@@ -391,45 +389,6 @@ vector<long long> trial_division4(long long n) {
     if (n > 1)
         factorization.push_back(n);
     return factorization;
-}
-~~~
-
-## Función Phi
-
-Cuenta la cantidad de enteros entre 1 y $n$ (inclusiva) que son coprimos con $n$ (dos números son coprimos si su máximo común divisor es 1).
-
-Implementación para cualquier n.
-
-~~~C++
-int phi(int n) {
-    int result = n;
-    for (int i = 2; i * i <= n; i++) {
-        if (n % i == 0) {
-            while (n % i == 0)
-                n /= i;
-            result -= result / i;
-        }
-    }
-    if (n > 1)
-        result -= result / n;
-    return result;
-}
-~~~
-
-Si se requiere el valor de $\Phi(n)$ para todos los números de 1 a $n$ se puede implementar de la siguiente forma.
-
-~~~C++
-void phi_1_to_n(int n) {
-    vector<int> phi(n + 1);
-    for (int i = 0; i <= n; i++)
-        phi[i] = i;
-
-    for (int i = 2; i <= n; i++) {
-        if (phi[i] == i) {
-            for (int j = i; j <= n; j += i)
-                phi[j] -= phi[j] / i;
-        }
-    }
 }
 ~~~
 
@@ -621,81 +580,91 @@ Para el manejo de números grandes se va a usar un arreglo donde se guarden sus 
 
 ~~~C++
 // Base a usar
-const int base = 1000*1000*1000;
-
-// Definición de vector
-typedef vector<int> lnum;
+const int base = 1000 * 1000 * 1000;
 
 // Convertir de una string al vector de "digitos"
-for (int i=(int)s.length(); i>0; i-=9)
-    if (i < 9)
-        a.push_back (atoi (s.substr (0, i).c_str()));
-    else
-        a.push_back (atoi (s.substr (i-9, 9).c_str()));
+for (int i = (int) s.length(); i > 0; i -= 9) {
+    if (i < 9) {
+        a.push_back(atoi(s.substr(0, i).c_str()));
+    } else {
+        a.push_back(atoi(s.substr(i - 9, 9).c_str()));
+    }
+}
 
-// Borrar leading 0
-while (a.size() > 1 && a.back() == 0)
+// Borrar leading 0, combiene hacerlo después de la mayoría de operaciones
+while (a.size() > 1 && a.back() == 0) {
     a.pop_back();
+}
 
 // Suma a + b resultado en a
 int carry = 0;
-for (size_t i=0; i<max(a.size(),b.size()) || carry; ++i) {
-    if (i == a.size())
-        a.push_back (0);
+for (size_t i = 0; i < max(a.size(), b.size()) || carry; ++i) {
+    if (i == a.size()) {
+        a.push_back(0);
+    }
     a[i] += carry + (i < b.size() ? b[i] : 0);
     carry = a[i] >= base;
-    if (carry)  a[i] -= base;
+    if (carry) {
+        a[i] -= base;
+    }
 }
 
 // Resta a - b y guarda en a
 int carry = 0;
-for (size_t i=0; i<b.size() || carry; ++i) {
+for (size_t i = 0; i < b.size() || carry; ++i) {
     a[i] -= carry + (i < b.size() ? b[i] : 0);
     carry = a[i] < 0;
-    if (carry)  a[i] += base;
+    if (carry) {
+        a[i] += base;
+    }
 }
-while (a.size() > 1 && a.back() == 0)
-    a.pop_back();
 
 // Multiplicar a por un entero b pequeño (b < base) y guardar en a
 int carry = 0;
-for (size_t i=0; i<a.size() || carry; ++i) {
-    if (i == a.size())
-        a.push_back (0);
+for (size_t i = 0; i < a.size() || carry; ++i) {
+    if (i == a.size()) {
+        a.push_back(0);
+    }
     long long cur = carry + a[i] * 1ll * b;
     a[i] = int (cur % base);
     carry = int (cur / base);
 }
-while (a.size() > 1 && a.back() == 0)
-    a.pop_back();
 
 // Multiplicar a por un entero largo b y guardar en c
-lnum c (a.size()+b.size());
-for (size_t i=0; i<a.size(); ++i)
-    for (int j=0, carry=0; j<(int)b.size() || carry; ++j) {
-        long long cur = c[i+j] + a[i] * 1ll * (j < (int)b.size() ? b[j] : 0) + carry;
-        c[i+j] = int (cur % base);
+vector<int> c(a.size() + b.size());
+for (size_t i = 0; i < a.size(); ++i) {
+    for (int j = 0, carry = 0; j < (int) b.size() || carry; ++j) {
+        long long cur = c[i + j] + a[i] * 1ll * (j < (int) b.size() ? b[j] : 0) + carry;
+        c[i + j] = int (cur % base);
         carry = int (cur / base);
     }
-while (c.size() > 1 && c.back() == 0)
-    c.pop_back();
+}
 
 // División de a entre un entero b pequeño (b < base)
 int carry = 0;
-for (int i=(int)a.size()-1; i>=0; --i) {
+for (int i = (int) a.size() - 1; i >= 0; --i) {
     long long cur = a[i] + carry * 1ll * base;
     a[i] = int (cur / b);
     carry = int (cur % b);
 }
-while (a.size() > 1 && a.back() == 0)
-    a.pop_back();
+
+// Para imprimir
+if (a.empty()) {
+    cout << 0;
+} else {
+    cout << a.back();
+}
+        
+for (int i = (int) a.size() - 2; i >= 0; --i) {
+    cout << setw(9) << setfill('0') << a[i];
+}
 ~~~
 
 # Estructuras de datos
 
 ## Policy Based Data Structures
 
-Es una estructura muy útil, es básicamente un *set* (con inserción y borrado en O(log n)) pero con índices.
+Es una estructura muy útil, es básicamente un *set* (con inserción y borrado en $O(log(n))$) pero con índices.
 
 ~~~C++
 #include <ext/pb_ds/assoc_container.hpp>
@@ -730,7 +699,7 @@ stack<pair<int, int>> st;
 
 // Agregar elemento
 int new_min = st.empty() ? new_elem : min(new_elem, st.top().second);
-st.push({new_elem, new_min});
+st.push({ new_elem, new_min });
 
 // Remover elemento
 int removed_element = st.top().first;
