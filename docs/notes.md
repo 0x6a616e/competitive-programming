@@ -84,14 +84,14 @@ if (abs(a - b) < 1e-9) {
 
 Aquí hay una tabla para tener una idea de la complejidad necesaria según el tamaño de la entrada.
 
-| tamaño de entrada | complejidad requerida  |
-|:------------------|:-----------------------|
-| $n \leq 10$       | $O(n!)$                |
-| $n \leq 20$       | $O(2^n)$               |
-| $n \leq 500$      | $O(n^3)$               |
-| $n \leq 5000$     | $O(n^2)$               |
-| $n \leq 10^6$     | $O(n*log(n))$ o $O(n)$ |
-| $n$ es grande     | $O(1)$ o $O(log(n))$   |
+| tamaño de entrada | complejidad requerida        |
+|:------------------|:-----------------------------|
+| $n \leq 10$       | $O(n!)$                      |
+| $n \leq 20$       | $O(2^n)$                     |
+| $n \leq 500$      | $O(n^3)$                     |
+| $n \leq 5000$     | $O(n^2)$                     |
+| $n \leq 10^6$     | $O(n \cdot log(n))$ o $O(n)$ |
+| $n$ es grande     | $O(1)$ o $O(log(n))$         |
 
 Esto no es para tomarlo como la verdad absoluta, pero puede servir para descartar ideas sin desperdiciar tiempo.
 
@@ -99,7 +99,21 @@ Esto no es para tomarlo como la verdad absoluta, pero puede servir para descarta
 
 ## Aritmética modular
 
-WIP.
+Calcular un exponente grande modulo de un número ($x^n mod m$) se puede hacer con exponenciación binaria.
+
+~~~C++
+long long binpow(long long a, long long b, long long m) {
+    a %= m;
+    long long res = 1;
+    while (b > 0) {
+        if (b & 1)
+            res = res * a % m;
+        a = a * a % m;
+        b >>= 1;
+    }
+    return res;
+}
+~~~
 
 ## Sucesión simple
 
@@ -142,13 +156,13 @@ $$ a + ak + ak^2 + \dots + b = \frac{bk - a}{k - 1} $$
 
 Se puede definir iterativamente.
 
-$$ \prod_{x=1}^{n} x = 1 * 2 * 3 * \dots * n $$
+$$ \prod_{x=1}^{n} x = 1 \cdot 2 \cdot 3 \dots n $$
 
 O recursivamente.
 
 $$ 0! = 1 $$
 
-$$ n! = n * (n - 1)! $$
+$$ n! = n \cdot (n - 1)! $$
 
 ## Números de Fibonacci.
 
@@ -233,7 +247,7 @@ $$ log_k(x) = a \implies k^a = x $$
 
 $$ log_k(ab) = log_k(a) + log_k(b) $$
 
-$$ log_k(x^n) = n * log_k(x) $$
+$$ log_k(x^n) = n \cdot log_k(x) $$
 
 $$ log_k(\frac{a}{b}) = log_k(a) - log_k(b) $$
 
@@ -255,44 +269,55 @@ $$ s'' = \frac{a_1 + \dots + a_{n - 1}}{n - 1} = \frac{ns - a_{n}}{n - 1} = \fra
 
 Es una forma de calcular $a^n$ usando $O(log_2(n))$ multiplicaciones en lugar de $O(n)$. No solo sirve para la aritmetica, ya que se puede aplicar a cualquier operación que tenga propiedad asociativa, es decir.
 
-$$ (X * Y) * Z = X * (Y * Z) $$
+$$ (X \cdot Y) \cdot Z = X \cdot (Y \cdot Z) $$
 
 La idea de exponenciación binaria es dividir el trabajo usando la representación binaria del exponente.
 
 Por ejemplo:
 
-$$ 3^{13} = 3^{1101_2} = 3^8 * 3^4 * 3^1 $$
+$$ 3^{13} = 3^{1101_2} = 3^8 \cdot 3^4 \cdot 3^1 $$
 
-Y debido a que $n$ tiene $log_2(n) + 1$ digitos en base 2, solo se necesitan $O(log_2(n))$ multiplicaciones.
+Y debido a que $n$ tiene $log_2(n) + 1$ digitos en base 2, solo se necesitan $O(log_2(n))$ multiplicaciones. La función *pow* de C++ ya hace esto. Pero tiene otras aplicaciones, como:
 
-Esto tiene una implementación recursiva y una iterativa, aunque las dos tienen la misma complejidad, la iterativa es más rápida en la práctica por no tener que manejar el stack.
+### Exponentes con módulo
+
+Calcular $x^n mod m$ se puede hacer con exponenciación binaria, eso esta en la sección de [Aritmética Modular](#aritmética-modular)
+
+### Aplicar permutaciones
+
+Se puede usar la exponenciación binaria para aplicar una determinada permutaciíon $n$ veces.
+
+Por ejemplo:
+
+- Secuencia original: [1, 2, 3]
+- Permutación:        [1, 2, 0]
+
+Si la aplicamos 3 veces obtenemos:
+
+- 1era aplicación:    [2, 3, 1]
+- 2da aplicación:     [3, 1, 2]
+- 3era aplicación:    [1, 2, 3]
+
+Lo cual se puede hacer con solo dos aplicaciones si se usa exponenciación binaria.
 
 ~~~C++
-long long binpow(long long a, long long b) {
-    long long res = 1;
-    while (b > 0) {
-        if (b & 1)
-            res = res * a;
-        a = a * a;
-        b >>= 1;
+vector<int> applyPermutation(vector<int> sequence, vector<int> permutation) {
+    vector<int> newSequence(sequence.size());
+    for(int i = 0; i < sequence.size(); i++) {
+        newSequence[i] = sequence[permutation[i]];
     }
-    return res;
+    return newSequence;
 }
-~~~
 
-También se puede modificar para incluir el módulo, para operaciones del tipo $x^n mod m$.
-
-~~~C++
-long long binpow(long long a, long long b, long long m) {
-    a %= m;
-    long long res = 1;
+vector<int> permute(vector<int> sequence, vector<int> permutation, long long b) {
     while (b > 0) {
-        if (b & 1)
-            res = res * a % m;
-        a = a * a % m;
+        if (b & 1) {
+            sequence = applyPermutation(sequence, permutation);
+        }
+        permutation = applyPermutation(permutation, permutation);
         b >>= 1;
     }
-    return res;
+    return sequence;
 }
 ~~~
 
@@ -300,7 +325,7 @@ long long binpow(long long a, long long b, long long m) {
 
 ### Generar
 
-La criba de Eratóstenes es una forma de calcular los números primos en el intervalo de $[1 ; n]$ con complejidad $O(n*log(log(n)))$.
+La criba de Eratóstenes es una forma de calcular los números primos en el intervalo de $[1 ; n]$ con complejidad $O(n \cdot log(log(n)))$.
 
 Su implementación es:
 
@@ -392,6 +417,46 @@ vector<long long> trial_division4(long long n) {
 }
 ~~~
 
+## Máximo común divisor
+
+A partir de C++17 ya hay una función *gcd* incluida, pero si por alguna razón no esta, aquí esta la declaración:
+
+$$ \gcd(a, b) = \begin{cases}a,&\text{if }b = 0 \\ \gcd(b, a \bmod b),&\text{otherwise.}\end{cases} $$
+
+Una implementación recursiva:
+
+~~~C++
+int gcd (int a, int b) {
+    return b ? gcd (b, a % b) : a;
+}
+~~~
+
+Y una iterativa:
+
+~~~C++
+int gcd (int a, int b) {
+    while (b) {
+        a %= b;
+        swap(a, b);
+    }
+    return a;
+}
+~~~
+
+## Mínimo común múltiplo
+
+Igual que el *gcd* ya debería de haber una funcín *lcm* en C++, pero por si llega a ser necesaria aquí esta su definición:
+
+$$ lcm(a, b) = \frac{a \cdot b}{\gcd(a, b)} $$
+
+Y aquí su implementación:
+
+~~~C++
+int lcm (int a, int b) {
+    return a / gcd(a, b) * b;
+}
+~~~
+
 # Ordenar
 
 Casi nunca es una buena idea usar algoritmos de ordenamiento que hayas hecho a mano, esto porque ya hay buenas implementaciones en los lenguajes de programación. Por ejemplo, la STL de C++ ya tiene una función *sort* que puede ser usada para ordenar (es una combinación de quicksort, heapsort, insertion sort), también existe *stable_sort* en caso de que se necesite un ordenamiento estable. Aquí hay un ejemplo de esta función en acción.
@@ -457,9 +522,9 @@ while (a <= b) {
         // x found at index k
     }
     if (array[k] > x)
-        b = k-1;
+        b = k - 1;
     else
-        a = k+1;
+        a = k + 1;
 }
 ~~~
 
@@ -530,7 +595,7 @@ n         = 01011000
 
 - $\gg$ : Desplaza el número a la derecha removiendo los últimos bits, esto es efectivamente lo mismo que dividir a la mitad. Ejemplo: $5 \gg 2 = 101_2 \gg 2 = 1_2 = 1$ o lo que es igual a $\frac{5}{2^2}$. Aunque sea una división es mucho más rápido que dividir tradicionalmente.
 
-- $\ll$ : Desplaza el número a la izquierda añadiendo bits vacios, es lo mismo a duplicar un número. Ejemplo: $5 \ll 2 = 101_2 \ll 2 = 10100_2 = 20$ o lo que es igual a $5*2^2$.
+- $\ll$ : Desplaza el número a la izquierda añadiendo bits vacios, es lo mismo a duplicar un número. Ejemplo: $5 \ll 2 = 101_2 \ll 2 = 10100_2 = 20$ o lo que es igual a $5 \cdot 2^2$.
 
 ## Trucos útiles
 
