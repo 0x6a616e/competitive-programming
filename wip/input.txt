@@ -1,2 +1,8 @@
-5k1r/2q3p1/p3p2p/1B3p1Q/n4P2/6P1/bbP2N1P/1K1RR3
-rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR
+7
+2 0
+2 2
+3 0
+3 3
+4 2
+4 5
+5 4

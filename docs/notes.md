@@ -95,6 +95,22 @@ Aquí hay una tabla para tener una idea de la complejidad necesaria según el ta
 
 Esto no es para tomarlo como la verdad absoluta, pero puede servir para descartar ideas sin desperdiciar tiempo.
 
+## Imprimir tiempo
+
+Aquí hay una función para imprimir en formato HH:MM:SS a partir de la cantidad de segundos.
+
+~~~C++
+void printTime(int seconds) {
+    int hours = seconds / 3600;
+    int minutes = (seconds % 3600) / 60;
+    int secs = seconds % 60;
+        
+    cout << setfill('0') << setw(2) << hours << ":"
+        << setfill('0') << setw(2) << minutes << ":"
+        << setfill('0') << setw(2) << secs << '\n';
+}
+~~~
+
 # Matemáticas
 
 ## Aritmética modular
@@ -506,6 +522,18 @@ Ahora usando esa función para un vector de strings:
 
 ~~~C++
 sort(v.begin(), v.end(), comp);
+~~~
+
+## Permutaciones
+
+Una forma simple de pasar por todas las permutaciones de algo es con *next_permutation*, pero primero se ordena lo que se vaya a permutar. Ejemplo:
+
+~~~C++
+letras = "cba";
+sort(letras.begin(), letras.end());
+do {
+    cout << letras << endl;
+} while (next_permutation(letras.begin(), letras.end()));
 ~~~
 
 # Búsqueda binaria
