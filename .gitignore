@@ -5,6 +5,5 @@
 *.out
 *.exe
 
-# Ignore I/O files
-input.txt
+# Ignore output files
 output.txt
