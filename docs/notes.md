@@ -856,7 +856,8 @@ typedef tree<
     null_type,
     less<pair<unsigned long long, int>>,
     rb_tree_tag,
-    tree_order_statistics_node_update> indexed_set;
+    tree_order_statistics_node_update
+> indexed_set;
 ~~~
 
 Esta implementación es para un multiset, por eso se almacena un *pair*, pero si se necesita que no haya repeticiones se sustituye el *pair* por el tipo de dato. También esta ordenado de menor a mayor, si se necesita lo opuesto se cambia el *less*.
