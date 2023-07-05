@@ -4,6 +4,7 @@
 # Ignore binary files
 *.out
 *.exe
+*.sh
 
 # Ignore output files
 output.txt
