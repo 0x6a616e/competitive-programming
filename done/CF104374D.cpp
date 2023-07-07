@@ -12,7 +12,6 @@ int main()
         long long ai, a, b, k, n, q, op;
         vector<long long> numeros;
         vector<long long>::iterator it;
-	numeros.
 
         cin >> n >> q;
 
