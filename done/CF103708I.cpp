@@ -4,25 +4,24 @@
 
 using namespace std;
 
-int main()
-{
-        cin.tie(0);
-        ios::sync_with_stdio(0);
+int main() {
+    cin.tie(0);
+    ios::sync_with_stdio(0);
 
-        int N, c = 0;
-        string num;
+    int N, c = 0;
+    string num;
 
-        cin >> num;
+    cin >> num;
 
-        N = stoi(num);
+    N = stoi(num);
 
-        for (int i = 0; i < num.size(); i++) {
-                if (num[i] != '0' && N % (num[i] - '0') == 0) {
-                        c++;
-                }
+    for (int i = 0; i < num.size(); i++) {
+        if (num[i] != '0' && N % (num[i] - '0') == 0) {
+            c++;
         }
+    }
 
-        cout << c << '\n';
+    cout << c << '\n';
 
-        return 0;
+    return 0;
 }

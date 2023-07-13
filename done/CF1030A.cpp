@@ -4,24 +4,23 @@
 
 using namespace std;
 
-int main()
-{
-        cin.tie(0);
-        ios::sync_with_stdio(0);
+int main() {
+    cin.tie(0);
+    ios::sync_with_stdio(0);
 
-        int n, ni;
+    int n, ni;
 
-        cin >> n;
+    cin >> n;
 
-        while (n--) {
-                cin >> ni;
-                if (ni) {
-                        cout << "HARD\n";
-                        return 0;
-                }
+    while (n--) {
+        cin >> ni;
+        if (ni) {
+            cout << "HARD\n";
+            return 0;
         }
+    }
 
-        cout << "EASY\n";
-        
-        return 0;
+    cout << "EASY\n";
+
+    return 0;
 }
