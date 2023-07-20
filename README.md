@@ -15,12 +15,6 @@ Varios de los problemas tienen su link en la primera línea
 * Los problemas que empiezan por "CF" son de [CodeForces](https://codeforces.com/)
 * Los problemas que solo tienen un nombre son problemas que encontré fuera de sitios donde se pueden probar soluciones*
 
-## ¿Cómo se genera el PDF de las notas?
-
-~~~bash
-pandoc -t pdf -s --toc notes.md -o notes.pdf
-~~~
-
 ---
 
 \* Los problemas que no sean de sitios consultables tendrán sus pdf disponibles mientras me sea posible
