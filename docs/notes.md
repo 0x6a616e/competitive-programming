@@ -5,13 +5,13 @@ output: pdf_document
 
 \newpage
 
-# C++
+# c++
 
 ## Plantilla
 
-Plantilla para cualquier programa en C++.
+Plantilla para cualquier programa en c++.
 
-~~~C++
+~~~c++
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -41,7 +41,7 @@ Con esto se optimiza el código además de indicar que se muestren la mayoría d
 
 Si el concurso requiere que se lea o escriba en archivos, se puede agregar esto al principio.
 
-~~~C++
+~~~c++
 freopen("input.txt", "r", stdin);
 freopen("output.txt", "w", stdout);
 ~~~
@@ -64,7 +64,7 @@ Con esto ya no se ocupan modificar más cosas.
 
 Algo a considerar sobre *long long* es que tiene un prefijo.
 
-~~~C++
+~~~c++
 long long x = 123456789123456789LL;
 ~~~
 
@@ -74,7 +74,7 @@ También pasa algo parecido a la división entera cuando se multiplican dos ente
 
 En la mayoría de los casos con usar *double* es suficiente, si eso no basta se puede usar *long double*. Pero algo a tener en cuenta cuando se usan números flotantes es que compararlos con $==$ no siempre funciona, esto por pequeños *errores* de precisión, por lo que una forma de compararlos es ver si la diferencia entre ellos es lo suficientemente pequeña.
 
-~~~C++
+~~~c++
 if (abs(a - b) < 1e-9) {
     // a and b are equal
 }
@@ -99,7 +99,7 @@ Esto no es para tomarlo como la verdad absoluta, pero puede servir para descarta
 
 Aquí hay una structura que representa una fecha, tiene un constructor que recibe el día, mes y año (los cuales pueden ser inválidos y se corrigen), un método que para saber si es bisciesto y un método para añadir una cantidad de días.
 
-~~~C++
+~~~c++
 struct Date {
     int day, month, year;
     vector<vector<int>> calendar = {
@@ -186,7 +186,7 @@ struct Date {
 
 Aquí hay una función para imprimir en formato HH:MM:SS a partir de la cantidad de segundos.
 
-~~~C++
+~~~c++
 void printTime(int seconds) {
     int hours = seconds / 3600;
     int minutes = (seconds % 3600) / 60;
@@ -204,7 +204,7 @@ void printTime(int seconds) {
 
 Calcular un exponente grande modulo de un número ($x^n mod m$) se puede hacer con exponenciación binaria.
 
-~~~C++
+~~~c++
 long long binpow(long long a, long long b, long long m) {
     a %= m;
     long long res = 1;
@@ -283,7 +283,7 @@ $$ f(n) = \frac{(1 + \sqrt{5})^n - (1 - \sqrt{5})^n}{2^n\sqrt{5}} $$
 
 Hay una forma de calcular el $n$-th número de Fibonacci en $O(n)$.
 
-~~~C++
+~~~c++
 int fib(int n) {
     int a = 0;
     int b = 1;
@@ -298,7 +298,7 @@ int fib(int n) {
 
 Y hay una de hacerlo en $O(log(n))$.
 
-~~~C++
+~~~c++
 struct matrix {
     long long mat[2][2];
     matrix friend operator *(const matrix &a, const matrix &b) {
@@ -380,7 +380,7 @@ Por ejemplo:
 
 $$ 3^{13} = 3^{1101_2} = 3^8 \cdot 3^4 \cdot 3^1 $$
 
-Y debido a que $n$ tiene $log_2(n) + 1$ digitos en base 2, solo se necesitan $O(log_2(n))$ multiplicaciones. La función *pow* de C++ ya hace esto. Pero tiene otras aplicaciones, como:
+Y debido a que $n$ tiene $log_2(n) + 1$ digitos en base 2, solo se necesitan $O(log_2(n))$ multiplicaciones. La función *pow* de c++ ya hace esto. Pero tiene otras aplicaciones, como:
 
 ### Exponentes con módulo
 
@@ -403,7 +403,7 @@ Si la aplicamos 3 veces obtenemos:
 
 Lo cual se puede hacer con solo dos aplicaciones si se usa exponenciación binaria.
 
-~~~C++
+~~~c++
 vector<int> applyPermutation(vector<int> sequence, vector<int> permutation) {
     vector<int> newSequence(sequence.size());
     for(int i = 0; i < sequence.size(); i++) {
@@ -432,7 +432,7 @@ La criba de Eratóstenes es una forma de calcular los números primos en el inte
 
 Su implementación es:
 
-~~~C++
+~~~c++
 int n;
 vector<bool> is_prime(n + 1, true);
 is_prime[0] = is_prime[1] = false;
@@ -448,7 +448,7 @@ for (int i = 2; i * i <= n; i++) {
 
 Hay una forma deterministica de comprobar si un número de hasta 64 bits es primo. 
 
-~~~C++
+~~~c++
 using u64 = uint64_t;
 using u128 = __uint128_t;
 
@@ -501,7 +501,7 @@ bool MillerRabin(u64 n) { // returns true if n is prime, else returns false.
 
 La forma más simple de obtener los factores primos de un número es pregenerando los primos desde $1$ hasta $\sqrt{n}$ y probando con cada uno de ellos.
 
-~~~C++
+~~~c++
 vector<long long> primes;
 
 vector<long long> trial_division4(long long n) {
@@ -522,13 +522,13 @@ vector<long long> trial_division4(long long n) {
 
 ## Máximo común divisor
 
-A partir de C++17 ya hay una función *gcd* incluida, pero si por alguna razón no esta, aquí esta la declaración:
+A partir de c++17 ya hay una función *gcd* incluida, pero si por alguna razón no esta, aquí esta la declaración:
 
 $$ \gcd(a, b) = \begin{cases}a,&\text{if }b = 0 \\ \gcd(b, a \bmod b),&\text{otherwise.}\end{cases} $$
 
 Una implementación recursiva:
 
-~~~C++
+~~~c++
 int gcd(int a, int b) {
     return b ? gcd (b, a % b) : a;
 }
@@ -536,7 +536,7 @@ int gcd(int a, int b) {
 
 Y una iterativa:
 
-~~~C++
+~~~c++
 int gcd(int a, int b) {
     while (b) {
         a %= b;
@@ -548,13 +548,13 @@ int gcd(int a, int b) {
 
 ## Mínimo común múltiplo
 
-Igual que el *gcd* ya debería de haber una funcín *lcm* en C++, pero por si llega a ser necesaria aquí esta su definición:
+Igual que el *gcd* ya debería de haber una funcín *lcm* en c++, pero por si llega a ser necesaria aquí esta su definición:
 
 $$ lcm(a, b) = \frac{a \cdot b}{\gcd(a, b)} $$
 
 Y aquí su implementación:
 
-~~~C++
+~~~c++
 int lcm (int a, int b) {
     return a / gcd(a, b) * b;
 }
@@ -562,18 +562,18 @@ int lcm (int a, int b) {
 
 # Ordenar
 
-Casi nunca es una buena idea usar algoritmos de ordenamiento que hayas hecho a mano, esto porque ya hay buenas implementaciones en los lenguajes de programación. Por ejemplo, la STL de C++ ya tiene una función *sort* que puede ser usada para ordenar (es una combinación de quicksort, heapsort, insertion sort), también existe *stable_sort* en caso de que se necesite un ordenamiento estable. Aquí hay un ejemplo de esta función en acción.
+Casi nunca es una buena idea usar algoritmos de ordenamiento que hayas hecho a mano, esto porque ya hay buenas implementaciones en los lenguajes de programación. Por ejemplo, la STL de c++ ya tiene una función *sort* que puede ser usada para ordenar (es una combinación de quicksort, heapsort, insertion sort), también existe *stable_sort* en caso de que se necesite un ordenamiento estable. Aquí hay un ejemplo de esta función en acción.
 
-## Con *sort* de C++
+## Con *sort* de c++
 
-~~~C++
+~~~c++
 vector<int> v = { 4, 2, 5, 3, 5, 8, 3 };
 sort(v.begin(), v.end());
 ~~~
 
 Después de este ordenamiento, el contenido del vector será [ 2, 3, 3, 4, 5, 5, 8 ]. Por defecto se ordena de menor a mayor, pero una forma de implementar un orden inverso es:
 
-~~~C++
+~~~c++
 sort(v.rbegin(), v.rend());
 ~~~
 
@@ -581,7 +581,7 @@ sort(v.rbegin(), v.rend());
 
 Las estructuras que nosotros hagamos no tienen un operador de comparación automaticamente. Este operador se puede definir dentro de la estructura como una función de nombre *operator<* cuyo parametro debe ser un elemento del mismo tipo, debe devolver *true* si el elemento es más pequeño que el parametro y *falso* si no es así. Un ejemplo:
 
-~~~C++
+~~~c++
 struct P {
     int x, y;
     bool operator<(const P &p) {
@@ -597,7 +597,7 @@ struct P {
 
 También se puede dar como parametro una función externa para que se use dentro del *sort*. Por ejemplo:
 
-~~~C++
+~~~c++
 bool comp(string a, string b) {
     if (a.size() != b.size())
         return a.size() < b.size();
@@ -607,7 +607,7 @@ bool comp(string a, string b) {
 
 Ahora usando esa función para un vector de strings:
 
-~~~C++
+~~~c++
 sort(v.begin(), v.end(), comp);
 ~~~
 
@@ -615,7 +615,7 @@ sort(v.begin(), v.end(), comp);
 
 Una forma simple de pasar por todas las permutaciones de algo es con *next_permutation*, pero primero se ordena lo que se vaya a permutar. Ejemplo:
 
-~~~C++
+~~~c++
 letras = "cba";
 sort(letras.begin(), letras.end());
 do {
@@ -631,7 +631,7 @@ En caso de que no se necesite ordenar todos los datos se pueden hacer dos tipos 
 
 Para ordenar de modo que los primeros N elementos esten ordenados se puede usar:
 
-~~~C++
+~~~c++
 partial_sort( RandomIt first, RandomIt middle, RandomIt last );
 ~~~
 
@@ -641,7 +641,7 @@ Esta función se asegura que los elementos hasta *middle* esten ordenados, OJO *
 
 Otra forma es si se quiere que el enesimo elemento del arreglo este ordenado, para eso se usa:
 
-~~~C++
+~~~c++
 nth_element( RandomIt first, RandomIt nth, RandomIt last );
 ~~~
 
@@ -653,7 +653,7 @@ Que igualmente recibe tres iteradores.
 
 Hay dos formas de implementar la búsqueda binaria por nuestra cuenta.
 
-~~~C++
+~~~c++
 int a = 0, b = n - 1;
 while (a <= b) {
     int k = (a + b) / 2;
@@ -669,7 +669,7 @@ while (a <= b) {
 
 Y.
 
-~~~C++
+~~~c++
 int k = 0;
 for (int b = n / 2; b >= 1; b /= 2) {
     while (k + b < n && array[k + b] <= x)
@@ -680,9 +680,9 @@ if (array[k] == x) {
 }
 ~~~
 
-## Funciones de C++
+## Funciones de c++
 
-La libreria estandar de C++ contiene las siguientes funciones que estan basadas en búsqueda binaria y por lo tanto funcionan en tiempo logaritmico:
+La libreria estandar de c++ contiene las siguientes funciones que estan basadas en búsqueda binaria y por lo tanto funcionan en tiempo logaritmico:
 
 * lower_bound : devuelve un apuntador al primer elemento que vale al menos x.
 * upper_bound : devuelve un apuntador al primer elemento que vale más que x. 
@@ -746,7 +746,7 @@ Se puede asignar, invertir o limpiar un bit usando las siguientes propiedades: $
 
 Se puede revisar si un bit $x$ esta activo con:
 
-~~~C++
+~~~c++
 bool is_set(unsigned int number, int x) {
     return (number >> x) & 1;
 }
@@ -761,7 +761,7 @@ n - 1       = 00110011
 n & (n - 1) = 00110000
 ~~~
 
-## Funciones de C++
+## Funciones de c++
 
 - has_single_bit : Revisa si el número es una potencia de 2.
 - bit_ceil / bit_floor : Redondea a la siguiente potencia de 2.
@@ -771,7 +771,7 @@ n & (n - 1) = 00110000
 
 Dada una mascara $m$ se quieren iterar por todas sus submascaras, es decir, mascaras $s$ en las que solo bits que se incluían en $m$ estan activos.
 
-~~~C++
+~~~c++
 for (int s=m; s; s=(s-1)&m)
     ... you can use s ...
 ~~~
@@ -782,7 +782,7 @@ Esto no incluye la submascara equivalente a 0.
 
 Para el manejo de números grandes se va a usar un arreglo donde se guarden sus "digitos".
 
-~~~C++
+~~~c++
 // Base a usar
 const int base = 1000 * 1000 * 1000;
 
@@ -870,7 +870,7 @@ for (int i = (int) a.size() - 2; i >= 0; --i) {
 
 Es una estructura muy útil, es básicamente un *set* (con inserción y borrado en $O(log(n))$) pero con índices.
 
-~~~C++
+~~~c++
 #include <ext/pb_ds/assoc_container.hpp>
 
 using namespace __gnu_pbds;
@@ -886,7 +886,7 @@ typedef tree<
 
 Esta implementación es para un multiset, por eso se almacena un *pair*, pero si se necesita que no haya repeticiones se sustituye el *pair* por el tipo de dato. También esta ordenado de menor a mayor, si se necesita lo opuesto se cambia el *less*.
 
-~~~C++
+~~~c++
 indexed_set is;
 
 is.order_of_key(key); // Regresa el índice que esa key tendría dentro del set, exista o no
@@ -899,7 +899,7 @@ Aquí hay modificaciones al stack y a la fila para además de tener sus caracter
 
 ### Minimum stack
 
-~~~C++
+~~~c++
 stack<pair<int, int>> st;
 
 // Agregar elemento
@@ -916,7 +916,7 @@ int minimum = st.top().second;
 
 ### Minimum queue
 
-~~~C++
+~~~c++
 stack<pair<int, int>> s1, s2;
 
 // Encontrar el mínimo
@@ -963,7 +963,7 @@ Asumimos que un subarreglo vacio esta permitido, por lo que la suma máxima siem
 
 En el segundo caso, dado que queremos encontrar un subarreglo con la máxima suma, el subarreglo que termina en la posición k - 1 debería tener también la máxima suma para ese punto. Entonces podemos resolver el problema al calcular la máxima suma de subarreglos para cada posición de izquierda a derecha. El siguiente código demuestra una implementación de este algoritmo:
 
-~~~C++
+~~~c++
 int best = 0, sum = 0;
 for (int k = 0; k < n; k++) {
     sum = max(array[k],sum+array[k]);
