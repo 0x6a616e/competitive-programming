@@ -623,6 +623,30 @@ do {
 } while (next_permutation(letras.begin(), letras.end()));
 ~~~
 
+## Ordenamiento parcial
+
+En caso de que no se necesite ordenar todos los datos se pueden hacer dos tipos de ordenamientos parciales.
+
+### Primeros N elementos
+
+Para ordenar de modo que los primeros N elementos esten ordenados se puede usar:
+
+~~~C++
+partial_sort( RandomIt first, RandomIt middle, RandomIt last );
+~~~
+
+Esta función se asegura que los elementos hasta *middle* esten ordenados, OJO *middle* no es un valor es un iterador, así que no ordena los menores a *middle* sino los *middle - first*.
+
+### N-th elemento
+
+Otra forma es si se quiere que el enesimo elemento del arreglo este ordenado, para eso se usa:
+
+~~~C++
+nth_element( RandomIt first, RandomIt nth, RandomIt last );
+~~~
+
+Que igualmente recibe tres iteradores.
+
 # Búsqueda binaria
 
 ## Forma manual
