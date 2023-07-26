@@ -1,64 +1,57 @@
-#include <iostream>
-#include <vector>
-#include <stack>
+#include <bits/stdc++.h>
+
+using namespace std;
 
 int main() {
-        int N, n = -1, a, b, tmp;
-        std::vector<int> l;
-        std::stack<int> s;
+    cin.tie(0);
+    ios::sync_with_stdio(0);
 
-        bool archivo = true;
-        bool bloque = true;
-        while (archivo || bloque) {
-                std::cin >> N;
-                if (N == 0) {
-                        if (!bloque) {
-                                archivo = false;
-                        } else {
-                                bloque = false;
-                                n = -1;
-                                std::cout << std::endl;
-                        }
-                } else {
-                        bloque = true;
-                        if (n == -1) {
-                                n = N;
-                        } else {
-                                a = 1;
-                                b = 0;
-                                while (!s.empty()) {
-                                        s.pop();
-                                }
-                                l.clear();
-                
-                                l.push_back(N);
-                                for (int i = 1; i < n; i++) {
-                                        std::cin >> tmp;
-                                        l.push_back(tmp);
-                                }
+    int n;
 
-                                while (a <= n && b < n) {
-                                        if (a == l[b]) {
-                                                if (a < n) {
-                                                        a++;
-                                                }
-                                                b++;
-                                        } else if (s.size() != 0 && s.top() == l[b]) {
-                                                s.pop();
-                                                b++;
-                                        } else {
-                                                s.push(a);
-                                                a++;
-                                        }
-                                }
-                                if (b == n) {
-                                        std::cout << "Yes" << std::endl;
-                                } else {
-                                        std::cout << "No" << std::endl;
-                                }
-                        }
-                }
+    while (cin >> n && n) {
+        int num;
+        vector<int> nums(n);
+
+        for (int i = 0; i < n; ++i) {
+            nums[i] = i + 1;
         }
-        
-        return 0;
+
+        while (cin >> num && num) {
+            queue<int> perm;
+            perm.push(num);
+
+            for (int i = 1; i < n; ++i) {
+                cin >> num;
+                perm.push(num);
+            }
+
+            int nums_index = 0;
+            stack<int> station;
+            bool posible = true;
+
+            while (posible && !perm.empty()) {
+                if (!station.empty() && perm.front() == station.top()) {
+                    perm.pop();
+                    station.pop();
+                } else if (nums_index < n && perm.front() == nums[nums_index]) {
+                    perm.pop();
+                    ++nums_index;
+                } else if (nums_index < n) {
+                    station.push(nums[nums_index]);
+                    ++nums_index;
+                } else {
+                    posible = false;
+                }
+            }
+
+            if (posible) {
+                cout << "Yes\n";
+            } else {
+                cout << "No\n";
+            }
+        }
+        cout << '\n';
+    }
+
+    return 0;
 }
