@@ -1033,6 +1033,23 @@ adyacencias en una competencia sería de 1000, más de esos y ya se vuelve una
 mala idea. También se necesita $O(V)$ para enumerar todos los vecinos de un
 vertice.
 
+Lista de adyacencias
+: Es una forma más eficiente de representar un grafo, se recomienda sea la
+primera opción a considerar al encontrarse con problemas de grafos. Su espacio
+es $O(V + E)$ y se suele representar como un vector de vectores o como un vector
+de vectores de pares. Ejemplo:
+
+0: [ 1, 2 ]
+1: [ 0, 2, 3 ]
+2: [ 0, 1, 4 ]
+3: [ 1, 4 ]
+4: [ 2, 3, 5 ]
+5: [ 4, 6 ]
+6: [ 5 ]
+
+Aquí se guardan con que nodo conecta cada nodo, si se necesitan guardar pesos
+se puede cambiar a vector de pares donde cada par sería un nodo con su peso.
+
 # Problemas clásicos
 
 ## Suma máxima de subarreglo
