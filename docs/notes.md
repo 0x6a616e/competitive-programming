@@ -942,6 +942,13 @@ int remove_element = s2.top().first;
 s2.pop();
 ~~~
 
+## Grafos
+
+Hay tres formas principales de representar un grafo.
+
+Matriz de adyacencias
+: Es buena elección si constantemente se necesita revisar si dos vertices estan conectados en un grafo denso. Pero no se recomienda para grafos grandes y dispersos porque requiere $O(V^2)$ espacio y habría mucho desperdiciado con celdas en blanco. Usualmente el límite de vertices para una matriz de adyacencias en una competencia sería de 1000, más de esos y ya se vuelve una mala idea. También se necesita $O(V)$ para enumerar todos los vecinos de un vertice.
+
 # Problemas clásicos
 
 ## Suma máxima de subarreglo
