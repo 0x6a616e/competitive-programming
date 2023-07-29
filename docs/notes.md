@@ -25,7 +25,10 @@ int main()
 }
 ~~~
 
-La principal ventaja de esta plantilla es que el *include* que usa trae toda la libreria estándar, yo siempre uso *cin* y *cout* así que esta plantilla incluye optimizaciones para el manejo de entrada. También hay que recordar que *'\\n'* es más rápido que *endl*.
+La principal ventaja de esta plantilla es que el *include* que usa trae toda
+la libreria estándar, yo siempre uso *cin* y *cout* así que esta plantilla
+incluye optimizaciones para el manejo de entrada. También hay que recordar que
+*'\\n'* es más rápido que *endl*.
 
 ## Compilación
 
@@ -35,11 +38,13 @@ Recomiendo este comando para compilar, a menos que el concurso sugiera uno.
 g++ -O2 -Wall test.cpp
 ~~~
 
-Con esto se optimiza el código además de indicar que se muestren la mayoría de advertencias.
+Con esto se optimiza el código además de indicar que se muestren la mayoría de
+advertencias.
 
 ## Manejo de archivos
 
-Si el concurso requiere que se lea o escriba en archivos, se puede agregar esto al principio.
+Si el concurso requiere que se lea o escriba en archivos, se puede agregar esto
+al principio.
 
 ~~~c++
 freopen("input.txt", "r", stdin);
@@ -68,11 +73,18 @@ Algo a considerar sobre *long long* es que tiene un prefijo.
 long long x = 123456789123456789LL;
 ~~~
 
-También pasa algo parecido a la división entera cuando se multiplican dos enteros hacia un *long long*, pasa que, a pesar de que esa variable es *long long*, el resultado de multiplicar dos enteros es un entero, y no se guarda bien. 
+También pasa algo parecido a la división entera cuando se multiplican dos
+enteros hacia un *long long*, pasa que, a pesar de que esa variable es *long
+long*, el resultado de multiplicar dos enteros es un entero, y no se guarda
+bien. 
 
 ## Números flotantes
 
-En la mayoría de los casos con usar *double* es suficiente, si eso no basta se puede usar *long double*. Pero algo a tener en cuenta cuando se usan números flotantes es que compararlos con $==$ no siempre funciona, esto por pequeños *errores* de precisión, por lo que una forma de compararlos es ver si la diferencia entre ellos es lo suficientemente pequeña.
+En la mayoría de los casos con usar *double* es suficiente, si eso no basta se
+puede usar *long double*. Pero algo a tener en cuenta cuando se usan números
+flotantes es que compararlos con $==$ no siempre funciona, esto por pequeños
+*errores* de precisión, por lo que una forma de compararlos es ver si la
+diferencia entre ellos es lo suficientemente pequeña.
 
 ~~~c++
 if (abs(a - b) < 1e-9) {
@@ -82,7 +94,8 @@ if (abs(a - b) < 1e-9) {
 
 ## Estimando la eficiencia
 
-Aquí hay una tabla para tener una idea de la complejidad necesaria según el tamaño de la entrada.
+Aquí hay una tabla para tener una idea de la complejidad necesaria según el
+tamaño de la entrada.
 
 | tamaño de entrada | complejidad requerida        |
 |:------------------|:-----------------------------|
@@ -93,11 +106,14 @@ Aquí hay una tabla para tener una idea de la complejidad necesaria según el ta
 | $n \leq 10^6$     | $O(n \cdot log(n))$ o $O(n)$ |
 | $n$ es grande     | $O(1)$ o $O(log(n))$         |
 
-Esto no es para tomarlo como la verdad absoluta, pero puede servir para descartar ideas sin desperdiciar tiempo.
+Esto no es para tomarlo como la verdad absoluta, pero puede servir para
+descartar ideas sin desperdiciar tiempo.
 
 ## Manejo de fechas
 
-Aquí hay una structura que representa una fecha, tiene un constructor que recibe el día, mes y año (los cuales pueden ser inválidos y se corrigen), un método que para saber si es bisciesto y un método para añadir una cantidad de días.
+Aquí hay una structura que representa una fecha, tiene un constructor que recibe
+el día, mes y año (los cuales pueden ser inválidos y se corrigen), un método
+que para saber si es bisciesto y un método para añadir una cantidad de días.
 
 ~~~c++
 struct Date {
@@ -167,7 +183,8 @@ struct Date {
 
     string zodiac() {
         int di, df, mi, mf;
-        for (map<string, vector<int>>::iterator it = zodiacs.begin(); it != zodiacs.end(); it++) {
+        map<string, vector<int>>::iterator it;
+        for (it = zodiacs.begin(); it != zodiacs.end(); it++) {
             di = it->second[1];
             mi = it->second[0];
             df = it->second[3];
@@ -184,7 +201,8 @@ struct Date {
 
 ## Imprimir tiempo
 
-Aquí hay una función para imprimir en formato HH:MM:SS a partir de la cantidad de segundos.
+Aquí hay una función para imprimir en formato HH:MM:SS a partir de la cantidad
+de segundos.
 
 ~~~c++
 void printTime(int seconds) {
@@ -202,7 +220,8 @@ void printTime(int seconds) {
 
 ## Aritmética modular
 
-Calcular un exponente grande modulo de un número ($x^n mod m$) se puede hacer con exponenciación binaria.
+Calcular un exponente grande modulo de un número ($x^n mod m$) se puede hacer
+con exponenciación binaria.
 
 ~~~c++
 long long binpow(long long a, long long b, long long m) {
@@ -220,7 +239,8 @@ long long binpow(long long a, long long b, long long m) {
 
 ## Sucesión simple
 
-Fórmulas útiles para calcular la suma de números consecutivos, hay una fórmula mucho más general pero no la entendí.
+Fórmulas útiles para calcular la suma de números consecutivos, hay una fórmula
+mucho más general pero no la entendí.
 
 $$ 1 + 2 + 3 + \dots + n = \frac{n(n + 1)}{2} $$
 
@@ -230,7 +250,8 @@ $$ 1^3 + 2^3 + 3^3 + \dots + n^3 = \left[\frac{n(n + 1)}{2}\right]^2 $$
 
 ## Sucesión aritmetica
 
-Otra cosa es una sucesión aritmetica, donde la diferencia entre dos números cualesquiera es la misma.
+Otra cosa es una sucesión aritmetica, donde la diferencia entre dos números
+cualesquiera es la misma.
 
 $$ 3, 7, 11, 15 $$
 
@@ -238,11 +259,13 @@ En esta sucesión aumentan de 4 en 4. La formula se ve así.
 
 $$ a + \dots + b = \frac{n(a + b)}{2} $$
 
-Es esta fórmula *a* es el primer número, *b* el segundo y *n* es la cantidad de números, se puede ver que en la fórmula no se considera el tamaño de los saltos.
+Es esta fórmula *a* es el primer número, *b* el segundo y *n* es la cantidad de
+números, se puede ver que en la fórmula no se considera el tamaño de los saltos.
 
 ## Sucesión geometrica
 
-Esta sucesión es una secuencia de números donde la proporción entre dos números consecutivos es la misma.
+Esta sucesión es una secuencia de números donde la proporción entre dos números
+consecutivos es la misma.
 
 $$ a + ak + ak^2 + \dots + b = \frac{bk - a}{k - 1} $$
 
@@ -277,7 +300,8 @@ $$ f(1) = 1 $$
 
 $$ f(n) = f(n - 1) + f(n - 2) $$
 
-También hay una fórmula directa para calcularlos, pero es poco práctica porque requiere un gran nivel de precisión.
+También hay una fórmula directa para calcularlos, pero es poco práctica porque
+requiere un gran nivel de precisión.
 
 $$ f(n) = \frac{(1 + \sqrt{5})^n - (1 - \sqrt{5})^n}{2^n\sqrt{5}} $$
 
@@ -354,54 +378,68 @@ $$ log_k(x^n) = n \cdot log_k(x) $$
 
 $$ log_k(\frac{a}{b}) = log_k(a) - log_k(b) $$
 
-Otra propiedad interesante es que la cantidad de digitos de un entero *x* en base *b* es:
+Otra propiedad interesante es que la cantidad de digitos de un entero *x* en
+base *b* es:
 
 $$ log_b(x) + 1 $$
 
 ## Promedio
 
-Se puede sumar o restar un número a un promedio ya calculado sin tener que recalcular la suma original.
+Se puede sumar o restar un número a un promedio ya calculado sin tener que
+recalcular la suma original.
 
 $$ s = \frac{a_1 + \dots + a_n}{n} $$
 
-$$ s' = \frac{a_1 + \dots + a_n + a_{n + 1}}{n + 1} = \frac{ns + a_{n + 1}}{n + 1} = \frac{(n + 1)s + a_{n + 1}}{n + 1} - \frac{s}{n + 1} = s + \frac{a_{n + 1} - s}{n + 1} $$
+$$ s' = \frac{a_1 + \dots + a_n + a_{n + 1}}{n + 1} =
+\frac{ns + a_{n + 1}}{n + 1} = \frac{(n + 1)s + a_{n + 1}}{n + 1} -
+\frac{s}{n + 1} = s + \frac{a_{n + 1} - s}{n + 1} $$
 
-$$ s'' = \frac{a_1 + \dots + a_{n - 1}}{n - 1} = \frac{ns - a_{n}}{n - 1} = \frac{(n - 1)s + a_{n}}{n - 1} + \frac{s}{n - 1} = s + \frac{s - a_{n}}{n - 1} $$
+$$ s'' = \frac{a_1 + \dots + a_{n - 1}}{n - 1} = \frac{ns - a_{n}}{n - 1} =
+\frac{(n - 1)s + a_{n}}{n - 1} + \frac{s}{n - 1} = s +
+\frac{s - a_{n}}{n - 1} $$
 
 ## Exponenciación binaria
 
-Es una forma de calcular $a^n$ usando $O(log_2(n))$ multiplicaciones en lugar de $O(n)$. No solo sirve para la aritmetica, ya que se puede aplicar a cualquier operación que tenga propiedad asociativa, es decir.
+Es una forma de calcular $a^n$ usando $O(log_2(n))$ multiplicaciones en lugar de
+$O(n)$. No solo sirve para la aritmetica, ya que se puede aplicar a cualquier
+operación que tenga propiedad asociativa, es decir.
 
 $$ (X \cdot Y) \cdot Z = X \cdot (Y \cdot Z) $$
 
-La idea de exponenciación binaria es dividir el trabajo usando la representación binaria del exponente.
+La idea de exponenciación binaria es dividir el trabajo usando la representación
+binaria del exponente.
 
 Por ejemplo:
 
 $$ 3^{13} = 3^{1101_2} = 3^8 \cdot 3^4 \cdot 3^1 $$
 
-Y debido a que $n$ tiene $log_2(n) + 1$ digitos en base 2, solo se necesitan $O(log_2(n))$ multiplicaciones. La función *pow* de c++ ya hace esto. Pero tiene otras aplicaciones, como:
+Y debido a que $n$ tiene $log_2(n) + 1$ digitos en base 2, solo se necesitan
+$O(log_2(n))$ multiplicaciones. La función *pow* de c++ ya hace esto. Pero tiene
+otras aplicaciones, como:
 
 ### Exponentes con módulo
 
-Calcular $x^n mod m$ se puede hacer con exponenciación binaria, eso esta en la sección de [Aritmética Modular](#aritmética-modular)
+Calcular $x^n mod m$ se puede hacer con exponenciación binaria, eso esta en la
+sección de [Aritmética Modular](#aritmética-modular)
 
 ### Aplicar permutaciones
 
-Se puede usar la exponenciación binaria para aplicar una determinada permutaciíon $n$ veces.
+Se puede usar la exponenciación binaria para aplicar una determinada
+permutaciíon $n$ veces.
 
 Por ejemplo:
 
-- Secuencia original: [1, 2, 3]
-- Permutación:        [1, 2, 0]
+- Secuencia original:   [1, 2, 3]
+- Permutación:          [1, 2, 0]
 
 Si la aplicamos 3 veces obtenemos:
 
-- 1era aplicación:    [2, 3, 1]
-- 2da aplicación:     [3, 1, 2]
-- 3era aplicación:    [1, 2, 3]
+- 1era aplicación:      [2, 3, 1]
+- 2da aplicación:       [3, 1, 2]
+- 3era aplicación:      [1, 2, 3]
 
-Lo cual se puede hacer con solo dos aplicaciones si se usa exponenciación binaria.
+Lo cual se puede hacer con solo dos aplicaciones si se usa exponenciación
+binaria.
 
 ~~~c++
 vector<int> applyPermutation(vector<int> sequence, vector<int> permutation) {
@@ -428,7 +466,8 @@ vector<int> permute(vector<int> sequence, vector<int> permutation, long long b) 
 
 ### Generar
 
-La criba de Eratóstenes es una forma de calcular los números primos en el intervalo de $[1 ; n]$ con complejidad $O(n \cdot log(log(n)))$.
+La criba de Eratóstenes es una forma de calcular los números primos en el
+intervalo de $[1 ; n]$ con complejidad $O(n \cdot log(log(n)))$.
 
 Su implementación es:
 
@@ -446,7 +485,8 @@ for (int i = 2; i * i <= n; i++) {
 
 ### Prueba
 
-Hay una forma deterministica de comprobar si un número de hasta 64 bits es primo. 
+Hay una forma deterministica de comprobar si un número de hasta 64 bits es
+primo. 
 
 ~~~c++
 using u64 = uint64_t;
@@ -499,7 +539,8 @@ bool MillerRabin(u64 n) { // returns true if n is prime, else returns false.
 
 ### Factores primos
 
-La forma más simple de obtener los factores primos de un número es pregenerando los primos desde $1$ hasta $\sqrt{n}$ y probando con cada uno de ellos.
+La forma más simple de obtener los factores primos de un número es pregenerando
+los primos desde $1$ hasta $\sqrt{n}$ y probando con cada uno de ellos.
 
 ~~~c++
 vector<long long> primes;
@@ -522,7 +563,8 @@ vector<long long> trial_division4(long long n) {
 
 ## Máximo común divisor
 
-A partir de c++17 ya hay una función *gcd* incluida, pero si por alguna razón no esta, aquí esta la declaración:
+A partir de c++17 ya hay una función *gcd* incluida, pero si por alguna razón
+no esta, aquí esta la declaración:
 
 $$ \gcd(a, b) = \begin{cases}a,&\text{if }b = 0 \\ \gcd(b, a \bmod b),&\text{otherwise.}\end{cases} $$
 
@@ -548,7 +590,8 @@ int gcd(int a, int b) {
 
 ## Mínimo común múltiplo
 
-Igual que el *gcd* ya debería de haber una funcín *lcm* en c++, pero por si llega a ser necesaria aquí esta su definición:
+Igual que el *gcd* ya debería de haber una funcín *lcm* en c++, pero por si
+llega a ser necesaria aquí esta su definición:
 
 $$ lcm(a, b) = \frac{a \cdot b}{\gcd(a, b)} $$
 
@@ -562,7 +605,12 @@ int lcm (int a, int b) {
 
 # Ordenar
 
-Casi nunca es una buena idea usar algoritmos de ordenamiento que hayas hecho a mano, esto porque ya hay buenas implementaciones en los lenguajes de programación. Por ejemplo, la STL de c++ ya tiene una función *sort* que puede ser usada para ordenar (es una combinación de quicksort, heapsort, insertion sort), también existe *stable_sort* en caso de que se necesite un ordenamiento estable. Aquí hay un ejemplo de esta función en acción.
+Casi nunca es una buena idea usar algoritmos de ordenamiento que hayas hecho a
+mano, esto porque ya hay buenas implementaciones en los lenguajes de
+programación. Por ejemplo, la STL de c++ ya tiene una función *sort* que puede
+ser usada para ordenar (es una combinación de quicksort, heapsort, insertion
+sort), también existe *stable_sort* en caso de que se necesite un ordenamiento
+estable. Aquí hay un ejemplo de esta función en acción.
 
 ## Con *sort* de c++
 
@@ -571,7 +619,9 @@ vector<int> v = { 4, 2, 5, 3, 5, 8, 3 };
 sort(v.begin(), v.end());
 ~~~
 
-Después de este ordenamiento, el contenido del vector será [ 2, 3, 3, 4, 5, 5, 8 ]. Por defecto se ordena de menor a mayor, pero una forma de implementar un orden inverso es:
+Después de este ordenamiento, el contenido del vector será [ 2, 3, 3, 4, 5, 5,
+8 ]. Por defecto se ordena de menor a mayor, pero una forma de implementar un
+orden inverso es:
 
 ~~~c++
 sort(v.rbegin(), v.rend());
@@ -579,7 +629,11 @@ sort(v.rbegin(), v.rend());
 
 ## Estructuras definidas
 
-Las estructuras que nosotros hagamos no tienen un operador de comparación automaticamente. Este operador se puede definir dentro de la estructura como una función de nombre *operator<* cuyo parametro debe ser un elemento del mismo tipo, debe devolver *true* si el elemento es más pequeño que el parametro y *falso* si no es así. Un ejemplo:
+Las estructuras que nosotros hagamos no tienen un operador de comparación
+automaticamente. Este operador se puede definir dentro de la estructura como
+una función de nombre *operator<* cuyo parametro debe ser un elemento del mismo
+tipo, debe devolver *true* si el elemento es más pequeño que el parametro y
+*falso* si no es así. Un ejemplo:
 
 ~~~c++
 struct P {
@@ -595,7 +649,8 @@ struct P {
 
 ## Con funciones personalizadas
 
-También se puede dar como parametro una función externa para que se use dentro del *sort*. Por ejemplo:
+También se puede dar como parametro una función externa para que se use dentro
+del *sort*. Por ejemplo:
 
 ~~~c++
 bool comp(string a, string b) {
@@ -613,7 +668,8 @@ sort(v.begin(), v.end(), comp);
 
 ## Permutaciones
 
-Una forma simple de pasar por todas las permutaciones de algo es con *next_permutation*, pero primero se ordena lo que se vaya a permutar. Ejemplo:
+Una forma simple de pasar por todas las permutaciones de algo es con
+*next_permutation*, pero primero se ordena lo que se vaya a permutar. Ejemplo:
 
 ~~~c++
 letras = "cba";
@@ -625,7 +681,8 @@ do {
 
 ## Ordenamiento parcial
 
-En caso de que no se necesite ordenar todos los datos se pueden hacer dos tipos de ordenamientos parciales.
+En caso de que no se necesite ordenar todos los datos se pueden hacer dos
+tipos de ordenamientos parciales.
 
 ### Primeros N elementos
 
@@ -635,11 +692,14 @@ Para ordenar de modo que los primeros N elementos esten ordenados se puede usar:
 partial_sort( RandomIt first, RandomIt middle, RandomIt last );
 ~~~
 
-Esta función se asegura que los elementos hasta *middle* esten ordenados, OJO *middle* no es un valor es un iterador, así que no ordena los menores a *middle* sino los *middle - first*.
+Esta función se asegura que los elementos hasta *middle* esten ordenados, OJO
+*middle* no es un valor es un iterador, así que no ordena los menores a *middle*
+sino los *middle - first*.
 
 ### N-th elemento
 
-Otra forma es si se quiere que el enesimo elemento del arreglo este ordenado, para eso se usa:
+Otra forma es si se quiere que el enesimo elemento del arreglo este ordenado,
+para eso se usa:
 
 ~~~c++
 nth_element( RandomIt first, RandomIt nth, RandomIt last );
@@ -682,13 +742,15 @@ if (array[k] == x) {
 
 ## Funciones de c++
 
-La libreria estandar de c++ contiene las siguientes funciones que estan basadas en búsqueda binaria y por lo tanto funcionan en tiempo logaritmico:
+La libreria estandar de c++ contiene las siguientes funciones que estan basadas
+en búsqueda binaria y por lo tanto funcionan en tiempo logaritmico:
 
 * lower_bound : devuelve un apuntador al primer elemento que vale al menos x.
 * upper_bound : devuelve un apuntador al primer elemento que vale más que x. 
 * equal_range : devuelve los dos apuntadores de arriba.
 
-Estas funciones asumen que el arreglo esta ordenado. Si no encuentran el elemento devuelven un apuntador pasado el último elemento.
+Estas funciones asumen que el arreglo esta ordenado. Si no encuentran el
+elemento devuelven un apuntador pasado el último elemento.
 
 # Manipulación de bits
 
@@ -732,13 +794,21 @@ n         = 01011000
 
 ## Desplazamientos
 
-- $\gg$ : Desplaza el número a la derecha removiendo los últimos bits, esto es efectivamente lo mismo que dividir a la mitad. Ejemplo: $5 \gg 2 = 101_2 \gg 2 = 1_2 = 1$ o lo que es igual a $\frac{5}{2^2}$. Aunque sea una división es mucho más rápido que dividir tradicionalmente.
+- $\gg$ : Desplaza el número a la derecha removiendo los últimos bits, esto es
+efectivamente lo mismo que dividir a la mitad. Ejemplo: $5 \gg 2 = 101_2 \gg 2 =
+1_2 = 1$ o lo que es igual a $\frac{5}{2^2}$. Aunque sea una división es mucho
+más rápido que dividir tradicionalmente.
 
-- $\ll$ : Desplaza el número a la izquierda añadiendo bits vacios, es lo mismo a duplicar un número. Ejemplo: $5 \ll 2 = 101_2 \ll 2 = 10100_2 = 20$ o lo que es igual a $5 \cdot 2^2$.
+- $\ll$ : Desplaza el número a la izquierda añadiendo bits vacios, es lo mismo
+a duplicar un número. Ejemplo: $5 \ll 2 = 101_2 \ll 2 = 10100_2 = 20$ o lo que
+es igual a $5 \cdot 2^2$.
 
 ## Trucos útiles
 
-Se puede asignar, invertir o limpiar un bit usando las siguientes propiedades: $1 \ll x$ es un número que solo tiene el bit x activo mientras que $\sim (1 \ll x)$ es un número con todos los bits excepto $x$ activos. Esto nos lleva a:
+Se puede asignar, invertir o limpiar un bit usando las siguientes propiedades:
+$1 \ll x$ es un número que solo tiene el bit x activo mientras que
+$\sim (1 \ll x)$ es un número con todos los bits excepto $x$ activos. Esto nos
+lleva a:
 
 - $n | (1 \ll x)$ activa el $x$-th bit en el número n.
 - $n \wedge (1 \ll x)$ invierte el $x$-th bit en el número n.
@@ -752,7 +822,8 @@ bool is_set(unsigned int number, int x) {
 }
 ~~~
 
-Se puede limpiar el bit más a la derecha de un número haciendo un AND con su predecesor.
+Se puede limpiar el bit más a la derecha de un número haciendo un AND con su
+predecesor.
 
 ~~~
 n           = 00110100
@@ -769,7 +840,8 @@ n & (n - 1) = 00110000
 
 # Submascaras de una mascara
 
-Dada una mascara $m$ se quieren iterar por todas sus submascaras, es decir, mascaras $s$ en las que solo bits que se incluían en $m$ estan activos.
+Dada una mascara $m$ se quieren iterar por todas sus submascaras, es decir,
+mascaras $s$ en las que solo bits que se incluían en $m$ estan activos.
 
 ~~~c++
 for (int s=m; s; s=(s-1)&m)
@@ -780,7 +852,8 @@ Esto no incluye la submascara equivalente a 0.
 
 # Manejo de números grandes
 
-Para el manejo de números grandes se va a usar un arreglo donde se guarden sus "digitos".
+Para el manejo de números grandes se va a usar un arreglo donde se guarden sus
+"digitos".
 
 ~~~c++
 // Base a usar
@@ -868,7 +941,8 @@ for (int i = (int) a.size() - 2; i >= 0; --i) {
 
 ## Policy Based Data Structures
 
-Es una estructura muy útil, es básicamente un *set* (con inserción y borrado en $O(log(n))$) pero con índices.
+Es una estructura muy útil, es básicamente un *set* (con inserción y borrado en
+$O(log(n))$) pero con índices.
 
 ~~~c++
 #include <ext/pb_ds/assoc_container.hpp>
@@ -884,7 +958,10 @@ typedef tree<
 > indexed_set;
 ~~~
 
-Esta implementación es para un multiset, por eso se almacena un *pair*, pero si se necesita que no haya repeticiones se sustituye el *pair* por el tipo de dato. También esta ordenado de menor a mayor, si se necesita lo opuesto se cambia el *less*.
+Esta implementación es para un multiset, por eso se almacena un *pair*, pero si
+se necesita que no haya repeticiones se sustituye el *pair* por el tipo de dato.
+También esta ordenado de menor a mayor, si se necesita lo opuesto se cambia el
+*less*.
 
 ~~~c++
 indexed_set is;
@@ -895,7 +972,8 @@ is.find_by_order(order); // Regresa un apuntador al índice que se uso como para
 
 ## Minimum stack / Minimum queue
 
-Aquí hay modificaciones al stack y a la fila para además de tener sus características poder acceder al menor elemento en $O(1)$.
+Aquí hay modificaciones al stack y a la fila para además de tener sus
+características poder acceder al menor elemento en $O(1)$.
 
 ### Minimum stack
 
@@ -947,13 +1025,24 @@ s2.pop();
 Hay tres formas principales de representar un grafo.
 
 Matriz de adyacencias
-: Es buena elección si constantemente se necesita revisar si dos vertices estan conectados en un grafo denso. Pero no se recomienda para grafos grandes y dispersos porque requiere $O(V^2)$ espacio y habría mucho desperdiciado con celdas en blanco. Usualmente el límite de vertices para una matriz de adyacencias en una competencia sería de 1000, más de esos y ya se vuelve una mala idea. También se necesita $O(V)$ para enumerar todos los vecinos de un vertice.
+: Es buena elección si constantemente se necesita revisar si dos vertices estan
+conectados en un grafo denso. Pero no se recomienda para grafos grandes y
+dispersos porque requiere $O(V^2)$ espacio y habría mucho desperdiciado con
+celdas en blanco. Usualmente el límite de vertices para una matriz de
+adyacencias en una competencia sería de 1000, más de esos y ya se vuelve una
+mala idea. También se necesita $O(V)$ para enumerar todos los vecinos de un
+vertice.
 
 # Problemas clásicos
 
 ## Suma máxima de subarreglo
 
-Aquí se habla de un problema clásico cuya solución más *directa* es O(n^3), pero que pensandola mejor se puede lograr reducir a O(n). Dado un arreglo de n númeors, hay que calcular cual es la suma máxima de una subsección, osea la suma más grande de una secuencia consecutiva de valores en el arreglo, esto se vuelve más interesante si el arreglo puede tener números negativos. Aquí hay un ejemplo.
+Aquí se habla de un problema clásico cuya solución más *directa* es O(n^3),
+pero que pensandola mejor se puede lograr reducir a O(n). Dado un arreglo de n
+números, hay que calcular cual es la suma máxima de una subsección, osea la
+suma más grande de una secuencia consecutiva de valores en el arreglo, esto se
+vuelve más interesante si el arreglo puede tener números negativos. Aquí hay un
+ejemplo.
 
 | -1 | 2 | 4 | -3 | 5 | 2 | -5 | 2 |
 
@@ -963,12 +1052,21 @@ El siguiente subarreglo produce una suma de 10:
 |----|---|---|----|---|---|----|---|
 |    | ^ | ^ |  ^ | ^ | ^ |    |   |
 
-Asumimos que un subarreglo vacio esta permitido, por lo que la suma máxima siempre será al menos 0. Ahora, para resolverlo en O(n) partimos de la idea de que para cada posición queremos calcular la suma máxima posible hasta ahí, entonces la del arreglo completo será la mayor de todas esas sumas. Consideramos dos posibilidades para la máxima suma del arreglo que termina en la posición *k*:
+Asumimos que un subarreglo vacio esta permitido, por lo que la suma máxima
+siempre será al menos 0. Ahora, para resolverlo en O(n) partimos de la idea de
+que para cada posición queremos calcular la suma máxima posible hasta ahí,
+entonces la del arreglo completo será la mayor de todas esas sumas. Consideramos
+dos posibilidades para la máxima suma del arreglo que termina en la posición *k*:
 
 1. El subarreglo solo contiene el elemento de la posición k.
-2. El subarreglo consiste de un subarreglo que termina en la posición k - 1, seguido del elemento en la posición k.
+2. El subarreglo consiste de un subarreglo que termina en la posición k - 1,
+seguido del elemento en la posición k.
 
-En el segundo caso, dado que queremos encontrar un subarreglo con la máxima suma, el subarreglo que termina en la posición k - 1 debería tener también la máxima suma para ese punto. Entonces podemos resolver el problema al calcular la máxima suma de subarreglos para cada posición de izquierda a derecha. El siguiente código demuestra una implementación de este algoritmo:
+En el segundo caso, dado que queremos encontrar un subarreglo con la máxima
+suma, el subarreglo que termina en la posición k - 1 debería tener también la
+máxima suma para ese punto. Entonces podemos resolver el problema al calcular
+la máxima suma de subarreglos para cada posición de izquierda a derecha. El
+siguiente código demuestra una implementación de este algoritmo:
 
 ~~~c++
 int best = 0, sum = 0;
@@ -979,4 +1077,6 @@ for (int k = 0; k < n; k++) {
 cout << best << '\n';
 ~~~
 
-Este algoritmo solo tiene un ciclo, por lo que la complejidad es O(n). Esta es la mejor complejidad posible, ya que cualquier algoritmo para este problema tiene que analizar todos los datos al menos una vez.
+Este algoritmo solo tiene un ciclo, por lo que la complejidad es O(n). Esta es
+la mejor complejidad posible, ya que cualquier algoritmo para este problema
+tiene que analizar todos los datos al menos una vez.
