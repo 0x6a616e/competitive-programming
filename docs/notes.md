@@ -1045,6 +1045,47 @@ de pares si no hay peso y cada entrada representa un arco, tiene espacio
 $O(E)$ y aunque dificulta el ver los vecinos de cierto nodo puede simplificar
 ciertos algoritmos.
 
+## Union-Find Disjoint Set
+
+Es una estructura de datos que permite de forma eficiente determinar que nodos
+pertenencen al mismo set, así como poder combinar sets. Su implementacion:
+
+~~~c++
+struct UnionFind {
+    vector<int> parent, rank;
+
+    UnionFind(int N) {
+        rank.assign(N, 0);
+        parent.assign(N, 0);
+        for (int i = 0; i < N; ++i) parent[i] = i;
+    }
+
+    int FindSet(int i) {
+        if (parent[i] == i) return i;
+
+        parent[i] = FindSet(parent[i]);
+
+        return parent[i];
+    }
+
+    bool IsSameSet(int i, int j) { return FindSet(i) == FindSet(j); }
+
+    void UnionSet(int i, int j) {
+        if (!IsSameSet(i, j)) {
+            int x = FindSet(i);
+            int y = FindSet(j);
+
+            if (rank[x] > rank[y])
+                parent[y] = x;
+            else {
+                parent[x] = y;
+                if (rank[x] == rank[y]) ++rank[y];
+            }
+        }
+    }
+};
+~~~
+
 # Problemas clásicos
 
 ## Suma máxima de subarreglo
