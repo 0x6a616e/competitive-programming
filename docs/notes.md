@@ -1037,18 +1037,13 @@ Lista de adyacencias
 : Es una forma más eficiente de representar un grafo, se recomienda sea la
 primera opción a considerar al encontrarse con problemas de grafos. Su espacio
 es $O(V + E)$ y se suele representar como un vector de vectores o como un vector
-de vectores de pares. Ejemplo:
+de vectores de pares.
 
-0: [ 1, 2 ]
-1: [ 0, 2, 3 ]
-2: [ 0, 1, 4 ]
-3: [ 1, 4 ]
-4: [ 2, 3, 5 ]
-5: [ 4, 6 ]
-6: [ 5 ]
-
-Aquí se guardan con que nodo conecta cada nodo, si se necesitan guardar pesos
-se puede cambiar a vector de pares donde cada par sería un nodo con su peso.
+Lista de arcos
+: Es otra forma en donde se usa un vector de trios (para grafos con peso) o uno
+de pares si no hay peso y cada entrada representa un arco, tiene espacio
+$O(E)$ y aunque dificulta el ver los vecinos de cierto nodo puede simplificar
+ciertos algoritmos.
 
 # Problemas clásicos
 
