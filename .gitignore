@@ -6,5 +6,5 @@
 *.exe
 *.sh
 
-# Ignore output files
+# Ignore I/O files
 output.txt
