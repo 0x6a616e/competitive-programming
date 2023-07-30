@@ -1054,26 +1054,26 @@ pertenencen al mismo set, así como poder combinar sets. Su implementacion:
 struct UnionFind {
     vector<int> parent, rank;
 
-    UnionFind(int N) {
+    unionFind(int N) {
         rank.assign(N, 0);
         parent.assign(N, 0);
         for (int i = 0; i < N; ++i) parent[i] = i;
     }
 
-    int FindSet(int i) {
+    int findSet(int i) {
         if (parent[i] == i) return i;
 
-        parent[i] = FindSet(parent[i]);
+        parent[i] = findSet(parent[i]);
 
         return parent[i];
     }
 
-    bool IsSameSet(int i, int j) { return FindSet(i) == FindSet(j); }
+    bool isSameSet(int i, int j) { return findSet(i) == findSet(j); }
 
-    void UnionSet(int i, int j) {
-        if (!IsSameSet(i, j)) {
-            int x = FindSet(i);
-            int y = FindSet(j);
+    void unionSet(int i, int j) {
+        if (!isSameSet(i, j)) {
+            int x = findSet(i);
+            int y = findSet(j);
 
             if (rank[x] > rank[y])
                 parent[y] = x;
@@ -1082,6 +1082,145 @@ struct UnionFind {
                 if (rank[x] == rank[y]) ++rank[y];
             }
         }
+    }
+};
+~~~
+
+## Segment Tree
+
+El árbol de segmentos es una estructura de datos que sirve para responder de
+forma eficiente consultas de rangos en arreglos de números que pueden cambiar.
+
+Primero una implementación para obtener el mínimo en cierto rango:
+
+~~~c++
+struct SegmentTree {
+    vector<int> st, A;
+    int n;
+
+    int left(int p) { return p << 1; }
+
+    int right(int p) { return (p << 1) + 1; }
+
+    void build(int p, int L, int R) {
+        if (L == R)
+            st[p] = L;
+        else {
+            build(left(p), L, (L + R) / 2);
+            build(right(p), (L + R) / 2 + 1, R);
+            int p1 = st[left(p)];
+            int p2 = st[right(p)];
+            st[p] = (A[p1] <= A[p2]) ? p1 : p2;
+        }
+    }
+
+    int rmq(int p, int L, int R, int i, int j) {
+        if (i > R || j < L) return -1;
+
+        if (L >= i && R <= j) return st[p];
+
+        int p1 = rmq(left(p), L, (L + R) / 2, i, j);
+        int p2 = rmq(right(p), (L + R) / 2 + 1, R, i, j);
+
+        if (p1 == -1) return p2;
+
+        if (p2 == -1) return p1;
+
+        return (A[p1] <= A[p2]) ? p1 : p2;
+    }
+
+    void pointUpdate(int p, int L, int R, int i, int v) {
+        if (L == R) return;
+
+        if (i >= L && i <= R) {
+            if (v <= A[st[p]]) st[p] = i;
+            
+            pointUpdate(left(p), L, (L + R) / 2, i, v);
+            pointUpdate(right(p), (L + R) / 2 + 1, R, i, v);
+        }
+    }
+
+    SegmentTree(vector<int> &_A) {
+        A = _A;
+        n = (int)A.size();
+        st.assign(4 * n, 0);
+        build(1, 0, n - 1);
+    }
+
+    int rmq(int i, int j) { return rmq(1, 0, n - 1, i, j); }
+
+    void pointUpdate(int i, int v) {
+        A[i] = v;
+        pointUpdate(1, 0, n - 1, i, v);
+    }
+
+    void rangeUpdate(int i, int j, int v) {
+        for (int k = j; k >= i; --k) pointUpdate(k, v);
+    }
+};
+~~~
+
+Ahora una implementación para la suma de los elementos en cierto rango:
+
+~~~c++
+struct SegmentTree {
+    vector<int> st, A;
+    int n;
+
+    int left(int p) { return p << 1; }
+
+    int right(int p) { return (p << 1) + 1; }
+
+    void build(int p, int L, int R) {
+        if (L == R)
+            st[p] = A[L];
+        else {
+            build(left(p), L, (L + R) / 2);
+            build(right(p), (L + R) / 2 + 1, R);
+            int p1 = st[left(p)];
+            int p2 = st[right(p)];
+            st[p] = p1 + p2;
+        }
+    }
+
+    int rsq(int p, int L, int R, int i, int j) {
+        if (i > R || j < L) return 0;
+
+        if (L >= i && R <= j) return st[p];
+
+        int p1 = rsq(left(p), L, (L + R) / 2, i, j);
+        int p2 = rsq(right(p), (L + R) / 2 + 1, R, i, j);
+
+        return p1 + p2;
+    }
+
+    void pointUpdate(int p, int L, int R, int i, int v) {
+        if (L == R && L == i) {
+            st[p] = v;
+        } else if (i >= L && i <= R) {
+            pointUpdate(left(p), L, (L + R) / 2, i, v);
+            pointUpdate(right(p), (L + R) / 2 + 1, R, i, v);
+
+            st[p] = st[left(p)] + st[right(p)];
+        }
+    }
+
+    SegmentTree(vector<int> &_A) {
+        A = _A;
+        n = (int)A.size();
+        st.assign(4 * n, 0);
+        build(1, 0, n - 1);
+    }
+
+    int rsq(int i, int j) { return rsq(1, 0, n - 1, i, j); }
+
+    void pointUpdate(int i, int v) {
+        pointUpdate(1, 0, n - 1, i, v);
+        A[i] = v;
+    }
+
+    void rangeUpdate(int i, int j, int v) {
+        for (int k = j; k >= i; --k) pointUpdate(k, v);
     }
 };
 ~~~
