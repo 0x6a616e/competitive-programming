@@ -1225,6 +1225,34 @@ struct SegmentTree {
 };
 ~~~
 
+## Fenwick Tree
+
+Muy similar al Segment Tree, por ahora creo que le daré prioridad al Segment
+Tree en lugar de este pero quisiera explorarlo mejor después.
+
+~~~c++
+struct FenwickTree {
+    vector<int> ft;
+
+    int LSOne(int S) { return (S & (-S)); }
+
+    FenwickTree(int n) { ft.assign(n + 1, 0); }
+
+    int rsq(int b) {
+        int sum = 0;
+        for (; b; b -= LSOne(b)) sum += ft[b];
+
+        return sum;
+    }
+
+    int rsq(int a, int b) { return rsq(b) - (a == 1 ? 0 : rsq(a - 1)); }
+
+    void adjust(int k, int v) {
+        for (; k < (int)ft.size(); k += LSOne(k)) ft[k] += v;
+    }
+};
+~~~
+
 # Problemas clásicos
 
 ## Suma máxima de subarreglo
