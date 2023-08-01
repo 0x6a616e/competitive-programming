@@ -4,6 +4,7 @@ using namespace std;
 
 struct SegmentTree {
     vector<int> st, A;
+    vector<bool> marked;
     int n;
 
     int left(int p) { return p << 1; }
@@ -44,10 +45,31 @@ struct SegmentTree {
         }
     }
 
+    void push(int p) {
+        if (marked[p]) {
+            st[left(p)] = st[right(p)] = st[p];
+            marked[left(p)] = marked[right(p)] = true;
+            marked[p] = false;
+        }
+    }
+
+    void rangeUpdate(int p, int L, int R, int i, int j, int v) {
+        if (L > R) return;
+        if (i >= L && j <= R) {
+            st[p] = v;
+            marked[p] = true;
+        } else {
+            push(p);
+            rangeUpdate(left(p), L, (L + R) / 2, i, j, v);
+            rangeUpdate(right(p), L, (L + R) / 2 + 1, i, j, v);
+        }
+    }
+
     SegmentTree(vector<int> &_A) {
         A = _A;
         n = (int)A.size();
         st.assign(4 * n, 0);
+        marked.assign(4 * n, false);
         build(1, 0, n - 1);
     }
 
@@ -58,9 +80,7 @@ struct SegmentTree {
         A[i] = v;
     }
 
-    void rangeUpdate(int i, int j, int v) {
-        for (int k = j; k >= i; --k) pointUpdate(k, v);
-    }
+    void rangeUpdate(int i, int j, int v) { rangeUpdate(1, 0, n - 1, i, j, v); }
 
     void invert(int i, int j) {
         for (int k = i; k <= j; ++k)
