@@ -4,6 +4,7 @@ using namespace std;
 
 struct SegmentTree {
     vector<int> st, A;
+    vector<bool> marked;
     int n;
 
     int left(int p) { return p << 1; }
@@ -27,6 +28,8 @@ struct SegmentTree {
 
         if (L >= i && R <= j) return st[p];
 
+        push(p);
+
         int p1 = rsq(left(p), L, (L + R) / 2, i, j);
         int p2 = rsq(right(p), (L + R) / 2 + 1, R, i, j);
 
@@ -44,10 +47,32 @@ struct SegmentTree {
         }
     }
 
+    void push(int p) {
+        if (marked[p]) {
+            st[left(p)] = st[right(p)] = st[p];
+            marked[left(p)] = marked[right(p)] = true;
+            marked[p] = false;
+        }
+    }
+
+    void rangeUpdate(int p, int L, int R, int i, int j, int v) {
+        if (L > R) return;
+        if (i == L && R == j) {
+            st[p] = v;
+            marked[p] = true;
+        } else {
+            push(v);
+            int tm = (L + R) / 2;
+            rangeUpdate(left(p), L, tm, i, min(j, tm), v);
+            rangeUpdate(right(p), tm + 1, R, max(i, tm + 1), j, v);
+        }
+    }
+
     SegmentTree(vector<int> &_A) {
         A = _A;
         n = (int)A.size();
         st.assign(4 * n, 0);
+        marked.assign(4 * n, false);
         build(1, 0, n - 1);
     }
 
@@ -58,9 +83,7 @@ struct SegmentTree {
         A[i] = v;
     }
 
-    void rangeUpdate(int i, int j, int v) {
-        for (int k = j; k >= i; --k) pointUpdate(k, v);
-    }
+    void rangeUpdate(int i, int j, int v) { rangeUpdate(1, 0, n - 1, i, j, v); }
 
     void invert(int i, int j) {
         for (int k = i; k <= j; ++k)
