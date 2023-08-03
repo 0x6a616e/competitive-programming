@@ -36,17 +36,6 @@ struct SegmentTree {
         return p1 + p2;
     }
 
-    void pointUpdate(int p, int L, int R, int i, int v) {
-        if (L == R && L == i) {
-            st[p] = v;
-        } else if (i >= L && i <= R) {
-            pointUpdate(left(p), L, (L + R) / 2, i, v);
-            pointUpdate(right(p), (L + R) / 2 + 1, R, i, v);
-
-            st[p] = st[left(p)] + st[right(p)];
-        }
-    }
-
     void push(int p) {
         if (marked[p]) {
             st[left(p)] = st[right(p)] = st[p];
@@ -56,15 +45,13 @@ struct SegmentTree {
     }
 
     void rangeUpdate(int p, int L, int R, int i, int j, int v) {
-        if (L > R) return;
         if (i == L && R == j) {
-            st[p] = v;
+            st[p] = v * (R - L + 1);
             marked[p] = true;
-        } else {
-            push(v);
-            int tm = (L + R) / 2;
-            rangeUpdate(left(p), L, tm, i, min(j, tm), v);
-            rangeUpdate(right(p), tm + 1, R, max(i, tm + 1), j, v);
+        } else if (i >= L && j <= R) {
+            push(p);
+            rangeUpdate(left(p), L, (L + R) / 2, i, j, v);
+            rangeUpdate(right(p), (L + R) / 2 + 1, R, i, j, v);
         }
     }
 
@@ -78,20 +65,7 @@ struct SegmentTree {
 
     int rsq(int i, int j) { return rsq(1, 0, n - 1, i, j); }
 
-    void pointUpdate(int i, int v) {
-        pointUpdate(1, 0, n - 1, i, v);
-        A[i] = v;
-    }
-
     void rangeUpdate(int i, int j, int v) { rangeUpdate(1, 0, n - 1, i, j, v); }
-
-    void invert(int i, int j) {
-        for (int k = i; k <= j; ++k)
-            if (A[k])
-                pointUpdate(k, 0);
-            else
-                pointUpdate(k, 1);
-    }
 };
 
 int main() {
@@ -135,7 +109,7 @@ int main() {
             } else if (op == 'E') {
                 st.rangeUpdate(a, b, 0);
             } else if (op == 'I') {
-                st.invert(a, b);
+                //  st.invert(a, b);
             } else if (op == 'S') {
                 ++qc;
                 cout << 'Q' << qc << ": " << st.rsq(a, b) << '\n';
