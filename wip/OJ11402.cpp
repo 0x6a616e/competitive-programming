@@ -38,27 +38,29 @@ struct SegmentTree {
 
     void push(int p, int L, int R) {
         if (marked[p]) {
-            int v = st[p] / (R - L + 1);
+            int v = (st[p] ? 1 : 0);
             int tm = (L + R) / 2;
             st[left(p)] = v * (tm - L + 1);
-            st[right(p)] = v * (R - (tm + 1) + 1);
+            st[right(p)] = v * (R - tm);
             marked[left(p)] = marked[right(p)] = true;
             marked[p] = false;
         }
     }
 
     void rangeUpdate(int p, int L, int R, int i, int j, int v) {
-        if (i == L && R == j) {
+        if (i > R || j < L) return;
+        if (L >= i && R <= j) {
             st[p] = v * (R - L + 1);
             marked[p] = true;
-        } else if (i >= L && j <= R) {
-            push(p, L, R);
-            rangeUpdate(left(p), L, (L + R) / 2, i, j, v);
-            rangeUpdate(right(p), (L + R) / 2 + 1, R, i, j, v);
+            return;
         }
+        push(p, L, R);
+        rangeUpdate(left(p), L, (L + R) / 2, i, j, v);
+        rangeUpdate(right(p), (L + R) / 2 + 1, R, i, j, v);
+        st[p] = st[left(p)] + st[right(p)];
     }
 
-    SegmentTree(vector<int> &_A) {
+    SegmentTree(vector<int>& _A) {
         A = _A;
         n = (int)A.size();
         st.assign(4 * n, 0);
