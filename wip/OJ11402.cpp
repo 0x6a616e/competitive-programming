@@ -28,7 +28,7 @@ struct SegmentTree {
 
         if (L >= i && R <= j) return st[p];
 
-        push(p);
+        push(p, L, R);
 
         int p1 = rsq(left(p), L, (L + R) / 2, i, j);
         int p2 = rsq(right(p), (L + R) / 2 + 1, R, i, j);
@@ -36,9 +36,12 @@ struct SegmentTree {
         return p1 + p2;
     }
 
-    void push(int p) {
+    void push(int p, int L, int R) {
         if (marked[p]) {
-            st[left(p)] = st[right(p)] = st[p];
+            int v = st[p] / (R - L + 1);
+            int tm = (L + R) / 2;
+            st[left(p)] = v * (tm - L + 1);
+            st[right(p)] = v * (R - (tm + 1) + 1);
             marked[left(p)] = marked[right(p)] = true;
             marked[p] = false;
         }
@@ -49,7 +52,7 @@ struct SegmentTree {
             st[p] = v * (R - L + 1);
             marked[p] = true;
         } else if (i >= L && j <= R) {
-            push(p);
+            push(p, L, R);
             rangeUpdate(left(p), L, (L + R) / 2, i, j, v);
             rangeUpdate(right(p), (L + R) / 2 + 1, R, i, j, v);
         }
