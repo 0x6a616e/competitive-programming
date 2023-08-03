@@ -60,6 +60,21 @@ struct SegmentTree {
         st[p] = st[left(p)] + st[right(p)];
     }
 
+    void invertRange(int p, int L, int R, int i, int j) {
+        if (j < L || i > R) {
+            return;
+        }
+        if (L == R) {
+            st[p] = (st[p] ? 0 : 1);
+            return;
+        }
+        push(p, L, R);
+        invertRange(left(p), L, (L + R) / 2, i, j);
+        invertRange(right(p), (L + R) / 2 + 1, R, i, j);
+
+        st[p] = st[left(p)] + st[right(p)];
+    }
+
     SegmentTree(vector<int>& _A) {
         A = _A;
         n = (int)A.size();
@@ -71,6 +86,8 @@ struct SegmentTree {
     int rsq(int i, int j) { return rsq(1, 0, n - 1, i, j); }
 
     void rangeUpdate(int i, int j, int v) { rangeUpdate(1, 0, n - 1, i, j, v); }
+
+    void invertRange(int i, int j) { invertRange(1, 0, n - 1, i, j); }
 };
 
 int main() {
@@ -114,7 +131,7 @@ int main() {
             } else if (op == 'E') {
                 st.rangeUpdate(a, b, 0);
             } else if (op == 'I') {
-                //  st.invert(a, b);
+                st.invertRange(a, b);
             } else if (op == 'S') {
                 ++qc;
                 cout << 'Q' << qc << ": " << st.rsq(a, b) << '\n';
