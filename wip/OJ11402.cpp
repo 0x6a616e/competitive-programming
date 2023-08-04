@@ -3,8 +3,7 @@
 using namespace std;
 
 struct SegmentTree {
-    vector<int> st, A;
-    vector<bool> marked;
+    vector<int> st, A, marked;
     int n;
 
     int left(int p) { return p << 1; }
@@ -37,13 +36,22 @@ struct SegmentTree {
     }
 
     void push(int p, int L, int R) {
-        if (marked[p]) {
+        int tm = (L + R) / 2;
+        if (marked[p] == 1) {
             int v = (st[p] ? 1 : 0);
-            int tm = (L + R) / 2;
             st[left(p)] = v * (tm - L + 1);
             st[right(p)] = v * (R - tm);
-            marked[left(p)] = marked[right(p)] = true;
-            marked[p] = false;
+            marked[left(p)] = marked[right(p)] = 1;
+            marked[p] = 0;
+        } else if (marked[p] == 2) {
+            if (L < R) {
+                push(left(p), L, tm);
+                push(right(p), tm + 1, R);
+            }
+            st[left(p)] = (tm - L + 1) - st[left(p)];
+            st[right(p)] = (R - tm) - st[right(p)];
+            marked[left(p)] = marked[right(p)] = 2;
+            marked[p] = 0;
         }
     }
 
@@ -51,7 +59,7 @@ struct SegmentTree {
         if (i > R || j < L) return;
         if (L >= i && R <= j) {
             st[p] = v * (R - L + 1);
-            marked[p] = true;
+            marked[p] = 1;
             return;
         }
         push(p, L, R);
@@ -61,17 +69,15 @@ struct SegmentTree {
     }
 
     void invertRange(int p, int L, int R, int i, int j) {
-        if (j < L || i > R) {
-            return;
-        }
-        if (L == R) {
-            st[p] = (st[p] ? 0 : 1);
+        if (i > R || j < L) return;
+        if (L >= i && R <= j) {
+            st[p] = (R - L + 1) - st[p];
+            marked[p] = 2;
             return;
         }
         push(p, L, R);
         invertRange(left(p), L, (L + R) / 2, i, j);
         invertRange(right(p), (L + R) / 2 + 1, R, i, j);
-
         st[p] = st[left(p)] + st[right(p)];
     }
 
@@ -79,7 +85,7 @@ struct SegmentTree {
         A = _A;
         n = (int)A.size();
         st.assign(4 * n, 0);
-        marked.assign(4 * n, false);
+        marked.assign(4 * n, 0);
         build(1, 0, n - 1);
     }
 
