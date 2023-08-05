@@ -44,10 +44,10 @@ struct SegmentTree {
             marked[left(p)] = marked[right(p)] = 1;
             marked[p] = 0;
         } else if (marked[p] == 2) {
-            if (L < R) {
-                push(left(p), L, tm);
-                push(right(p), tm + 1, R);
-            }
+            // if (L < R) {
+            //     push(left(p), L, tm);
+            //     push(right(p), tm + 1, R);
+            // }
             st[left(p)] = (tm - L + 1) - st[left(p)];
             st[right(p)] = (R - tm) - st[right(p)];
             marked[left(p)] = marked[right(p)] = 2;
