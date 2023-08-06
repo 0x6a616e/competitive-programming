@@ -1,11 +1,7 @@
-# Ignore vscode
-.vscode/
-
 # Ignore binary files
 *.out
 *.exe
 *.sh
 
 # Ignore I/O files
-input.txt
 output.txt
