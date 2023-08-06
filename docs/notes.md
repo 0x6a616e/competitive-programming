@@ -1165,6 +1165,7 @@ Ahora una implementación para la suma de los elementos en cierto rango:
 ~~~c++
 struct SegmentTree {
     vector<int> st, A;
+    vector<bool> marked;
     int n;
 
     int left(int p) { return p << 1; }
@@ -1188,40 +1189,50 @@ struct SegmentTree {
 
         if (L >= i && R <= j) return st[p];
 
+        push(p, L, R);
+
         int p1 = rsq(left(p), L, (L + R) / 2, i, j);
         int p2 = rsq(right(p), (L + R) / 2 + 1, R, i, j);
 
         return p1 + p2;
     }
 
-    void pointUpdate(int p, int L, int R, int i, int v) {
-        if (L == R && L == i) {
-            st[p] = v;
-        } else if (i >= L && i <= R) {
-            pointUpdate(left(p), L, (L + R) / 2, i, v);
-            pointUpdate(right(p), (L + R) / 2 + 1, R, i, v);
-
-            st[p] = st[left(p)] + st[right(p)];
+    void push(int p, int L, int R) {
+        if (L == R) return;
+        if (marked[p]) {
+            int tm = (L + R) / 2;
+            int v = st[p] / (R - L + 1);
+            st[left(p)] = v * (tm - L + 1);
+            st[right(p)] = v * (R - tm);
+            marked[left(p)] = marked[right(p)] = true;
+            marked[p] = false;
         }
     }
 
-    SegmentTree(vector<int> &_A) {
+    void rangeUpdate(int p, int L, int R, int i, int j, int v) {
+        if (i > R || j < L) return;
+        if (L >= i && R <= j) {
+            st[p] = v * (R - L + 1);
+            marked[p] = true;
+            return;
+        }
+        push(p, L, R);
+        rangeUpdate(left(p), L, (L + R) / 2, i, j, v);
+        rangeUpdate(right(p), (L + R) / 2 + 1, R, i, j, v);
+        st[p] = st[left(p)] + st[right(p)];
+    }
+
+    SegmentTree(vector<int>& _A) {
         A = _A;
         n = (int)A.size();
         st.assign(4 * n, 0);
+        marked.assign(4 * n, false);
         build(1, 0, n - 1);
     }
 
     int rsq(int i, int j) { return rsq(1, 0, n - 1, i, j); }
 
-    void pointUpdate(int i, int v) {
-        pointUpdate(1, 0, n - 1, i, v);
-        A[i] = v;
-    }
-
-    void rangeUpdate(int i, int j, int v) {
-        for (int k = j; k >= i; --k) pointUpdate(k, v);
-    }
+    void rangeUpdate(int i, int j, int v) { rangeUpdate(1, 0, n - 1, i, j, v); }
 };
 ~~~
 
@@ -1253,7 +1264,7 @@ struct FenwickTree {
 };
 ~~~
 
-# Problemas clásicos
+# Problemas de ejemplo
 
 ## Suma máxima de subarreglo
 
@@ -1300,3 +1311,104 @@ cout << best << '\n';
 Este algoritmo solo tiene un ciclo, por lo que la complejidad es O(n). Esta es
 la mejor complejidad posible, ya que cualquier algoritmo para este problema
 tiene que analizar todos los datos al menos una vez.
+
+## Segment Tree para arreglo binario
+
+Hay un arreglo binario donde se necesita saber cuantos 1's hay en determinado
+rango, también es necesario poder actualizar un rango así como poder invertir
+un rango (cambiar 0 -> 1 y 1 -> 0).
+
+~~~c++
+struct SegmentTree {
+    vector<int> st, A, marked;
+    int n;
+
+    int left(int p) { return p << 1; }
+
+    int right(int p) { return (p << 1) + 1; }
+
+    void build(int p, int L, int R) {
+        if (L == R)
+            st[p] = A[L];
+        else {
+            build(left(p), L, (L + R) / 2);
+            build(right(p), (L + R) / 2 + 1, R);
+            int p1 = st[left(p)];
+            int p2 = st[right(p)];
+            st[p] = p1 + p2;
+        }
+    }
+
+    int rsq(int p, int L, int R, int i, int j) {
+        if (i > R || j < L) return 0;
+
+        if (L >= i && R <= j) return st[p];
+
+        push(p, L, R);
+
+        int p1 = rsq(left(p), L, (L + R) / 2, i, j);
+        int p2 = rsq(right(p), (L + R) / 2 + 1, R, i, j);
+
+        return p1 + p2;
+    }
+
+    void push(int p, int L, int R) {
+        if (L == R) return;
+        int tm = (L + R) / 2;
+        if (marked[p] == 1) {
+            int v = (st[p] ? 1 : 0);
+            st[left(p)] = v * (tm - L + 1);
+            st[right(p)] = v * (R - tm);
+            marked[left(p)] = marked[right(p)] = 1;
+            marked[p] = 0;
+        } else if (marked[p] == 2) {
+            push(left(p), L, tm);
+            push(right(p), tm + 1, R);
+            st[left(p)] = (tm - L + 1) - st[left(p)];
+            st[right(p)] = (R - tm) - st[right(p)];
+            marked[left(p)] = marked[right(p)] = 2;
+            marked[p] = 0;
+        }
+    }
+
+    void invertRange(int p, int L, int R, int i, int j) {
+        if (i > R || j < L) return;
+        push(p, L, R);
+        if (L >= i && R <= j) {
+            st[p] = (R - L + 1) - st[p];
+            marked[p] = 2;
+            return;
+        }
+        invertRange(left(p), L, (L + R) / 2, i, j);
+        invertRange(right(p), (L + R) / 2 + 1, R, i, j);
+        st[p] = st[left(p)] + st[right(p)];
+    }
+
+    void rangeUpdate(int p, int L, int R, int i, int j, int v) {
+        if (i > R || j < L) return;
+        if (L >= i && R <= j) {
+            st[p] = v * (R - L + 1);
+            marked[p] = 1;
+            return;
+        }
+        push(p, L, R);
+        rangeUpdate(left(p), L, (L + R) / 2, i, j, v);
+        rangeUpdate(right(p), (L + R) / 2 + 1, R, i, j, v);
+        st[p] = st[left(p)] + st[right(p)];
+    }
+
+    SegmentTree(vector<int>& _A) {
+        A = _A;
+        n = (int)A.size();
+        st.assign(4 * n, 0);
+        marked.assign(4 * n, 0);
+        build(1, 0, n - 1);
+    }
+
+    int rsq(int i, int j) { return rsq(1, 0, n - 1, i, j); }
+
+    void rangeUpdate(int i, int j, int v) { rangeUpdate(1, 0, n - 1, i, j, v); }
+
+    void invertRange(int i, int j) { invertRange(1, 0, n - 1, i, j); }
+};
+~~~
