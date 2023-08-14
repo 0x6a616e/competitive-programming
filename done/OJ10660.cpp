@@ -26,12 +26,12 @@ int main() {
                             int config = 0;
                             for (int i = 0; i < 5; ++i) {
                                 for (int j = 0; j < 5; ++j) {
-                                    int zone = 0;
-                                    zone += abs(i - a / 5) + abs(j - a % 5);
-                                    zone += abs(i - b / 5) + abs(j - b % 5);
-                                    zone += abs(i - c / 5) + abs(j - c % 5);
-                                    zone += abs(i - d / 5) + abs(j - d % 5);
-                                    zone += abs(i - e / 5) + abs(j - e % 5);
+                                    int da = abs(i - a / 5) + abs(j - a % 5);
+                                    int db = abs(i - b / 5) + abs(j - b % 5);
+                                    int dc = abs(i - c / 5) + abs(j - c % 5);
+                                    int dd = abs(i - d / 5) + abs(j - d % 5);
+                                    int de = abs(i - e / 5) + abs(j - e % 5);
+                                    int zone = min({da, db, dc, dd, de});
                                     zone *= city[i][j];
                                     config += zone;
                                 }
@@ -49,9 +49,8 @@ int main() {
                 }
             }
         }
-        for (int i : res) {
-            cout << i << ' ';
-        }
+        cout << res[0];
+        for (int i = 1; i < 5; ++i) cout << ' ' << res[i];
         cout << '\n';
     }
 
