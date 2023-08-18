@@ -2,41 +2,36 @@
 
 using namespace std;
 
-int main()
-{
-        cin.tie(0);
-        ios::sync_with_stdio(0);
+int main() {
+    cin.tie(0);
+    ios::sync_with_stdio(0);
 
-        int round;
+    int R, aciertos, tmp, errores;
+    string palabra, intento;
+    unordered_set<char> p;
 
-        while (cin >> round && round != -1) {
-                int fallidos = 0;
-                string palabra, intento;
-                set<char> letras;
+    while (cin >> R && R != -1) {
+        cin >> palabra >> intento;
+        p.clear();
+        aciertos = errores = 0;
 
-                cin >> palabra;
-                cin >> intento;
-
-                for (int i = 0; i < palabra.size(); i++) {
-                        letras.insert(palabra[i]);
-                }
-                
-                for (int i = 0; i < intento.size() && letras.size() > 0 && fallidos < 7; i++) {
-                        if (letras.find(intento[i]) == letras.end()) {
-                                fallidos++;
-                        }
-                        letras.erase(intento[i]);
-                }
-
-                cout << "Round " << round << '\n';
-                if (letras.size() == 0) {
-                        cout << "You win.\n";
-                } else if (fallidos == 7) {
-                        cout << "You lose.\n";
-                } else {
-                        cout << "You chickened out.\n";
-                }
+        for (char c : palabra) p.insert(c);
+        for (char c : intento) {
+            tmp = p.count(c);
+            if (!tmp)
+                ++errores;
+            else
+                p.erase(c);
+            if (errores == 7 || !p.size()) break;
         }
-        
-        return 0;
+        cout << "Round " << R << '\n';
+        if (!p.size())
+            cout << "You win.\n";
+        else if (errores == 7)
+            cout << "You lose.\n";
+        else
+            cout << "You chickened out.\n";
+    }
+
+    return 0;
 }
