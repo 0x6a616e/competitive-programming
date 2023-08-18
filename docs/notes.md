@@ -11,7 +11,7 @@ output: pdf_document
 
 Plantilla para cualquier programa en c++.
 
-~~~c++
+~~~cpp
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -46,7 +46,7 @@ advertencias.
 Si el concurso requiere que se lea o escriba en archivos, se puede agregar esto
 al principio.
 
-~~~c++
+~~~cpp
 freopen("input.txt", "r", stdin);
 freopen("output.txt", "w", stdout);
 ~~~
@@ -69,7 +69,7 @@ Con esto ya no se ocupan modificar más cosas.
 
 Algo a considerar sobre *long long* es que tiene un prefijo.
 
-~~~c++
+~~~cpp
 long long x = 123456789123456789LL;
 ~~~
 
@@ -86,7 +86,7 @@ flotantes es que compararlos con $==$ no siempre funciona, esto por pequeños
 *errores* de precisión, por lo que una forma de compararlos es ver si la
 diferencia entre ellos es lo suficientemente pequeña.
 
-~~~c++
+~~~cpp
 if (abs(a - b) < 1e-9) {
     // a and b are equal
 }
@@ -115,7 +115,7 @@ Aquí hay una structura que representa una fecha, tiene un constructor que recib
 el día, mes y año (los cuales pueden ser inválidos y se corrigen), un método
 que para saber si es bisciesto y un método para añadir una cantidad de días.
 
-~~~c++
+~~~cpp
 struct Date {
     int day, month, year;
     vector<vector<int>> calendar = {
@@ -204,7 +204,7 @@ struct Date {
 Aquí hay una función para imprimir en formato HH:MM:SS a partir de la cantidad
 de segundos.
 
-~~~c++
+~~~cpp
 void printTime(int seconds) {
     int hours = seconds / 3600;
     int minutes = (seconds % 3600) / 60;
@@ -223,7 +223,7 @@ void printTime(int seconds) {
 Calcular un exponente grande modulo de un número ($x^n mod m$) se puede hacer
 con exponenciación binaria.
 
-~~~c++
+~~~cpp
 long long binpow(long long a, long long b, long long m) {
     a %= m;
     long long res = 1;
@@ -307,7 +307,7 @@ $$ f(n) = \frac{(1 + \sqrt{5})^n - (1 - \sqrt{5})^n}{2^n\sqrt{5}} $$
 
 Hay una forma de calcular el $n$-th número de Fibonacci en $O(n)$.
 
-~~~c++
+~~~cpp
 int fib(int n) {
     int a = 0;
     int b = 1;
@@ -322,7 +322,7 @@ int fib(int n) {
 
 Y hay una de hacerlo en $O(log(n))$.
 
-~~~c++
+~~~cpp
 struct matrix {
     long long mat[2][2];
     matrix friend operator *(const matrix &a, const matrix &b) {
@@ -441,7 +441,7 @@ Si la aplicamos 3 veces obtenemos:
 Lo cual se puede hacer con solo dos aplicaciones si se usa exponenciación
 binaria.
 
-~~~c++
+~~~cpp
 vector<int> applyPermutation(vector<int> sequence, vector<int> permutation) {
     vector<int> newSequence(sequence.size());
     for(int i = 0; i < sequence.size(); i++) {
@@ -471,7 +471,7 @@ intervalo de $[1 ; n]$ con complejidad $O(n \cdot log(log(n)))$.
 
 Su implementación es:
 
-~~~c++
+~~~cpp
 int n;
 vector<bool> is_prime(n + 1, true);
 is_prime[0] = is_prime[1] = false;
@@ -488,7 +488,7 @@ for (int i = 2; i * i <= n; i++) {
 Hay una forma deterministica de comprobar si un número de hasta 64 bits es
 primo. 
 
-~~~c++
+~~~cpp
 using u64 = uint64_t;
 using u128 = __uint128_t;
 
@@ -542,7 +542,7 @@ bool MillerRabin(u64 n) { // returns true if n is prime, else returns false.
 La forma más simple de obtener los factores primos de un número es pregenerando
 los primos desde $1$ hasta $\sqrt{n}$ y probando con cada uno de ellos.
 
-~~~c++
+~~~cpp
 vector<long long> primes;
 
 vector<long long> trial_division4(long long n) {
@@ -570,7 +570,7 @@ $$ \gcd(a, b) = \begin{cases}a,&\text{if }b = 0 \\ \gcd(b, a \bmod b),&\text{oth
 
 Una implementación recursiva:
 
-~~~c++
+~~~cpp
 int gcd(int a, int b) {
     return b ? gcd (b, a % b) : a;
 }
@@ -578,7 +578,7 @@ int gcd(int a, int b) {
 
 Y una iterativa:
 
-~~~c++
+~~~cpp
 int gcd(int a, int b) {
     while (b) {
         a %= b;
@@ -597,7 +597,7 @@ $$ lcm(a, b) = \frac{a \cdot b}{\gcd(a, b)} $$
 
 Y aquí su implementación:
 
-~~~c++
+~~~cpp
 int lcm (int a, int b) {
     return a / gcd(a, b) * b;
 }
@@ -614,7 +614,7 @@ estable. Aquí hay un ejemplo de esta función en acción.
 
 ## Con *sort* de c++
 
-~~~c++
+~~~cpp
 vector<int> v = { 4, 2, 5, 3, 5, 8, 3 };
 sort(v.begin(), v.end());
 ~~~
@@ -623,7 +623,7 @@ Después de este ordenamiento, el contenido del vector será [ 2, 3, 3, 4, 5, 5,
 8 ]. Por defecto se ordena de menor a mayor, pero una forma de implementar un
 orden inverso es:
 
-~~~c++
+~~~cpp
 sort(v.rbegin(), v.rend());
 ~~~
 
@@ -635,7 +635,7 @@ una función de nombre *operator<* cuyo parametro debe ser un elemento del mismo
 tipo, debe devolver *true* si el elemento es más pequeño que el parametro y
 *falso* si no es así. Un ejemplo:
 
-~~~c++
+~~~cpp
 struct P {
     int x, y;
     bool operator<(const P &p) {
@@ -652,7 +652,7 @@ struct P {
 También se puede dar como parametro una función externa para que se use dentro
 del *sort*. Por ejemplo:
 
-~~~c++
+~~~cpp
 bool comp(string a, string b) {
     if (a.size() != b.size())
         return a.size() < b.size();
@@ -662,7 +662,7 @@ bool comp(string a, string b) {
 
 Ahora usando esa función para un vector de strings:
 
-~~~c++
+~~~cpp
 sort(v.begin(), v.end(), comp);
 ~~~
 
@@ -671,7 +671,7 @@ sort(v.begin(), v.end(), comp);
 Una forma simple de pasar por todas las permutaciones de algo es con
 *next_permutation*, pero primero se ordena lo que se vaya a permutar. Ejemplo:
 
-~~~c++
+~~~cpp
 letras = "cba";
 sort(letras.begin(), letras.end());
 do {
@@ -688,7 +688,7 @@ tipos de ordenamientos parciales.
 
 Para ordenar de modo que los primeros N elementos esten ordenados se puede usar:
 
-~~~c++
+~~~cpp
 partial_sort( RandomIt first, RandomIt middle, RandomIt last );
 ~~~
 
@@ -701,7 +701,7 @@ sino los *middle - first*.
 Otra forma es si se quiere que el enesimo elemento del arreglo este ordenado,
 para eso se usa:
 
-~~~c++
+~~~cpp
 nth_element( RandomIt first, RandomIt nth, RandomIt last );
 ~~~
 
@@ -713,7 +713,7 @@ Que igualmente recibe tres iteradores.
 
 Hay dos formas de implementar la búsqueda binaria por nuestra cuenta.
 
-~~~c++
+~~~cpp
 int a = 0, b = n - 1;
 while (a <= b) {
     int k = (a + b) / 2;
@@ -729,7 +729,7 @@ while (a <= b) {
 
 Y.
 
-~~~c++
+~~~cpp
 int k = 0;
 for (int b = n / 2; b >= 1; b /= 2) {
     while (k + b < n && array[k + b] <= x)
@@ -816,7 +816,7 @@ lleva a:
 
 Se puede revisar si un bit $x$ esta activo con:
 
-~~~c++
+~~~cpp
 bool is_set(unsigned int number, int x) {
     return (number >> x) & 1;
 }
@@ -843,7 +843,7 @@ n & (n - 1) = 00110000
 Dada una mascara $m$ se quieren iterar por todas sus submascaras, es decir,
 mascaras $s$ en las que solo bits que se incluían en $m$ estan activos.
 
-~~~c++
+~~~cpp
 for (int s=m; s; s=(s-1)&m)
     ... you can use s ...
 ~~~
@@ -855,7 +855,7 @@ Esto no incluye la submascara equivalente a 0.
 Para el manejo de números grandes se va a usar un arreglo donde se guarden sus
 "digitos".
 
-~~~c++
+~~~cpp
 // Base a usar
 const int base = 1000 * 1000 * 1000;
 
@@ -944,7 +944,7 @@ for (int i = (int) a.size() - 2; i >= 0; --i) {
 Es una estructura muy útil, es básicamente un *set* (con inserción y borrado en
 $O(log(n))$) pero con índices.
 
-~~~c++
+~~~cpp
 #include <ext/pb_ds/assoc_container.hpp>
 
 using namespace __gnu_pbds;
@@ -963,7 +963,7 @@ se necesita que no haya repeticiones se sustituye el *pair* por el tipo de dato.
 También esta ordenado de menor a mayor, si se necesita lo opuesto se cambia el
 *less*.
 
-~~~c++
+~~~cpp
 indexed_set is;
 
 is.order_of_key(key); // Regresa el índice que esa key tendría dentro del set, exista o no
@@ -977,7 +977,7 @@ características poder acceder al menor elemento en $O(1)$.
 
 ### Minimum stack
 
-~~~c++
+~~~cpp
 stack<pair<int, int>> st;
 
 // Agregar elemento
@@ -994,7 +994,7 @@ int minimum = st.top().second;
 
 ### Minimum queue
 
-~~~c++
+~~~cpp
 stack<pair<int, int>> s1, s2;
 
 // Encontrar el mínimo
@@ -1050,7 +1050,7 @@ ciertos algoritmos.
 Es una estructura de datos que permite de forma eficiente determinar que nodos
 pertenencen al mismo set, así como poder combinar sets. Su implementacion:
 
-~~~c++
+~~~cpp
 struct UnionFind {
     vector<int> parent, rank;
 
@@ -1093,7 +1093,7 @@ forma eficiente consultas de rangos en arreglos de números que pueden cambiar.
 
 Primero una implementación para obtener el mínimo en cierto rango:
 
-~~~c++
+~~~cpp
 struct SegmentTree {
     vector<int> st, A;
     int n;
@@ -1162,7 +1162,7 @@ struct SegmentTree {
 
 Ahora una implementación para la suma de los elementos en cierto rango:
 
-~~~c++
+~~~cpp
 struct SegmentTree {
     vector<int> st, A;
     vector<bool> marked;
@@ -1241,7 +1241,7 @@ struct SegmentTree {
 Muy similar al Segment Tree, por ahora creo que le daré prioridad al Segment
 Tree en lugar de este pero quisiera explorarlo mejor después.
 
-~~~c++
+~~~cpp
 struct FenwickTree {
     vector<int> ft;
 
@@ -1299,7 +1299,7 @@ máxima suma para ese punto. Entonces podemos resolver el problema al calcular
 la máxima suma de subarreglos para cada posición de izquierda a derecha. El
 siguiente código demuestra una implementación de este algoritmo:
 
-~~~c++
+~~~cpp
 int best = 0, sum = 0;
 for (int k = 0; k < n; k++) {
     sum = max(array[k],sum+array[k]);
@@ -1318,7 +1318,7 @@ Hay un arreglo binario donde se necesita saber cuantos 1's hay en determinado
 rango, también es necesario poder actualizar un rango así como poder invertir
 un rango (cambiar 0 -> 1 y 1 -> 0).
 
-~~~c++
+~~~cpp
 struct SegmentTree {
     vector<int> st, A, marked;
     int n;
