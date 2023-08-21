@@ -27,6 +27,17 @@ string printLocations(int num) {
     return res;
 }
 
+int getMin(int a, int b) {
+    int aa = a;
+    int bb = b;
+    while (aa && bb) {
+        if ((a & 1) && !(b & 1)) return aa;
+        if ((b & 1) && !(a & 1)) return bb;
+        a >>= 1;
+        b >>= 1;
+    }
+}
+
 int main() {
     int planned, accepted, caso = 0;
     while (cin >> planned >> accepted && (planned || accepted)) {
@@ -48,8 +59,7 @@ int main() {
             poblaciones[n] = t;
             for (map<int, int>::iterator it = poblaciones.begin();
                  it != poblaciones.end(); ++it) {
-                if (hasExactlyOneBitSet(it->first) &&
-                    (it->first & n) == it->first)
+                if (hasExactlyOneBitSet(it->first) && (it->first & n))
                     it->second -= t;
             }
         }
@@ -65,14 +75,15 @@ int main() {
                 if (total > mejor.second) {
                     mejor.first = i;
                     mejor.second = total;
+                } else if (total == mejor.second) {
+                    mejor.first = getMin(mejor.first, i);
                 }
             }
         }
-        if (caso) cout << '\n';
         cout << "Case Number  " << ++caso << '\n';
         cout << "Number of Customers: " << mejor.second << '\n';
         cout << "Locations recommended: " << printLocations(mejor.first)
-             << '\n';
+             << "\n\n";
     }
     return 0;
 }
