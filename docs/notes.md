@@ -35,7 +35,7 @@ incluye optimizaciones para el manejo de entrada. También hay que recordar que
 Recomiendo este comando para compilar, a menos que el concurso sugiera uno.
 
 ~~~bash
-g++ -O2 -Wall test.cpp
+g++ -O2 -Wall -std=c++11 test.cpp
 ~~~
 
 Con esto se optimiza el código además de indicar que se muestren la mayoría de
@@ -765,32 +765,24 @@ Es el manejo de números binarios.
 
 Ejemplos:
 
-~~~
-n         = 01011000
-n-1       = 01010111
---------------------
-n & (n-1) = 01010000
-~~~
+> n         = 01011000
+> n-1       = 01010111
+> --------------------
+> n & (n-1) = 01010000
 
-~~~
-n         = 01011000
-n-1       = 01010111
---------------------
-n | (n-1) = 01011111
-~~~
+> n         = 01011000
+> n-1       = 01010111
+> --------------------
+> n | (n-1) = 01011111
 
-~~~
-n         = 01011000
-n-1       = 01010111
---------------------
-n ^ (n-1) = 00001111
-~~~
+> n         = 01011000
+> n-1       = 01010111
+> --------------------
+> n ^ (n-1) = 00001111
 
-~~~
-n         = 01011000
---------------------
-~n        = 10100111
-~~~
+> n         = 01011000
+> --------------------
+> ~n        = 10100111
 
 ## Desplazamientos
 
@@ -813,6 +805,7 @@ lleva a:
 - $n | (1 \ll x)$ activa el $x$-th bit en el número n.
 - $n \wedge (1 \ll x)$ invierte el $x$-th bit en el número n.
 - $n \& \sim (1 \ll x)$ limpia el $x$-th bit del número n.
+- Si $n \& (n - 1)$ es $0$ para $n > 0$ entonces $n$ es una potencia de 2.
 
 Se puede revisar si un bit $x$ esta activo con:
 
@@ -825,18 +818,10 @@ bool is_set(unsigned int number, int x) {
 Se puede limpiar el bit más a la derecha de un número haciendo un AND con su
 predecesor.
 
-~~~
-n           = 00110100
-n - 1       = 00110011
-----------------------
-n & (n - 1) = 00110000
-~~~
-
-## Funciones de c++
-
-- has_single_bit : Revisa si el número es una potencia de 2.
-- bit_ceil / bit_floor : Redondea a la siguiente potencia de 2.
-- popcount : Cuenta la cantidad de bits activos.
+> n           = 00110100
+> n - 1       = 00110011
+> ----------------------
+> n & (n - 1) = 00110000
 
 # Submascaras de una mascara
 
