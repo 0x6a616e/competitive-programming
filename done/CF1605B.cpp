@@ -24,10 +24,10 @@ int main() {
         int i_d = n - 1;
         vector<int> sol;
         sol.reserve(n);
-        while (!ordenado && i_i < i_d)
-            if (s[i_i] == '0' && s[i_d] == '0')
+        while (!ordenado && i_i < i_d) {
+            if (s[i_i] == '0' && s[i_d] == '0') {
                 ++i_i;
-            else if (s[i_i] == '0' && s[i_d] == '1') {
+            } else if (s[i_i] == '0' && s[i_d] == '1') {
                 ++i_i;
                 --i_d;
             } else if (s[i_i] == '1' && s[i_d] == '0') {
@@ -35,9 +35,10 @@ int main() {
                 sol.push_back(i_d);
                 ++i_i;
                 --i_d;
-            } else if (s[i_i] == '1' && s[i_d] == '1')
+            } else if (s[i_i] == '1' && s[i_d] == '1') {
                 --i_d;
-
+            }
+        }
         sort(sol.begin(), sol.end());
         cout << !sol.empty() << '\n';
         if (!sol.empty()) {
