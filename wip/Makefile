@@ -7,7 +7,7 @@ main: *.cpp
 
 debug: *.cpp
 	@echo "Compiling for debugging..."
-	g++ $(CFLAGS) *.cpp -o main.out
+	g++ $(CDFLAGS) *.cpp -o main.out
 
 clean:
 	@echo "Deleting files..."
