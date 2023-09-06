@@ -3,22 +3,8 @@
 using namespace std;
 
 string paintable(vector<vector<char>> &grid, int y, int x) {
-    if (y > 0) {
-        string up_posible;
-        if (grid[y - 1][x] == '0')
-            return "up";
-        else
-            up_posible = paintable(grid, y - 1, x);
-        if (up_posible != "no") return up_posible;
-    }
-    if (x > 0) {
-        string left_posible;
-        if (grid[y][x - 1] == '0')
-            return "left";
-        else
-            left_posible = paintable(grid, y, x - 1);
-        if (left_posible != "no") return left_posible;
-    }
+    if (y > 0 && grid[y - 1][x] == '0') return "up";
+    if (x > 0 && grid[y][x - 1] == '0') return "left";
     return "no";
 }
 
