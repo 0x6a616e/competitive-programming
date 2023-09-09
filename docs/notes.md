@@ -603,6 +603,21 @@ int lcm (int a, int b) {
 }
 ~~~
 
+## Ceil/Floor
+
+Estas funciones a veces pueden tener problemas de precisión, por lo que puede
+ser mejor aplicarlas de forma que siempre se mantienen enteros.
+
+Floor suele ser innecesario porque ese es el comportamiento por defecto de C++
+al dividir enteros.
+
+Ceil se puede sustituir por:
+
+$$ \lceil \frac{a}{b} \rceil = \lfloor \frac{a + b - 1}{b} \rfloor $$
+
+Esta igualdad se cumple para enteros positivos, para enteros negativos no estoy
+muy seguro.
+
 # Ordenar
 
 Casi nunca es una buena idea usar algoritmos de ordenamiento que hayas hecho a
