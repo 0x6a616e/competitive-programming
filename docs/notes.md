@@ -603,7 +603,9 @@ int lcm (int a, int b) {
 }
 ~~~
 
-## Ceil/Floor
+## Tips generales
+
+### Ceil/Floor
 
 Estas funciones a veces pueden tener problemas de precisión, por lo que puede
 ser mejor aplicarlas de forma que siempre se mantienen enteros.
@@ -617,6 +619,15 @@ $$ \lceil \frac{a}{b} \rceil = \lfloor \frac{a + b - 1}{b} \rfloor $$
 
 Esta igualdad se cumple para enteros positivos, para enteros negativos no estoy
 muy seguro.
+
+### Cantidad de múltiplos de un número
+
+Para problemas donde se quiera saber por ejemplo, cuantos múltiplos de 2 hay del
+1 al 100 se puede responder dividiendo este número entre la base.
+
+Para el caso de múltiplos de dos números, por ejemplo, cuantos números hay del
+1 al 100 que sean múltiplos de 2 y de 5 se usa el mínimo común múltiplo como
+base.
 
 # Ordenar
 
