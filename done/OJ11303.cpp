@@ -54,18 +54,6 @@ struct bigNum {
 
         return false;
     }
-
-    void print() {
-        if (digits.empty()) {
-            cout << 0;
-        } else {
-            cout << digits.back();
-        }
-
-        for (int i = (int)digits.size() - 2; i >= 0; --i) {
-            cout << setw(9) << setfill('0') << digits[i];
-        }
-    }
 };
 
 int main() {
@@ -77,7 +65,7 @@ int main() {
 
     while (cin >> n >> m >> k) {
         vector<int> patron(m);
-        unordered_set<int> patronSet;
+        set<int> patronSet;
         for (int i = 0; i < m; ++i) {
             cin >> patron[i];
             patronSet.insert(patron[i]);
@@ -88,7 +76,7 @@ int main() {
         bigNum acum("0");
         bigNum acum2 = acum;
         bigNum fin(k);
-        unordered_set<int> usados;
+        set<int> usados;
         for (int i = 0; i < n; ++i) {
             int derecha = n - i - 1;
             bigNum p("1");
@@ -110,8 +98,6 @@ int main() {
                         usados.insert(num);
                         acum2 = acum;
                         break;
-                    } else {
-                        acum = acum2;
                     }
                 } else {
                     acum2.add(np);
@@ -120,10 +106,9 @@ int main() {
                         usados.insert(num);
                         acum2 = acum;
                         break;
-                    } else {
-                        acum = acum2;
                     }
                 }
+                acum = acum2;
             }
         }
         for (int i = 0; i < n; ++i) cout << (i ? " " : "") << sol[i];
