@@ -29,7 +29,7 @@ struct bigNum {
         cleanZeros();
     }
 
-    void multiplyBy(int &n2) {
+    void multiplyBy(int n2) {
         int carry = 0;
         for (size_t i = 0; i < digits.size() || carry; ++i) {
             if (i == digits.size()) digits.push_back(0);
@@ -77,12 +77,57 @@ int main() {
 
     while (cin >> n >> m >> k) {
         vector<int> patron(m);
-        for (int i = 0; i < m; ++i) cin >> patron[i];
+        unordered_set<int> patronSet;
+        for (int i = 0; i < m; ++i) {
+            cin >> patron[i];
+            patronSet.insert(patron[i]);
+        }
 
         int pIndex = 0;
         vector<int> sol(n);
+        bigNum acum("0");
+        bigNum acum2 = acum;
+        bigNum fin(k);
+        unordered_set<int> usados;
         for (int i = 0; i < n; ++i) {
+            int derecha = n - i - 1;
+            bigNum p("1");
+            for (int j = 0; j < derecha - ((m - pIndex) - 1); ++j)
+                p.multiplyBy(derecha - j);
+            bigNum np("1");
+            for (int j = 0; j < derecha - (m - pIndex); ++j)
+                np.multiplyBy(derecha - j);
+            for (int num = 1; num < n + 1; ++num) {
+                if (usados.count(num) ||
+                    (patronSet.count(num) && num != patron[pIndex]))
+                    continue;
+
+                if (pIndex < (int)patron.size() && num == patron[pIndex]) {
+                    acum2.add(p);
+                    if (!(acum2 < fin)) {
+                        sol[i] = num;
+                        ++pIndex;
+                        usados.insert(num);
+                        acum2 = acum;
+                        break;
+                    } else {
+                        acum = acum2;
+                    }
+                } else {
+                    acum2.add(np);
+                    if (!(acum2 < fin)) {
+                        sol[i] = num;
+                        usados.insert(num);
+                        acum2 = acum;
+                        break;
+                    } else {
+                        acum = acum2;
+                    }
+                }
+            }
         }
+        for (int i = 0; i < n; ++i) cout << (i ? " " : "") << sol[i];
+        cout << '\n';
     }
 
     return 0;
