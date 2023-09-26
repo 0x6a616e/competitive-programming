@@ -78,6 +78,11 @@ int main() {
     while (cin >> n >> m >> k) {
         vector<int> patron(m);
         for (int i = 0; i < m; ++i) cin >> patron[i];
+
+        int pIndex = 0;
+        vector<int> sol(n);
+        for (int i = 0; i < n; ++i) {
+        }
     }
 
     return 0;
