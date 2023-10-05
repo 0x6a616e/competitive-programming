@@ -21,7 +21,6 @@ int main() {
         if (i + jump >= n) jump >>= 1;
         sol += a[i];
         a[i + jump] += a[i];
-        a[i] = 0;
         cout << sol << '\n';
     }
 
