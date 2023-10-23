@@ -23,7 +23,7 @@ int main() {
     int best = -1;
     for (int i = 0; i < n; ++i) {
         cin >> d;
-        if (d && (best == -1 || d % 30 < best)) best = d % 30;
+        if (d && (best == -1 || d % 30 > best)) best = d % 30;
     }
 
     int sol;
