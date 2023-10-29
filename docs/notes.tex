@@ -1,4 +1,4 @@
-\documentclass[11pt]{article}
+\documentclass[10pt]{article}
 \usepackage[margin=2cm]{geometry}
 \usepackage{graphicx}
 \usepackage{listings}
@@ -204,7 +204,7 @@ void printTime(int seconds) {
 }
 \end{lstlisting}
 
-\subsection{Exponenciación binaria mod n}
+\subsection{Exponenciación binaria mod m}
 
 \[ a^b \bmod m \]
 
@@ -220,6 +220,122 @@ long long binpow(long long a, long long b, long long m) {
     }
     return res;
 }
+\end{lstlisting}
+
+\subsection{Submascaras de una mascara}
+
+Dada una mascara $m$ se quieren iterar por todas sus submascaras, es decir, mascaras $s$ en las que solo bits que se incluían en $m$ estan activos.
+
+\begin{lstlisting}
+for (int s = m; s; s = (s-1) & m) {
+    ... you can use s ...
+}
+\end{lstlisting}
+
+Esto no incluye la submascara equivalente a 0.
+
+\subsection{Manejo de números grandes}
+
+\begin{lstlisting}
+struct BigNum {
+    int base;
+    vector<int> digits;
+
+    BigNum(string &s) {
+        base = 1000 * 1000 * 1000;
+        for (int i = (int)s.length(); i > 0; i -= 9) {
+            if (i < 9) {
+                digits.push_back(atoi(s.substr(0, i).c_str()));
+            } else {
+                digits.push_back(atoi(s.substr(i - 9, 9).c_str()));
+            }
+        }
+    }
+
+    void addBigNum(BigNum &b) {
+        int carry = 0;
+        for (size_t i = 0; i < max(digits.size(), b.digits.size()) || carry; ++i) {
+            if (i == digits.size()) {
+                digits.push_back(0);
+            }
+            digits[i] += carry + (i < b.digits.size() ? b.digits[i] : 0);
+            carry = digits[i] >= base;
+            if (carry) {
+                digits[i] -= base;
+            }
+        }
+        cleanZeroes();
+    }
+
+    void substractBigNum(BigNum &b) {
+        int carry = 0;
+        for (size_t i = 0; i < b.digits.size() || carry; ++i) {
+            digits[i] -= carry + (i < b.digits.size() ? b.digits[i] : 0);
+            carry = digits[i] < 0;
+            if (carry) {
+                digits[i] += base;
+            }
+        }
+        cleanZeroes();
+    }
+
+    void multiplyNum(int &b) {
+        int carry = 0;
+        for (size_t i = 0; i < digits.size() || carry; ++i) {
+            if (i == digits.size()) {
+                digits.push_back(0);
+            }
+            long long cur = carry + digits[i] * 1LL * b;
+            digits[i] = int(cur % base);
+            carry = int(cur / base);
+        }
+    }
+
+    void multiplyBigNum(BigNum &b) {
+        vector<int> c(digits.size() + b.digits.size());
+        for (size_t i = 0; i < digits.size(); ++i) {
+            for (int j = 0, carry = 0; j < (int)b.digits.size() || carry; ++j) {
+                long long cur =
+                    c[i + j] +
+                    digits[i] * 1LL *
+                    (j < (int)b.digits.size() ? b.digits[j] : 0) +
+                    carry;
+                c[i + j] = int(cur % base);
+                carry = int(cur / base);
+            }
+        }
+        digits = c;
+        cleanZeroes();
+    }
+
+    void divideNum(int &b) {
+        int carry = 0;
+        for (int i = (int)digits.size() - 1; i >= 0; --i) {
+            long long cur = digits[i] + carry * 1LL * base;
+            digits[i] = int(cur / b);
+            carry = int(cur % b);
+        }
+        cleanZeroes();
+    }
+
+    void cleanZeroes() {
+        while (digits.size() > 1 && digits.back() == 0) {
+            digits.pop_back();
+        }
+    }
+
+    void print() {
+        if (digits.empty()) {
+            cout << 0;
+        } else {
+            cout << digits.back();
+        }
+
+        for (int i = (int)digits.size() - 2; i >= 0; --i) {
+            cout << setw(9) << setfill('0') << digits[i];
+        }
+    }
+};
 \end{lstlisting}
 
 \section{Matemáticas}
@@ -359,7 +475,7 @@ Se puede sumar o restar un número a un promedio ya calculado sin tener que reca
 
 \subsection{Generar números primos}
 
-La criba de Eratóstenes es una forma de calcular los números primos en el intervalo de $[1 ; n]$ con complejidad $O(n \cdot log(log(n)))$.
+La criba de Eratóstenes es una forma de calcular los números primos en el intervalo de $[1 ; n]$ con complejidad $O(nlog(log(n)))$.
 
 Su implementación es:
 
@@ -691,132 +807,11 @@ Se puede asignar, invertir o limpiar un bit usando las siguientes propiedades:
     \item[$ n \& (n - 1) $] Limpia el bit más a la derecha de n, se puede usar para saber si es una potencia.
 \end{description}
 
-\begin{verbatim}  
-
-Se puede revisar si un bit $x$ esta activo con:
-
-\begin{lstlisting}
-bool is_set(unsigned int number, int x) {
-    return (number >> x) & 1;
-}
-\end{lstlisting}
-
-Se puede limpiar el bit más a la derecha de un número haciendo un AND con su
-predecesor.
- 
-\end{lstlisting}
-n           = 00110100
-n - 1       = 00110011
-----------------------
-n & (n - 1) = 00110000
-\end{lstlisting}
-
-\begin{verbatim}
-# Submascaras de una mascara
-
-Dada una mascara $m$ se quieren iterar por todas sus submascaras, es decir,
-mascaras $s$ en las que solo bits que se incluían en $m$ estan activos.
-
-\begin{lstlisting}
-for (int s=m; s; s=(s-1)&m)
-    ... you can use s ...
-\end{lstlisting}
-
-Esto no incluye la submascara equivalente a 0.
-
-# Manejo de números grandes
-
-Para el manejo de números grandes se va a usar un arreglo donde se guarden sus
-"digitos".
-
-\begin{lstlisting}
-// Base a usar
-const int base = 1000 textit{ 1000 } 1000;
-
-// Convertir de una string al vector de "digitos"
-for (int i = (int) s.length(); i > 0; i -= 9) {
-    if (i < 9) {
-        a.push_back(atoi(s.substr(0, i).c_str()));
-    } else {
-        a.push_back(atoi(s.substr(i - 9, 9).c_str()));
-    }
-}
-
-// Borrar leading 0, combiene hacerlo después de la mayoría de operaciones
-while (a.size() > 1 && a.back() == 0) {
-    a.pop_back();
-}
-
-// Suma a + b resultado en a
-int carry = 0;
-for (size_t i = 0; i < max(a.size(), b.size()) || carry; ++i) {
-    if (i == a.size()) {
-        a.push_back(0);
-    }
-    a[i] += carry + (i < b.size() ? b[i] : 0);
-    carry = a[i] >= base;
-    if (carry) {
-        a[i] -= base;
-    }
-}
-
-// Resta a - b y guarda en a
-int carry = 0;
-for (size_t i = 0; i < b.size() || carry; ++i) {
-    a[i] -= carry + (i < b.size() ? b[i] : 0);
-    carry = a[i] < 0;
-    if (carry) {
-        a[i] += base;
-    }
-}
-
-// Multiplicar a por un entero b pequeño (b < base) y guardar en a
-int carry = 0;
-for (size_t i = 0; i < a.size() || carry; ++i) {
-    if (i == a.size()) {
-        a.push_back(0);
-    }
-    long long cur = carry + a[i] textit{ 1ll } b;
-    a[i] = int (cur % base);
-    carry = int (cur / base);
-}
-
-// Multiplicar a por un entero largo b y guardar en c
-vector<int> c(a.size() + b.size());
-for (size_t i = 0; i < a.size(); ++i) {
-    for (int j = 0, carry = 0; j < (int) b.size() || carry; ++j) {
-        long long cur = c[i + j] + a[i] textit{ 1ll } (j < (int) b.size() ? b[j] : 0) + carry;
-        c[i + j] = int (cur % base);
-        carry = int (cur / base);
-    }
-}
-
-// División de a entre un entero b pequeño (b < base)
-int carry = 0;
-for (int i = (int) a.size() - 1; i >= 0; --i) {
-    long long cur = a[i] + carry textit{ 1ll } base;
-    a[i] = int (cur / b);
-    carry = int (cur % b);
-}
-
-// Para imprimir
-if (a.empty()) {
-    cout << 0;
-} else {
-    cout << a.back();
-}
-        
-for (int i = (int) a.size() - 2; i >= 0; --i) {
-    cout << setw(9) << setfill('0') << a[i];
-}
-\end{lstlisting}
-
-# Estructuras de datos
+\section{Estructuras de datos}
 
 \subsection{Policy Based Data Structures}
 
-Es una estructura muy útil, es básicamente un textit{set} (con inserción y borrado en
-$O(log(n))$) pero con índices.
+Es una estructura muy útil, es básicamente un \textit{set} (con inserción y borrado en $O(log(n))$) pero con índices.
 
 \begin{lstlisting}
 #include <ext/pb_ds/assoc_container.hpp>
@@ -824,32 +819,20 @@ $O(log(n))$) pero con índices.
 using namespace __gnu_pbds;
 
 typedef tree<
-    pair<unsigned long long, int>,
+    int,
     null_type,
-    less<pair<unsigned long long, int>>,
+    less<int>,
     rb_tree_tag,
     tree_order_statistics_node_update
 > indexed_set;
-\end{lstlisting}
 
-Esta implementación es para un multiset, por eso se almacena un textit{pair}, pero si
-se necesita que no haya repeticiones se sustituye el textit{pair} por el tipo de dato.
-También esta ordenado de menor a mayor, si se necesita lo opuesto se cambia el
-textit{less}.
-
-\begin{lstlisting}
 indexed_set is;
 
-is.order_of_key(key); // Regresa el índice que esa key tendría dentro del set, exista o no
-is.find_by_order(order); // Regresa un apuntador al índice que se uso como parametro
+is.order_of_key(key); // Regresa el indice que esa key tendria dentro del set, exista o no
+is.find_by_order(order); // Regresa un apuntador al indice que se uso como parametro
 \end{lstlisting}
 
-\subsection{Minimum stack / Minimum queue}
-
-Aquí hay modificaciones al stack y a la fila para además de tener sus
-características poder acceder al menor elemento en $O(1)$.
-
-#\subsection{Minimum stack}
+\subsection{Minimum stack}
 
 \begin{lstlisting}
 stack<pair<int, int>> st;
@@ -862,22 +845,22 @@ st.push({ new_elem, new_min });
 int removed_element = st.top().first;
 st.pop();
 
-// Encontrar el mínimo
+// Encontrar el minimo
 int minimum = st.top().second;
 \end{lstlisting}
 
-#\subsection{Minimum queue}
+\subsection{Minimum queue}
 
 \begin{lstlisting}
 stack<pair<int, int>> s1, s2;
 
-// Encontrar el mínimo
+// Encontrar el minimo
 if (s1.empty() || s2.empty()) 
     minimum = s1.empty() ? s2.top().second : s1.top().second;
 else
     minimum = min(s1.top().second, s2.top().second);
 
-// Añadir elemento
+// Agregar elemento
 int minimum = s1.empty() ? new_element : min(new_element, s1.top().second);
 s1.push({new_element, minimum});
 
@@ -898,31 +881,15 @@ s2.pop();
 
 Hay tres formas principales de representar un grafo.
 
-Matriz de adyacencias
-: Es buena elección si constantemente se necesita revisar si dos vertices estan
-conectados en un grafo denso. Pero no se recomienda para grafos grandes y
-dispersos porque requiere $O(V^2)$ espacio y habría mucho desperdiciado con
-celdas en blanco. Usualmente el límite de vertices para una matriz de
-adyacencias en una competencia sería de 1000, más de esos y ya se vuelve una
-mala idea. También se necesita $O(V)$ para enumerar todos los vecinos de un
-vertice.
-
-Lista de adyacencias
-: Es una forma más eficiente de representar un grafo, se recomienda sea la
-primera opción a considerar al encontrarse con problemas de grafos. Su espacio
-es $O(V + E)$ y se suele representar como un vector de vectores o como un vector
-de vectores de pares.
-
-Lista de arcos
-: Es otra forma en donde se usa un vector de trios (para grafos con peso) o uno
-de pares si no hay peso y cada entrada representa un arco, tiene espacio
-$O(E)$ y aunque dificulta el ver los vecinos de cierto nodo puede simplificar
-ciertos algoritmos.
+\begin{description}
+    \item[Matriz de adyacencias] Es buena elección si constantemente se necesita revisar si dos vertices estan conectados en un grafo denso. Pero no se recomienda para grafos grandes y dispersos porque requiere $O(V^2)$ espacio y habría mucho desperdiciado con celdas en blanco. Usualmente el límite de vertices para una matriz de adyacencias en una competencia sería de 1000, más de esos y ya se vuelve una mala idea. También se necesita $O(V)$ para enumerar todos los vecinos de un vertice.
+    \item[Lista de adyacencias] Es una forma más eficiente de representar un grafo, se recomienda sea la primera opción a considerar al encontrarse con problemas de grafos. Su espacio es $O(V + E)$ y se suele representar como un vector de vectores o como un vector de vectores de pares.
+    \item[Lista de arcos] Es otra forma en donde se usa un vector de trios (para grafos con peso) o uno de pares si no hay peso y cada entrada representa un arco, tiene espacio $O(E)$ y aunque dificulta el ver los vecinos de cierto nodo puede simplificar ciertos algoritmos.
+\end{description}
 
 \subsection{Union-Find Disjoint Set}
 
-Es una estructura de datos que permite de forma eficiente determinar que nodos
-pertenencen al mismo set, así como poder combinar sets. Su implementacion:
+Es una estructura de datos que permite de forma eficiente determinar que nodos pertenencen al mismo set, así como poder combinar sets. Su implementacion:
 
 \begin{lstlisting}
 struct UnionFind {
@@ -936,9 +903,7 @@ struct UnionFind {
 
     int findSet(int i) {
         if (parent[i] == i) return i;
-
         parent[i] = findSet(parent[i]);
-
         return parent[i];
     }
 
@@ -960,331 +925,4 @@ struct UnionFind {
 };
 \end{lstlisting}
 
-\subsection{Segment Tree}
-
-El árbol de segmentos es una estructura de datos que sirve para responder de
-forma eficiente consultas de rangos en arreglos de números que pueden cambiar.
-
-Primero una implementación para obtener el mínimo en cierto rango:
-
-\begin{lstlisting}
-struct SegmentTree {
-    vector<int> st, A;
-    int n;
-
-    int left(int p) { return p << 1; }
-
-    int right(int p) { return (p << 1) + 1; }
-
-    void build(int p, int L, int R) {
-        if (L == R)
-            st[p] = L;
-        else {
-            build(left(p), L, (L + R) / 2);
-            build(right(p), (L + R) / 2 + 1, R);
-            int p1 = st[left(p)];
-            int p2 = st[right(p)];
-            st[p] = (A[p1] <= A[p2]) ? p1 : p2;
-        }
-    }
-
-    int rmq(int p, int L, int R, int i, int j) {
-        if (i > R || j < L) return -1;
-
-        if (L >= i && R <= j) return st[p];
-
-        int p1 = rmq(left(p), L, (L + R) / 2, i, j);
-        int p2 = rmq(right(p), (L + R) / 2 + 1, R, i, j);
-
-        if (p1 == -1) return p2;
-
-        if (p2 == -1) return p1;
-
-        return (A[p1] <= A[p2]) ? p1 : p2;
-    }
-
-    void pointUpdate(int p, int L, int R, int i, int v) {
-        if (L == R) return;
-
-        if (i >= L && i <= R) {
-            if (v <= A[st[p]]) st[p] = i;
-            
-            pointUpdate(left(p), L, (L + R) / 2, i, v);
-            pointUpdate(right(p), (L + R) / 2 + 1, R, i, v);
-        }
-    }
-
-    SegmentTree(vector<int> &_A) {
-        A = _A;
-        n = (int)A.size();
-        st.assign(4 * n, 0);
-        build(1, 0, n - 1);
-    }
-
-    int rmq(int i, int j) { return rmq(1, 0, n - 1, i, j); }
-
-    void pointUpdate(int i, int v) {
-        A[i] = v;
-        pointUpdate(1, 0, n - 1, i, v);
-    }
-
-    void rangeUpdate(int i, int j, int v) {
-        for (int k = j; k >= i; --k) pointUpdate(k, v);
-    }
-};
-\end{lstlisting}
-
-Ahora una implementación para la suma de los elementos en cierto rango:
-
-\begin{lstlisting}
-struct SegmentTree {
-    vector<int> st, A;
-    vector<bool> marked;
-    int n;
-
-    int left(int p) { return p << 1; }
-
-    int right(int p) { return (p << 1) + 1; }
-
-    void build(int p, int L, int R) {
-        if (L == R)
-            st[p] = A[L];
-        else {
-            build(left(p), L, (L + R) / 2);
-            build(right(p), (L + R) / 2 + 1, R);
-            int p1 = st[left(p)];
-            int p2 = st[right(p)];
-            st[p] = p1 + p2;
-        }
-    }
-
-    int rsq(int p, int L, int R, int i, int j) {
-        if (i > R || j < L) return 0;
-
-        if (L >= i && R <= j) return st[p];
-
-        push(p, L, R);
-
-        int p1 = rsq(left(p), L, (L + R) / 2, i, j);
-        int p2 = rsq(right(p), (L + R) / 2 + 1, R, i, j);
-
-        return p1 + p2;
-    }
-
-    void push(int p, int L, int R) {
-        if (L == R) return;
-        if (marked[p]) {
-            int tm = (L + R) / 2;
-            int v = st[p] / (R - L + 1);
-            st[left(p)] = v * (tm - L + 1);
-            st[right(p)] = v * (R - tm);
-            marked[left(p)] = marked[right(p)] = true;
-            marked[p] = false;
-        }
-    }
-
-    void rangeUpdate(int p, int L, int R, int i, int j, int v) {
-        if (i > R || j < L) return;
-        if (L >= i && R <= j) {
-            st[p] = v * (R - L + 1);
-            marked[p] = true;
-            return;
-        }
-        push(p, L, R);
-        rangeUpdate(left(p), L, (L + R) / 2, i, j, v);
-        rangeUpdate(right(p), (L + R) / 2 + 1, R, i, j, v);
-        st[p] = st[left(p)] + st[right(p)];
-    }
-
-    SegmentTree(vector<int>& _A) {
-        A = _A;
-        n = (int)A.size();
-        st.assign(4 * n, 0);
-        marked.assign(4 * n, false);
-        build(1, 0, n - 1);
-    }
-
-    int rsq(int i, int j) { return rsq(1, 0, n - 1, i, j); }
-
-    void rangeUpdate(int i, int j, int v) { rangeUpdate(1, 0, n - 1, i, j, v); }
-};
-\end{lstlisting}
-
-\subsection{Fenwick Tree}
-
-Muy similar al Segment Tree, por ahora creo que le daré prioridad al Segment
-Tree en lugar de este pero quisiera explorarlo mejor después.
-
-\begin{lstlisting}
-struct FenwickTree {
-    vector<int> ft;
-
-    int LSOne(int S) { return (S & (-S)); }
-
-    FenwickTree(int n) { ft.assign(n + 1, 0); }
-
-    int rsq(int b) {
-        int sum = 0;
-        for (; b; b -= LSOne(b)) sum += ft[b];
-
-        return sum;
-    }
-
-    int rsq(int a, int b) { return rsq(b) - (a == 1 ? 0 : rsq(a - 1)); }
-
-    void adjust(int k, int v) {
-        for (; k < (int)ft.size(); k += LSOne(k)) ft[k] += v;
-    }
-};
-\end{lstlisting}
-
-# Problemas de ejemplo
-
-\subsection{Suma máxima de subarreglo}
-
-Aquí se habla de un problema clásico cuya solución más textit{directa} es O(n^3),
-pero que pensandola mejor se puede lograr reducir a O(n). Dado un arreglo de n
-números, hay que calcular cual es la suma máxima de una subsección, osea la
-suma más grande de una secuencia consecutiva de valores en el arreglo, esto se
-vuelve más interesante si el arreglo puede tener números negativos. Aquí hay un
-ejemplo.
-
-| -1 | 2 | 4 | -3 | 5 | 2 | -5 | 2 |
-
-El siguiente subarreglo produce una suma de 10:
-
-| -1 | 2 | 4 | -3 | 5 | 2 | -5 | 2 |
-|----|---|---|----|---|---|----|---|
-|    | ^ | ^ |  ^ | ^ | ^ |    |   |
-
-Asumimos que un subarreglo vacio esta permitido, por lo que la suma máxima
-siempre será al menos 0. Ahora, para resolverlo en O(n) partimos de la idea de
-que para cada posición queremos calcular la suma máxima posible hasta ahí,
-entonces la del arreglo completo será la mayor de todas esas sumas. Consideramos
-dos posibilidades para la máxima suma del arreglo que termina en la posición textit{k}:
-
-1. El subarreglo solo contiene el elemento de la posición k.
-2. El subarreglo consiste de un subarreglo que termina en la posición k - 1,
-seguido del elemento en la posición k.
-
-En el segundo caso, dado que queremos encontrar un subarreglo con la máxima
-suma, el subarreglo que termina en la posición k - 1 debería tener también la
-máxima suma para ese punto. Entonces podemos resolver el problema al calcular
-la máxima suma de subarreglos para cada posición de izquierda a derecha. El
-siguiente código demuestra una implementación de este algoritmo:
-
-\begin{lstlisting}
-int best = 0, sum = 0;
-for (int k = 0; k < n; k++) {
-    sum = max(array[k],sum+array[k]);
-    best = max(best,sum);
-}
-cout << best << '\n';
-\end{lstlisting}
-
-Este algoritmo solo tiene un ciclo, por lo que la complejidad es O(n). Esta es
-la mejor complejidad posible, ya que cualquier algoritmo para este problema
-tiene que analizar todos los datos al menos una vez.
-
-\subsection{Segment Tree para arreglo binario}
-
-Hay un arreglo binario donde se necesita saber cuantos 1's hay en determinado
-rango, también es necesario poder actualizar un rango así como poder invertir
-un rango (cambiar 0 -> 1 y 1 -> 0).
-
-\begin{lstlisting}
-struct SegmentTree {
-    vector<int> st, A, marked;
-    int n;
-
-    int left(int p) { return p << 1; }
-
-    int right(int p) { return (p << 1) + 1; }
-
-    void build(int p, int L, int R) {
-        if (L == R)
-            st[p] = A[L];
-        else {
-            build(left(p), L, (L + R) / 2);
-            build(right(p), (L + R) / 2 + 1, R);
-            int p1 = st[left(p)];
-            int p2 = st[right(p)];
-            st[p] = p1 + p2;
-        }
-    }
-
-    int rsq(int p, int L, int R, int i, int j) {
-        if (i > R || j < L) return 0;
-
-        if (L >= i && R <= j) return st[p];
-
-        push(p, L, R);
-
-        int p1 = rsq(left(p), L, (L + R) / 2, i, j);
-        int p2 = rsq(right(p), (L + R) / 2 + 1, R, i, j);
-
-        return p1 + p2;
-    }
-
-    void push(int p, int L, int R) {
-        if (L == R) return;
-        int tm = (L + R) / 2;
-        if (marked[p] == 1) {
-            int v = (st[p] ? 1 : 0);
-            st[left(p)] = v * (tm - L + 1);
-            st[right(p)] = v * (R - tm);
-            marked[left(p)] = marked[right(p)] = 1;
-            marked[p] = 0;
-        } else if (marked[p] == 2) {
-            push(left(p), L, tm);
-            push(right(p), tm + 1, R);
-            st[left(p)] = (tm - L + 1) - st[left(p)];
-            st[right(p)] = (R - tm) - st[right(p)];
-            marked[left(p)] = marked[right(p)] = 2;
-            marked[p] = 0;
-        }
-    }
-
-    void invertRange(int p, int L, int R, int i, int j) {
-        if (i > R || j < L) return;
-        push(p, L, R);
-        if (L >= i && R <= j) {
-            st[p] = (R - L + 1) - st[p];
-            marked[p] = 2;
-            return;
-        }
-        invertRange(left(p), L, (L + R) / 2, i, j);
-        invertRange(right(p), (L + R) / 2 + 1, R, i, j);
-        st[p] = st[left(p)] + st[right(p)];
-    }
-
-    void rangeUpdate(int p, int L, int R, int i, int j, int v) {
-        if (i > R || j < L) return;
-        if (L >= i && R <= j) {
-            st[p] = v * (R - L + 1);
-            marked[p] = 1;
-            return;
-        }
-        push(p, L, R);
-        rangeUpdate(left(p), L, (L + R) / 2, i, j, v);
-        rangeUpdate(right(p), (L + R) / 2 + 1, R, i, j, v);
-        st[p] = st[left(p)] + st[right(p)];
-    }
-
-    SegmentTree(vector<int>& _A) {
-        A = _A;
-        n = (int)A.size();
-        st.assign(4 * n, 0);
-        marked.assign(4 * n, 0);
-        build(1, 0, n - 1);
-    }
-
-    int rsq(int i, int j) { return rsq(1, 0, n - 1, i, j); }
-
-    void rangeUpdate(int i, int j, int v) { rangeUpdate(1, 0, n - 1, i, j, v); }
-
-    void invertRange(int i, int j) { invertRange(1, 0, n - 1, i, j); }
-};
-\end{lstlisting}
-\end{verbatim}
 \end{document}
