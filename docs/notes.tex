@@ -589,10 +589,7 @@ nth_element( RandomIt first, RandomIt nth, RandomIt last );
 
 Que igualmente recibe tres iteradores.
 
-\begin{verbatim}
-# Búsqueda binaria
-
-\subsection{Forma manual}
+\subsection{Búsqueda binaria manual}
 
 Hay dos formas de implementar la búsqueda binaria por nuestra cuenta.
 
@@ -623,80 +620,78 @@ if (array[k] == x) {
 }
 \end{lstlisting}
 
-\subsection{Funciones de c++}
+\subsection{Búsqueda binaria con C++}
 
-La libreria estandar de c++ contiene las siguientes funciones que estan basadas
-en búsqueda binaria y por lo tanto funcionan en tiempo logaritmico:
+La libreria estandar de C++ contiene las siguientes funciones que estan basadas en búsqueda binaria y por lo tanto funcionan en tiempo logaritmico:
 
-* lower_bound : devuelve un apuntador al primer elemento que vale al menos x.
-* upper_bound : devuelve un apuntador al primer elemento que vale más que x. 
-* equal_range : devuelve los dos apuntadores de arriba.
+\begin{description}
+    \item[lower\_bound] Devuelve un apuntador al primer elemento que vale al menos x.
+    \item[upper\_bound] Devuelve un apuntador al primer elemento que vale más que x.
+    \item[equal\_range] Devuelve los dos apuntadores de arriba.
+\end{description}
 
 Estas funciones asumen que el arreglo esta ordenado. Si no encuentran el
 elemento devuelven un apuntador pasado el último elemento.
 
-# Manipulación de bits
-
-Es el manejo de números binarios.
+\section{Manipulación de bits}
 
 \subsection{Operadores binarios}
 
-- $\&$ : Es el AND.
-- $|$ : Es el OR.
-- $\wedge$ : Es el XOR.
-- $\sim$ : Es el NOT.
+\begin{description}
+    \item[$ \& $] AND
+    \item[$ | $] OR
+    \item[\^{}] XOR
+    \item[$ \sim $] NOT
+\end{description}
 
 Ejemplos:
 
-\end{lstlisting}
-n         = 01011000
-n-1       = 01010111
---------------------
-n & (n-1) = 01010000
-\end{lstlisting}
+\begin{verbatim}
+n           = 01011000
+n - 1       = 01010111
+----------------------
+n & (n - 1) = 01010000
+\end{verbatim}
 
-\end{lstlisting}
-n         = 01011000
-n-1       = 01010111
---------------------
-n | (n-1) = 01011111
-\end{lstlisting}
+\begin{verbatim}
+n           = 01011000
+n - 1       = 01010111
+----------------------
+n | (n - 1) = 01011111
+\end{verbatim}
 
-\end{lstlisting}
-n         = 01011000
-n-1       = 01010111
---------------------
-n ^ (n-1) = 00001111
-\end{lstlisting}
+\begin{verbatim}
+n           = 01011000
+n - 1       = 01010111
+----------------------
+n ^ (n - 1) = 00001111
+\end{verbatim}
 
-\end{lstlisting}
+\begin{verbatim}
 n         = 01011000
 --------------------
 ~n        = 10100111
-\end{lstlisting}
+\end{verbatim}
 
 \subsection{Desplazamientos}
 
-- $\gg$ : Desplaza el número a la derecha removiendo los últimos bits, esto es
-efectivamente lo mismo que dividir a la mitad. Ejemplo: $5 \gg 2 = 101_2 \gg 2 =
-1_2 = 1$ o lo que es igual a $\frac{5}{2^2}$. Aunque sea una división es mucho
-más rápido que dividir tradicionalmente.
-
-- $\ll$ : Desplaza el número a la izquierda añadiendo bits vacios, es lo mismo
-a duplicar un número. Ejemplo: $5 \ll 2 = 101_2 \ll 2 = 10100_2 = 20$ o lo que
-es igual a $5 \cdot 2^2$.
+\begin{description}
+    \item[$ >> $] Desplaza el número a la derecha removiendo bits, es lo mismo que dividir a la mitad.
+    \item[$ << $] Desplaza el número a la izquierda añadiendo bits vacios, es lo mismo a duplicar un número.
+\end{description}
 
 \subsection{Trucos útiles}
 
 Se puede asignar, invertir o limpiar un bit usando las siguientes propiedades:
-$1 \ll x$ es un número que solo tiene el bit x activo mientras que
-$\sim (1 \ll x)$ es un número con todos los bits excepto $x$ activos. Esto nos
-lleva a:
 
-- $n | (1 \ll x)$ activa el $x$-th bit en el número n.
-- $n \wedge (1 \ll x)$ invierte el $x$-th bit en el número n.
-- $n \& \sim (1 \ll x)$ limpia el $x$-th bit del número n.
-- Si $n \& (n - 1)$ es $0$ para $n > 0$ entonces $n$ es una potencia de 2.
+\begin{description}
+    \item[$ n | (1 << x) $] Activa el $x$-th bit en el número n.
+    \item[$ n $ \^{} $ (1 << x) $] Invierte el $x$-th bit en el número n.
+    \item[$ n \& \sim (1 << x) $] Limpia el $x$-th bit del número n.
+    \item[$ n \& (n - 1) $] Limpia el bit más a la derecha de n, se puede usar para saber si es una potencia.
+\end{description}
+
+\begin{verbatim}  
 
 Se puede revisar si un bit $x$ esta activo con:
 
@@ -716,6 +711,7 @@ n - 1       = 00110011
 n & (n - 1) = 00110000
 \end{lstlisting}
 
+\begin{verbatim}
 # Submascaras de una mascara
 
 Dada una mascara $m$ se quieren iterar por todas sus submascaras, es decir,
