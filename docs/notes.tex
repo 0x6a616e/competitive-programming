@@ -620,6 +620,90 @@ Para problemas donde se quiera saber por ejemplo, cuantos múltiplos de 2 hay de
 
 Para el caso de múltiplos de dos números, por ejemplo, cuantos números hay del 1 al 100 que sean múltiplos de 2 y de 5 se usa el mínimo común múltiplo como base.
 
+\subsection{Extended Euclidean Algorithm}
+
+\begin{lstlisting}
+int gcd(int a, int b, int &x, int &y) {
+    if (b == 0) {
+        x = 1;
+        y = 0;
+        return a;
+    }
+    int x1, y1;
+    int d = gcd(b, a % b, x1, y1);
+    x = y1;
+    y = x1 - y1 * (a / b);
+    return d;
+}
+\end{lstlisting}
+
+\section{Aritmética modular}
+
+\subsection{Propiedad distributiva}
+
+La operación del modulo tiene propiedades distributivas para la suma, resta y multiplicación.
+
+\[ (a + b) \bmod c = ((a \bmod c) + (b \bmod c)) \bmod c \]
+
+\[ (a * b) \bmod c = ((a \bmod c) * (b \bmod c)) \bmod c \]
+
+\[ (a - b) \bmod c = ((a \bmod c) - (b \bmod c)) \bmod c \]
+
+Un detalle de la propiedad distributiva en la resta es que aunque matemáticamente es correcto como lo exprese arriba, al momento de programar se debe hacer diferente.
+
+Incorrecto:
+
+\begin{lstlisting}
+a = (a % c);
+b = (b % c);
+ans = (a - b) % c;
+\end{lstlisting}
+
+Correcto:
+
+\begin{lstlisting}
+a = (a % c);
+b = (b % c);
+ans = (a - b + c) % c;
+\end{lstlisting}
+
+\subsection{Modular multiplicative inverse}
+
+Esto aplica cuando se busca hacer una división modulo m, dado que el modulo no tiene la propiedad distributiva en la división, entra el modular multiplicative inverse:
+
+El inverso multiplicativo es un número tal que:
+
+\[ n * mi(n) == 1 \]
+
+Debido a eso, se expresa la división como una multiplicación:
+
+\[ x / y == x * mi(y) \]
+
+En la aritmética regular el inverso multiplicativo suele ser un número decimal, pero en la aritmética modular el mmi depende del número y de la base para el modulo.
+
+\[ (n * mmi(n, m)) \bmod m == 1 \]
+
+Por eso, en lugar de hacer esto:
+
+\[ (x / y) \bmod m \]
+
+Se debe programar esto:
+
+\[ (x * mmi(y, m)) \bmod m \]
+
+\begin{lstlisting}
+int mmi(int a, int m) {
+    int x, y;
+    int g = extended_euclidean(a, m, x, y);
+    if (g != 1) {
+        return -1;
+    } else {
+        x = (x % m + m) % m;
+        return x;
+    }
+}
+\end{lstlisting}
+
 \section{Ordenamiento}
 
 Existen las funciones \textit{sort} y \textit{stable\_sort}.
