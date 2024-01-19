@@ -6,10 +6,13 @@ The prefix of each file indicates the online judge.
 
 CF
 : Codeforces
+
 OJ
 : Online Judge UVA
+
 OU
 : OmegaUp
+
 CSES
 : Code Submission Evaluation System
 
