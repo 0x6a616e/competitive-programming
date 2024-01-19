@@ -1,3 +1,7 @@
+// https://codeforces.com/contest/178/problem/A1
+// https://codeforces.com/contest/178/problem/A2
+// https://codeforces.com/contest/178/problem/A3
+
 #include <bits/stdc++.h>
 
 using namespace std;
