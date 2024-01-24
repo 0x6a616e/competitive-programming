@@ -1,4 +1,4 @@
-CFLAGS = -O2 -std=c++11 -Wall
+CFLAGS = -O2 -std=c++11 -Wall -Wextra -Wshadow
 CDFLAGS = --debug -std=c++11 -Wpedantic
 
 main: *.cpp
