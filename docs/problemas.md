@@ -1,0 +1,5 @@
+[] [Permutations](https://cses.fi/problemset/task/1070)
+[] [Bit Strings](https://cses.fi/problemset/task/1617)
+[] [Trailing Zeros](https://cses.fi/problemset/task/1618)
+[] [Tower of Hanoi](https://cses.fi/problemset/task/2165)
+[] [Apple Division](https://cses.fi/problemset/task/1623)
