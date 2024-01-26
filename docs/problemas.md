@@ -3,3 +3,7 @@
 - [ ] [Trailing Zeros](https://cses.fi/problemset/task/1618)
 - [ ] [Tower of Hanoi](https://cses.fi/problemset/task/2165)
 - [ ] [Apple Division](https://cses.fi/problemset/task/1623)
+- [ ] [B. Soldier and Badges](https://codeforces.com/contest/546/problem/B)
+- [ ] [B. Incinerate](https://codeforces.com/contest/1763/problem/B)
+- [ ] [B. Prinzessin der Verurteilung](https://codeforces.com/contest/1536/problem/B)
+- [ ] [C. Queries for the Array](https://codeforces.com/contest/1861/problem/C)
