@@ -11,20 +11,24 @@ int main() {
     int n;
     cin >> n;
 
-    long long sol[n];
-    long long curr = -10000000000000000;
-    long long best = -10000000000000000;
+    long long curr;
+    long long best;
+    long long sol;
 
-    for (int i = 0; i < n; ++i) {
-        int x;
+    int x;
+    cin >> x;
+    curr = x;
+    best = x;
+
+    for (int i = 1; i < n; ++i) {
         cin >> x;
         if (curr + x > x) {
             curr += x;
         } else {
             curr = x;
         }
-        sol[i] = curr;
-        best = max(best, sol[i]);
+        sol = curr;
+        best = max(best, sol);
     }
 
     cout << best << '\n';
