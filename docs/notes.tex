@@ -960,16 +960,6 @@ int remove_element = s2.top().first;
 s2.pop();
 \end{lstlisting}
 
-\subsection{Grafos}
-
-Hay tres formas principales de representar un grafo.
-
-\begin{description}
-    \item[Matriz de adyacencias] Es buena elección si constantemente se necesita revisar si dos vertices estan conectados en un grafo denso. Pero no se recomienda para grafos grandes y dispersos porque requiere $O(V^2)$ espacio y habría mucho desperdiciado con celdas en blanco. Usualmente el límite de vertices para una matriz de adyacencias en una competencia sería de 1000, más de esos y ya se vuelve una mala idea. También se necesita $O(V)$ para enumerar todos los vecinos de un vertice.
-    \item[Lista de adyacencias] Es una forma más eficiente de representar un grafo, se recomienda sea la primera opción a considerar al encontrarse con problemas de grafos. Su espacio es $O(V + E)$ y se suele representar como un vector de vectores o como un vector de vectores de pares.
-    \item[Lista de arcos] Es otra forma en donde se usa un vector de trios (para grafos con peso) o uno de pares si no hay peso y cada entrada representa un arco, tiene espacio $O(E)$ y aunque dificulta el ver los vecinos de cierto nodo puede simplificar ciertos algoritmos.
-\end{description}
-
 \subsection{Union-Find Disjoint Set}
 
 Es una estructura de datos que permite de forma eficiente determinar que nodos pertenencen al mismo set, así como poder combinar sets. Su implementacion:
@@ -1007,5 +997,98 @@ struct UnionFind {
     }
 };
 \end{lstlisting}
+
+\section{Grafos}
+
+\subsection{Almacenamiento}
+
+Hay tres formas principales de representar un grafo.
+
+\begin{description}
+    \item[Matriz de adyacencias] Es buena elección si constantemente se necesita revisar si dos vertices estan conectados en un grafo denso. Pero no se recomienda para grafos grandes y dispersos porque requiere $O(V^2)$ espacio y habría mucho desperdiciado con celdas en blanco. Usualmente el límite de vertices para una matriz de adyacencias en una competencia sería de 1000, más de esos y ya se vuelve una mala idea. También se necesita $O(V)$ para enumerar todos los vecinos de un vertice.
+    \item[Lista de adyacencias] Es una forma más eficiente de representar un grafo, se recomienda sea la primera opción a considerar al encontrarse con problemas de grafos. Su espacio es $O(V + E)$ y se suele representar como un vector de vectores o como un vector de vectores de pares.
+    \item[Lista de arcos] Es otra forma en donde se usa un vector de trios (para grafos con peso) o uno de pares si no hay peso y cada entrada representa un arco, tiene espacio $O(E)$ y aunque dificulta el ver los vecinos de cierto nodo puede simplificar ciertos algoritmos.
+\end{description}
+
+\subsection{Dijkstra}
+
+Dijkstra es un algoritmo para encontrar el camino más corto con un inicio en común. Es decir, Dijkstra toma un nodo $s$ como inicio y calcula el camino más corto desde ese nodo hasta todos los demás nodos del grafo. Tiene la condición de que en este grafo todos los pesos deben ser no negativos.
+
+Para implementarlo se necesita que el grafo este almacenado como una lista de adyacencias y tener un valor definido como infinito que sea mayor que cualquier camino posible dentro del grafo.
+
+\subsubsection{Implementación 1 $O(n^2+m)$}
+
+\begin{lstlisting}
+const int INF = 1000000000;
+vector<vector<pair<int, int>>> adj;
+
+void dijkstra(int s, vector<int> &d, vector<int> &p) {
+    int n = adj.size();
+    d.assign(n, INF);
+    p.assign(n, -1);
+    vector<bool> u(n, false);
+
+    d[s] = 0;
+    for (int i = 0; i < n; i++) {
+        int v = -1;
+        for (int j = 0; j < n; j++) {
+            if (!u[j] && (v == -1 || d[j] < d[v]))
+                v = j;
+        }
+
+        if (d[v] == INF)
+            break;
+
+        u[v] = true;
+        for (auto edge : adj[v]) {
+            int to = edge.first;
+            int len = edge.second;
+
+            if (d[v] + len < d[to]) {
+                d[to] = d[v] + len;
+                p[to] = v;
+            }
+        }
+    }
+}
+\end{lstlisting}
+
+\subsubsection{Implementación 2 $O(m \log n)$}
+
+\begin{lstlisting}
+const int INF = 1000000000;
+vector<vector<pair<int, int>>> adj;
+
+void dijkstra(int s, vector<int> & d, vector<int> & p) {
+    int n = adj.size();
+    d.assign(n, INF);
+    p.assign(n, -1);
+
+    d[s] = 0;
+    using pii = pair<int, int>;
+    priority_queue<pii, vector<pii>, greater<pii>> q;
+    q.push({0, s});
+    while (!q.empty()) {
+        int v = q.top().second;
+        int d_v = q.top().first;
+        q.pop();
+        if (d_v != d[v])
+            continue;
+
+        for (auto edge : adj[v]) {
+            int to = edge.first;
+            int len = edge.second;
+
+            if (d[v] + len < d[to]) {
+                d[to] = d[v] + len;
+                p[to] = v;
+                q.push({d[to], to});
+            }
+        }
+    }
+}
+\end{lstlisting}
+
+\subsubsection{Implementación 3}
 
 \end{document}
