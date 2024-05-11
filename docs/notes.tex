@@ -337,6 +337,50 @@ struct BigNum {
 };
 \end{lstlisting}
 
+\subsection{Knuth–Morris–Pratt}
+
+\begin{lstlisting}
+vector<int> prefix_function(string s) {
+    int n = (int)s.length();
+    vector<int> pi(n);
+    for (int i = 1; i < n; i++) {
+        int j = pi[i-1];
+        while (j > 0 && s[i] != s[j])
+            j = pi[j-1];
+        if (s[i] == s[j])
+            j++;
+        pi[i] = j;
+    }
+    return pi;
+}
+\end{lstlisting}
+
+Si lo que se busca es saber la primera aparición de una string $s$ en la string $t$.
+
+\begin{lstlisting}
+int kmp_function(string haystack, string needle) {
+    string s = needle + '#' + haystack;
+    int n = (int)needle.length();
+    int m = (int)haystack.length();
+    
+    int b = (int)s.length();
+    vector<int> pi(b);
+    for (int i = 1; i < b; i++) {
+        int j = pi[i - 1];
+        while (j > 0 && s[i] != s[j])
+            j = pi[j - 1];
+        if (s[i] == s[j])
+            j++;
+        pi[i] = j;
+    }
+    
+    for (int i = 0; i < b; ++i) {
+        if (pi[i] == n) return i - 2 * n;
+    }
+    return -1;
+}
+\end{lstlisting}
+
 \section{Matemáticas}
 
 \subsection{Sucesión simple}
@@ -1012,7 +1056,7 @@ Hay tres formas principales de representar un grafo.
 
 \subsection{Dijkstra}
 
-Dijkstra es un algoritmo para encontrar el camino más corto con un inicio en común. Es decir, Dijkstra toma un nodo $s$ como inicio y calcula el camino más corto desde ese nodo hasta todos los demás nodos del grafo. Tiene la condición de que en este grafo todos los pesos deben ser no negativos.
+Dijkstra es un algoritmo para encontrar el camino más corto con un inicio en común. Es decir, Dijkstra toma un nodo $s$ como inicio y calcula el camino más corto desde ese nodo hasta todos los demás nodos del grafo. Tiene la condición de que en este grafo todos los pesos deben ser no negativos. Este nodo tiene $n$ vertices y $m$ aristas.
 
 Para implementarlo se necesita que el grafo este almacenado como una lista de adyacencias y tener un valor definido como infinito que sea mayor que cualquier camino posible dentro del grafo.
 
@@ -1088,7 +1132,5 @@ void dijkstra(int s, vector<int> & d, vector<int> & p) {
     }
 }
 \end{lstlisting}
-
-\subsubsection{Implementación 3}
 
 \end{document}
