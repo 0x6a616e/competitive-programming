@@ -4,15 +4,11 @@
 
 using namespace std;
 
-int main()
-{
-        int N, M;
+int ceil(int a, int b) { return (a + b - 1) / b; }
 
-        cin >> N >> M;
+int main() {
+    int N, M;
 
-        if (N % M != 0) {
-                cout << (N / M) + 1 << '\n';
-        } else {
-                cout << (N / M) << '\n';
-        }
+    cin >> N >> M;
+    cout << ceil(N, M) << endl;
 }
