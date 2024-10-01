@@ -1,7 +1,0 @@
-# Ignore binary files
-*.out
-*.exe
-*.sh
-
-# Ignore I/O files
-output.txt

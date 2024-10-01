@@ -1,0 +1,54 @@
+\contentsline {section}{\numberline {1}C++}{3}{}%
+\contentsline {subsection}{\numberline {1.1}Plantilla básica}{3}{}%
+\contentsline {subsection}{\numberline {1.2}Compilación}{3}{}%
+\contentsline {subsection}{\numberline {1.3}Manejo de archivos}{3}{}%
+\contentsline {subsection}{\numberline {1.4}Tipos de dato y sus rangos}{3}{}%
+\contentsline {subsection}{\numberline {1.5}Números flotantes}{3}{}%
+\contentsline {subsection}{\numberline {1.6}Estimación de eficiencia}{4}{}%
+\contentsline {section}{\numberline {2}Funciones y estructuras útiles}{4}{}%
+\contentsline {subsection}{\numberline {2.1}Manejo de fechas}{4}{}%
+\contentsline {subsection}{\numberline {2.2}Imprimir tiempo}{5}{}%
+\contentsline {subsection}{\numberline {2.3}Exponenciación binaria mod m}{5}{}%
+\contentsline {subsection}{\numberline {2.4}Submascaras de una mascara}{6}{}%
+\contentsline {subsection}{\numberline {2.5}Manejo de números grandes}{6}{}%
+\contentsline {subsection}{\numberline {2.6}Knuth–Morris–Pratt}{8}{}%
+\contentsline {section}{\numberline {3}Matemáticas}{8}{}%
+\contentsline {subsection}{\numberline {3.1}Sucesión simple}{8}{}%
+\contentsline {subsection}{\numberline {3.2}Sucesión aritmetica}{9}{}%
+\contentsline {subsection}{\numberline {3.3}Sucesión geometrica}{9}{}%
+\contentsline {subsection}{\numberline {3.4}Factorial}{9}{}%
+\contentsline {subsection}{\numberline {3.5}Números de Fibonacci}{9}{}%
+\contentsline {subsection}{\numberline {3.6}Logaritmos}{10}{}%
+\contentsline {subsection}{\numberline {3.7}Promedio}{11}{}%
+\contentsline {subsection}{\numberline {3.8}Generar números primos}{11}{}%
+\contentsline {subsection}{\numberline {3.9}Prueba de primalidad}{11}{}%
+\contentsline {subsection}{\numberline {3.10}Factores primos}{12}{}%
+\contentsline {subsection}{\numberline {3.11}Máximo común divisor}{12}{}%
+\contentsline {subsection}{\numberline {3.12}Mínimo común múltiplo}{13}{}%
+\contentsline {subsection}{\numberline {3.13}Ceil/Floor}{13}{}%
+\contentsline {subsection}{\numberline {3.14}Cantidad de múltiplos de un número}{13}{}%
+\contentsline {subsection}{\numberline {3.15}Extended Euclidean Algorithm}{13}{}%
+\contentsline {section}{\numberline {4}Aritmética modular}{14}{}%
+\contentsline {subsection}{\numberline {4.1}Propiedad distributiva}{14}{}%
+\contentsline {subsection}{\numberline {4.2}Modular multiplicative inverse}{14}{}%
+\contentsline {section}{\numberline {5}Ordenamiento}{15}{}%
+\contentsline {subsection}{\numberline {5.1}Estructuras definidas}{15}{}%
+\contentsline {subsection}{\numberline {5.2}Con funciones personalizadas}{15}{}%
+\contentsline {subsection}{\numberline {5.3}Permutaciones}{15}{}%
+\contentsline {subsection}{\numberline {5.4}Ordenamiento parcial}{16}{}%
+\contentsline {subsection}{\numberline {5.5}Búsqueda binaria manual}{16}{}%
+\contentsline {subsection}{\numberline {5.6}Búsqueda binaria con C++}{16}{}%
+\contentsline {section}{\numberline {6}Manipulación de bits}{16}{}%
+\contentsline {subsection}{\numberline {6.1}Operadores binarios}{16}{}%
+\contentsline {subsection}{\numberline {6.2}Desplazamientos}{17}{}%
+\contentsline {subsection}{\numberline {6.3}Trucos útiles}{17}{}%
+\contentsline {section}{\numberline {7}Estructuras de datos}{17}{}%
+\contentsline {subsection}{\numberline {7.1}Policy Based Data Structures}{17}{}%
+\contentsline {subsection}{\numberline {7.2}Minimum stack}{18}{}%
+\contentsline {subsection}{\numberline {7.3}Minimum queue}{18}{}%
+\contentsline {subsection}{\numberline {7.4}Union-Find Disjoint Set}{18}{}%
+\contentsline {section}{\numberline {8}Grafos}{19}{}%
+\contentsline {subsection}{\numberline {8.1}Almacenamiento}{19}{}%
+\contentsline {subsection}{\numberline {8.2}Dijkstra}{19}{}%
+\contentsline {subsubsection}{\numberline {8.2.1}Implementación 1 $O(n^2+m)$}{20}{}%
+\contentsline {subsubsection}{\numberline {8.2.2}Implementación 2 $O(m \log n)$}{20}{}%
