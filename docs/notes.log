@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/nixos.org) (preloaded format=pdflatex 1980.1.1)  30 SEP 2024 19:47
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/nixos.org) (preloaded format=pdflatex 1980.1.1)  1 OCT 2024 22:02
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -353,88 +353,42 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
 \c@lstlisting=\count296
- (./notes.toc [1
-
-{/nix/store/2l0g40fzn662r2pp3hqi9gfirbfp8ck1-texlive-2023-env/share/texmf-var/f
-onts/map/pdftex/updmap/pdftex.map}])
+ (./notes.toc)
 \tf@toc=\write3
 \openout3 = `notes.toc'.
 
- [2]
-LaTeX Font Info:    Trying to load font information for OML+cmr on input line 2
-1.
+ [1
 
-(/nix/store/qg5hw9sx0sp24rvxbaysnaq7nni6lnvc-texlive-2023-env-texmfdist/tex/lat
-ex/base/omlcmr.fd
-File: omlcmr.fd 2023/04/13 v2.5m Standard LaTeX font definitions
-)
-LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <10> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 21.
-LaTeX Font Info:    Trying to load font information for OMS+cmr on input line 2
-5.
-
-(/nix/store/qg5hw9sx0sp24rvxbaysnaq7nni6lnvc-texlive-2023-env-texmfdist/tex/lat
-ex/base/omscmr.fd
-File: omscmr.fd 2023/04/13 v2.5m Standard LaTeX font definitions
-)
-LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 25.
-
-(/nix/store/qg5hw9sx0sp24rvxbaysnaq7nni6lnvc-texlive-2023-env-texmfdist/tex/lat
-ex/listings/lstlang1.sty
-File: lstlang1.sty 2024/02/21 1.10 listings language file
-)
-(/nix/store/qg5hw9sx0sp24rvxbaysnaq7nni6lnvc-texlive-2023-env-texmfdist/tex/lat
-ex/listings/lstlang1.sty
-File: lstlang1.sty 2024/02/21 1.10 listings language file
-) [3{/nix/store/qg5hw9sx0sp24rvxbaysnaq7nni6lnvc-texlive-2023-env-texmfdist/fon
-ts/enc/dvips/cm-super/cm-super-ts1.enc}] [4] [5]
-[6] [7] [8] [9] [10] [11] [12] [13] [14] [15] [16] [17]
-Overfull \hbox (39.5215pt too wide) in paragraph at lines 958--959
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
- []
-
-
-Overfull \hbox (3.52113pt too wide) in paragraph at lines 959--960
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
- []
-
-[18] [19] [20] [21] (./notes.aux)
+{/nix/store/2l0g40fzn662r2pp3hqi9gfirbfp8ck1-texlive-2023-env/share/texmf-var/f
+onts/map/pdftex/updmap/pdftex.map}] [2] (./notes.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-02-20>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 6031 strings out of 474132
- 94592 string characters out of 5721662
- 1989187 words of memory out of 5000000
- 28326 multiletter control sequences out of 15000+600000
- 560890 words of font info for 46 fonts, out of 8000000 for 9000
+ 5106 strings out of 474132
+ 84621 string characters out of 5721662
+ 1932187 words of memory out of 5000000
+ 27415 multiletter control sequences out of 15000+600000
+ 560041 words of font info for 43 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 74i,9n,82p,559b,1551s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 74i,9n,82p,259b,266s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </nix/store/qg5hw9sx0sp24rvxbaysnaq7nni6lnvc-texlive-2023-env-texmfdist/fonts
 /type1/public/amsfonts/cm/cmbx10.pfb></nix/store/qg5hw9sx0sp24rvxbaysnaq7nni6ln
 vc-texlive-2023-env-texmfdist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></nix/s
 tore/qg5hw9sx0sp24rvxbaysnaq7nni6lnvc-texlive-2023-env-texmfdist/fonts/type1/pu
-blic/amsfonts/cm/cmex10.pfb></nix/store/qg5hw9sx0sp24rvxbaysnaq7nni6lnvc-texliv
-e-2023-env-texmfdist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></nix/store/qg5h
-w9sx0sp24rvxbaysnaq7nni6lnvc-texlive-2023-env-texmfdist/fonts/type1/public/amsf
-onts/cm/cmmi7.pfb></nix/store/qg5hw9sx0sp24rvxbaysnaq7nni6lnvc-texlive-2023-env
--texmfdist/fonts/type1/public/amsfonts/cm/cmr10.pfb></nix/store/qg5hw9sx0sp24rv
-xbaysnaq7nni6lnvc-texlive-2023-env-texmfdist/fonts/type1/public/amsfonts/cm/cmr
-7.pfb></nix/store/qg5hw9sx0sp24rvxbaysnaq7nni6lnvc-texlive-2023-env-texmfdist/f
-onts/type1/public/amsfonts/cm/cmsy10.pfb></nix/store/qg5hw9sx0sp24rvxbaysnaq7nn
-i6lnvc-texlive-2023-env-texmfdist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></ni
-x/store/qg5hw9sx0sp24rvxbaysnaq7nni6lnvc-texlive-2023-env-texmfdist/fonts/type1
-/public/amsfonts/cm/cmti10.pfb></nix/store/qg5hw9sx0sp24rvxbaysnaq7nni6lnvc-tex
-live-2023-env-texmfdist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></nix/store/q
-g5hw9sx0sp24rvxbaysnaq7nni6lnvc-texlive-2023-env-texmfdist/fonts/type1/public/c
-m-super/sfrm1000.pfb>
-Output written on notes.pdf (21 pages, 202101 bytes).
+blic/amsfonts/cm/cmmi10.pfb></nix/store/qg5hw9sx0sp24rvxbaysnaq7nni6lnvc-texliv
+e-2023-env-texmfdist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></nix/store/qg5hw
+9sx0sp24rvxbaysnaq7nni6lnvc-texlive-2023-env-texmfdist/fonts/type1/public/amsfo
+nts/cm/cmr10.pfb></nix/store/qg5hw9sx0sp24rvxbaysnaq7nni6lnvc-texlive-2023-env-
+texmfdist/fonts/type1/public/amsfonts/cm/cmr7.pfb></nix/store/qg5hw9sx0sp24rvxb
+aysnaq7nni6lnvc-texlive-2023-env-texmfdist/fonts/type1/public/amsfonts/cm/cmsy1
+0.pfb>
+Output written on notes.pdf (2 pages, 77524 bytes).
 PDF statistics:
- 133 PDF objects out of 1000 (max. 8388607)
- 85 compressed objects within 1 object stream
+ 46 PDF objects out of 1000 (max. 8388607)
+ 27 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
