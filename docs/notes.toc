@@ -2,3 +2,6 @@
 \contentsline {subsection}{\numberline {1.1}Complexity Cheatsheet}{2}{}%
 \contentsline {section}{\numberline {2}Useful Functions}{2}{}%
 \contentsline {subsection}{\numberline {2.1}Ceil}{2}{}%
+\contentsline {subsection}{\numberline {2.2}Fibonacci}{2}{}%
+\contentsline {subsubsection}{\numberline {2.2.1}Linear ($O(n)$)}{2}{}%
+\contentsline {subsubsection}{\numberline {2.2.2}Logarithmic ($O(\log {n})$)}{2}{}%
