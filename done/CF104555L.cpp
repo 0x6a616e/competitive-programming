@@ -4,24 +4,28 @@
 
 using namespace std;
 
+typedef vector<char> vc;
+typedef priority_queue<char, vc, greater<char>> pqc;
+typedef vector<pqc> vpqc;
+
 int main() {
-    cin.tie(0);
-    ios::sync_with_stdio(0);
+  cin.tie(0);
+  ios::sync_with_stdio(0);
 
-    string s;
-    int k;
+  string s;
+  int k;
 
-    cin >> s >> k;
+  cin >> s >> k;
 
-    vector<priority_queue<int, vector<int>, greater<int>>> letras(k);
+  vpqc letras(k);
 
-    for (int i = 0; i < (int)s.size(); ++i) letras[i % k].push(s[i]);
+  for (int i = 0; i < (int)s.size(); ++i) letras[i % k].push(s[i]);
 
-    for (int i = 0; i < (int)s.size(); ++i) {
-        cout << char(letras[i % k].top());
-        letras[i % k].pop();
-    }
-    cout << endl;
+  for (int i = 0; i < (int)s.size(); ++i) {
+    cout << letras[i % k].top();
+    letras[i % k].pop();
+  }
+  cout << endl;
 
-    return 0;
+  return 0;
 }
