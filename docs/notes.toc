@@ -5,3 +5,5 @@
 \contentsline {subsection}{\numberline {2.2}Fibonacci}{2}{}%
 \contentsline {subsubsection}{\numberline {2.2.1}Linear ($O(n)$)}{2}{}%
 \contentsline {subsubsection}{\numberline {2.2.2}Logarithmic ($O(\log {n})$)}{2}{}%
+\contentsline {section}{\numberline {3}Data Structures}{3}{}%
+\contentsline {subsection}{\numberline {3.1}Union-Find Disjoint Set}{3}{}%
