@@ -3,6 +3,8 @@
 \usepackage{graphicx}
 \usepackage{listings}
 \usepackage{mathtools}
+\usepackage{tabularx}
+\usepackage{ragged2e}
 
 \lstset{language=C++}
 \setlength{\parindent}{0pt}
@@ -38,6 +40,213 @@
         \hline
     \end{tabular}
 \end{center}
+
+\subsection{Scanf}
+
+\subsubsection{Description}
+
+\begin{lstlisting}
+int scanf( const char * format, ... );
+\end{lstlisting}
+
+Reads data from stdin and stores them according to the parameter format into
+the locations pointed by the additional arguments.
+
+The additional arguments should point to already allocated objects of the type
+specified by their corresponding format specifier within the format string.
+
+\subsubsection{Parameters}
+
+\textbf{format}
+
+---
+
+C string that contains a sequence of characters that control how characters
+extracted from the stream are treated:
+
+\begin{description}
+    \item[Whitespace character] The function will read and ignore any whitespace
+        characters encountered before the next non-whitespace character
+        (whitespace characters include spaces, newline and tab characters -- see
+        isspace). A single whitespace in the format string validates any
+        quantity of whitespace characters extracted from the stream (including
+        none).
+    \item[Non-whitespace character, except format specifier (\%)] Any character
+        that is not either a whitespace character (blank, newline or tab) or
+        part of a format specifier (which begin with a \% character) causes the
+        function to read the next character from the stream, compare it to this
+        non-whitespace character and if it matches, it is discarded and the
+        function continues with the next character of format. If the character
+        does not match, the function fails, returning and leaving subsequent
+        characters of the stream unread.
+    \item[Format specifiers] A sequence formed by an initial percentage sign
+        (\%) indicates a format specifier, which is used to specify the type and
+        format of the data to be retrieved from the stream and stored into the
+        locations pointed by the additional arguments.
+\end{description}
+
+A format specifier for scanf follows this prototype:
+
+\begin{lstlisting}
+%[*][width][length]specifier
+\end{lstlisting}
+
+Where the specifier character at the end is the most significant component,
+since it defines which characters are extracted, their interpretation and the
+type of its corresponding argument:
+
+\begin{center}
+    \begin{tabularx}{\linewidth}{|l|l|*{1}{>{\RaggedRight\arraybackslash}X|}}
+        \hline
+        Specifier & Description & Characters extracted \\
+        \hline
+        i & Integer & Any number of digits, optionally preceded by a sign (+ or
+                        -). Decimal digits assumed by default (0-9), but a 0
+                        prefix introduces octal digits (0-7), and 0x hexadecimal
+                        digits (0-f). Signed argument. \\
+        \hline
+        d or u & Decimal Integer & Any number of decimal digits (0-9),
+                                    optionally preceded by a sign (+ or -). d
+                                    is for a signed argument, and u for an
+                                    unsigned. \\
+        \hline
+        o & Octal Integer & Any number of octal digits (0-7), optionally
+                            preceded by a sign (+ or -). Unsigned argument. \\
+        \hline
+        x & Hexadecimal Integer & Any number of hexadecimal digits (0-9, a-f,
+                                    A-F), optionally preceded by 0x or 0X, and
+                                    all optionally preceded by a sign (+ or -).
+                                    Unsigned argument. \\
+        \hline
+        f, e, g, a & Floating Point Number & A series of decimal digits,
+                                                optionally containing a decimal
+                                                point, optionally preceeded by a
+                                                sign (+ or -) and optionally
+                                                followed by the e or E character
+                                                and a decimal integer (or some
+                                                of the other sequences supported
+                                                by strtod). Implementations
+                                                complying with C99 also support
+                                                hexadecimal floating-point
+                                                format when preceded by 0x or
+                                                0X. \\
+        \hline
+        c & Character & The next character. If a width other than 1 is
+                        specified, the function reads exactly width characters
+                        and stores them in the successive locations of the array
+                        passed as argument. No null character is appended at the
+                        end. \\
+        \hline
+        s & String of Characters & Any number of non-whitespace characters,
+                                    stopping at the first whitespace character
+                                    found. A terminating null character is
+                                    automatically added at the end of the stored
+                                    sequence. \\
+        \hline
+        p & Pointer Address & A sequence of characters representing a pointer.
+                                The particular format used depends on the system
+                                and library implementation, but it is the same
+                                as the one used to format \%p in fprintf. \\
+        \hline
+        [characters] & Scanset & Any number of the characters specified between
+                                    the brackets. A dash (-) that is not the
+                                    first character may produce non-portable
+                                    behavior in some library implementations. \\
+        \hline
+        [\^{}characters] & Negated Scanset & Any number of characters none of them
+                                            specified as characters between the
+                                            brackets. \\
+        \hline
+        n & Count & No input is consumed. The number of characters read so far
+                    from stdin is stored in the pointed location. \\
+        \hline
+        \% & \% & A \% followed by another \% matches a single \%. \\
+        \hline
+    \end{tabularx}
+\end{center}
+
+Except for n, at least one character shall be consumed by any specifier.
+Otherwise the match fails, and the scan ends there.
+
+The format specifier can also contain sub-specifiers: asterisk (*), width and
+length (in that order), which are optional and follow these specifications:
+
+\begin{center}
+    \begin{tabularx}{\linewidth}{|l|X|}
+        \hline
+        Sub-Specifier & Description \\
+        \hline
+        * & An optional starting asterisk indicates that the data is to be read
+            from the stream but ignored (i.e. it is not stored in the location
+            pointed by an argument). \\
+        \hline
+        width & Specifies the maximum number of characters to be read in the
+                current reading operation (optional). \\
+        \hline
+        length & One of hh, h, l, ll, j, z, t, L (optional). This alters the
+                    expected type of the storage pointed by the corresponding
+                    argument (see below). \\
+        \hline
+    \end{tabularx}
+\end{center}
+
+This is a chart showing the types expected for the corresponding arguments where
+input is stored (both with and without a length sub-specifier):
+
+\begin{center}
+    \begin{tabularx}{\linewidth}{|l|*{6}{>{\RaggedRight\arraybackslash}X|}}
+        \hline
+        & \multicolumn{6}{c|}{\textbf{Specifiers}} \\
+        \hline
+        \textbf{length} & d i & u o x & f e g a & c s [] [\^{}] & p & n \\
+        \hline
+        \textbf{(none)} & int* & unsigned int* & float* & char* & void** & int* \\
+        \hline
+        hh & signed char* & unsigned char* & & & & signed char* \\
+        \hline
+        h & short int* & unsigned short int* & & & & short int* \\
+        \hline
+        l & long int* & unsigned long int* & double* & wchar\_t* & & long int* \\
+        \hline
+        ll & long long int* & unsigned long long int* & & & & long long int* \\
+        \hline
+        j & intmax\_t* & uintmax\_t* & & & & intmax\_t* \\
+        \hline
+        z & size\_t* & size\_t* & & & & size\_t* \\
+        \hline
+        t & ptrdiff\_t* & ptrdiff\_t* & & & & ptrdiff\_t* \\
+        \hline
+        L & & & long double* & & & \\
+        \hline
+    \end{tabularx}
+\end{center}
+
+... (aditional arguments)
+
+---
+
+Depending on the format string, the function may expect a sequence of additional
+arguments, each containing a pointer to allocated storage where the
+interpretation of the extracted characters is stored with the appropriate type.
+There should be at least as many of these arguments as the number of values
+stored by the format specifiers. Additional arguments are ignored by the
+function. These arguments are expected to be pointers: to store the result of a
+scanf operation on a regular variable, its name should be preceded by the
+reference operator (\&) (see example).
+
+\subsubsection{Return Value}
+
+On success, the function returns the number of items of the argument list
+successfully filled. This count can match the expected number of items or be
+less (even zero) due to a matching failure, a reading error, or the reach of the
+end-of-file.
+
+If a reading error happens or the end-of-file is reached while reading, the
+proper indicator is set (feof or ferror). And, if either happens before any data
+could be successfully read, EOF is returned.
+
+If an encoding error happens interpreting wide characters, the function sets
+errno to EILSEQ.
 
 \section{Useful Functions}
 
