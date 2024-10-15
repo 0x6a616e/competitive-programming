@@ -22,7 +22,7 @@
 \begin{center}
     \begin{tabular}{ | l | l | }
         \hline
-        n & Worst AC Algorithm \\
+        \textbf{n} & \textbf{Worst AC Algorithm} \\
         \hline
         $\leq [10..11]$ & $O(n!), O(n^6)$ \\
         $\leq [17..19]$ & $O(2^n \times n^2)$ \\
@@ -98,7 +98,7 @@ type of its corresponding argument:
 \begin{center}
     \begin{tabularx}{\linewidth}{|l|l|*{1}{>{\RaggedRight\arraybackslash}X|}}
         \hline
-        Specifier & Description & Characters extracted \\
+        \textbf{specifier} & \textbf{Description} & \textbf{Characters extracted} \\
         \hline
         i & Integer & Any number of digits, optionally preceded by a sign (+ or
                         -). Decimal digits assumed by default (0-9), but a 0
@@ -174,7 +174,7 @@ length (in that order), which are optional and follow these specifications:
 \begin{center}
     \begin{tabularx}{\linewidth}{|l|X|}
         \hline
-        Sub-Specifier & Description \\
+        \textbf{Sub-Specifier} & \textbf{Description} \\
         \hline
         * & An optional starting asterisk indicates that the data is to be read
             from the stream but ignored (i.e. it is not stored in the location
@@ -247,6 +247,213 @@ could be successfully read, EOF is returned.
 
 If an encoding error happens interpreting wide characters, the function sets
 errno to EILSEQ.
+
+\subsection{Printf}
+
+\subsubsection{Description}
+
+\begin{lstlisting}
+int printf( const char * format, ... );
+\end{lstlisting}
+
+Writes the C string pointed by format to the standard output (stdout). If format
+includes format specifiers (subsequences beginning with \%), the additional
+arguments following format are formatted and inserted in the resulting string
+replacing their respective specifiers.
+
+\subsubsection{Parameters}
+
+\textbf{format}
+
+---
+
+C string that contains the text to be written to stdout.
+
+It can optionally contain embedded format specifiers that are replaced by the
+values specified in subsequent additional arguments and formatted as requested.
+
+A format specifier follows this prototype:
+
+\begin{lstlisting}
+ %[flags][width][.precision][length]specifier
+\end{lstlisting}
+
+Where the specifier character at the end is the most significant component,
+since it defines the type and the interpretation of its corresponding argument:
+
+\begin{center}
+    \begin{tabularx}{\linewidth}{|*{3}{>{\RaggedRight\arraybackslash}X|}}
+        \hline
+        \textbf{specifier} & \textbf{Output} & \textbf{Example} \\
+        \hline
+        d \textbf{or} i & Signed decimal integer & 392 \\
+        \hline
+        u & Unsigned decimal integer & 7235 \\
+        \hline
+        o & Unsigned octal & 610 \\
+        \hline
+        x & Unsigned hexadecimal integer & 7fa \\
+        \hline
+        X & Unsigned hexadecimal integer (uppercase) & 7FA \\
+        \hline
+        f & Decimal floating point, lowercase & 392.65 \\
+        \hline
+        F & Decimal floating point, uppercase & 392.65 \\
+        \hline
+        e & Scientific notation (mantissa/exponent), lowercase & 3.9265e+2 \\
+        \hline
+        E & Scientific notation (mantissa/exponent), uppercase & 3.9265E+2 \\
+        \hline
+        g & Use the shortest representation: \%e or \%f & 392.65 \\
+        \hline
+        G & Use the shortest representation: \%E or \%F & 392.65 \\
+        \hline
+        a & Hexadecimal floating point, lowercase & -0xc.90fep-2 \\
+        \hline
+        A & Hexadecimal floating point, uppercase & -0XC.90FEP-2 \\
+        \hline
+        c & Character & a \\
+        \hline
+        s & String of characters & sample \\
+        \hline
+        p & Pointer address & b8000000 \\
+        \hline
+        n & Nothing printed. The corresponding argument must be a pointer to a
+            signed int. The number of characters written so far is stored in the
+            pointed location. & \\
+        \hline
+        \% & A \% followed by another \% character will write a single \% to the stream. & \% \\
+        \hline
+    \end{tabularx}
+\end{center}
+
+The format specifier can also contain sub-specifiers: flags, width, .precision
+and modifiers (in that order), which are optional and follow these
+specifications:
+
+\begin{center}
+    \begin{tabularx}{\linewidth}{|*{2}{>{\RaggedRight\arraybackslash}X|}}
+        \hline
+        \textbf{flags} & \textbf{Description} \\
+        \hline
+        - & Left-justify within the given field width; Right justification is
+            the default (see width sub-specifier). \\
+        \hline
+        + & Forces to preceed the result with a plus or minus sign (+ or -) even
+            for positive numbers. By default, only negative numbers are preceded
+            with a - sign. \\
+        \hline
+        (space) & If no sign is going to be written, a blank space is inserted
+                    before the value. \\
+        \hline
+        \# & Used with o, x or X specifiers the value is preceeded with 0, 0x or
+            0X respectively for values different than zero. Used with a, A, e,
+            E, f, F, g or G it forces the written output to contain a decimal
+            point even if no more digits follow. By default, if no digits
+            follow, no decimal point is written. \\
+        \hline
+        0 & Left-pads the number with zeroes (0) instead of spaces when padding
+            is specified (see width sub-specifier). \\
+        \hline
+    \end{tabularx}
+\end{center}
+
+\begin{center}
+    \begin{tabularx}{\linewidth}{|*{2}{>{\RaggedRight\arraybackslash}X|}}
+        \hline
+        \textbf{width} & \textbf{Description} \\
+        \hline
+        (number) & Minimum number of characters to be printed. If the value to
+                    be printed is shorter than this number, the result is padded
+                    with blank spaces. The value is not truncated even if the
+                    result is larger. \\
+        \hline
+        * & The width is not specified in the format string, but as an
+            additional integer value argument preceding the argument that has to
+            be formatted. \\
+        \hline
+    \end{tabularx}
+\end{center}
+
+\begin{center}
+    \begin{tabularx}{\linewidth}{|*{2}{>{\RaggedRight\arraybackslash}X|}}
+        \hline
+        \textbf{.precision} & \textbf{Description} \\
+        \hline
+        .number & For integer specifiers (d, i, o, u, x, X): precision specifies
+                    the minimum number of digits to be written. If the value to
+                    be written is shorter than this number, the result is padded
+                    with leading zeros. The value is not truncated even if the
+                    result is longer. A precision of 0 means that no character
+                    is written for the value 0. For a, A, e, E, f and F
+                    specifiers: this is the number of digits to be printed after
+                    the decimal point (by default, this is 6). For g and G
+                    specifiers: This is the maximum number of significant digits
+                    to be printed. For s: this is the maximum number of
+                    characters to be printed. By default all characters are
+                    printed until the ending null character is encountered. If
+                    the period is specified without an explicit value for
+                    precision, 0 is assumed. \\
+        \hline
+        .* & The precision is not specified in the format string, but as an
+                additional integer value argument preceding the argument that
+                has to be formatted. \\
+        \hline
+    \end{tabularx}
+\end{center}
+
+The length sub-specifier modifies the length of the data type. This is a chart
+showing the types used to interpret the corresponding arguments with and without
+length specifier (if a different type is used, the proper type promotion or
+conversion is performed, if allowed):
+
+\begin{center}
+    \begin{tabularx}{\linewidth}{|l|*{6}{>{\RaggedRight\arraybackslash}X|}}
+        \hline
+        & \multicolumn{6}{c|}{\textbf{Specifiers}} \\
+        \hline
+        \textbf{length} & d i & u o x & f e g a & c s [] [\^{}] & p & n \\
+        \hline
+        \textbf{(none)} & int* & unsigned int* & float* & char* & void** & int* \\
+        \hline
+        hh & signed char* & unsigned char* & & & & signed char* \\
+        \hline
+        h & short int* & unsigned short int* & & & & short int* \\
+        \hline
+        l & long int* & unsigned long int* & double* & wchar\_t* & & long int* \\
+        \hline
+        ll & long long int* & unsigned long long int* & & & & long long int* \\
+        \hline
+        j & intmax\_t* & uintmax\_t* & & & & intmax\_t* \\
+        \hline
+        z & size\_t* & size\_t* & & & & size\_t* \\
+        \hline
+        t & ptrdiff\_t* & ptrdiff\_t* & & & & ptrdiff\_t* \\
+        \hline
+        L & & & long double* & & & \\
+        \hline
+    \end{tabularx}
+\end{center}
+
+... (aditional arguments)
+
+---
+
+Depending on the format string, the function may expect a sequence of additional
+arguments, each containing a value to be used to replace a format specifier in
+the format string (or a pointer to a storage location, for n). There should be
+at least as many of these arguments as the number of values specified in the
+format specifiers. Additional arguments are ignored by the function.
+
+\subsubsection{Return Value}
+
+On success, the total number of characters written is returned.
+
+If a writing error occurs, the error indicator (ferror) is set and a negative
+number is returned.
+
+If a multibyte character encoding error occurs while writing wide characters,
+errno is set to EILSEQ and a negative number is returned.
 
 \section{Useful Functions}
 
