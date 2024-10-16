@@ -31,18 +31,14 @@ int main() {
     if (left_v[i] != (i + 1)) {
       ++sol;
       int pos = left_m[i + 1];
-      left_m[i + 1] = i;
       left_m[left_v[i]] = pos;
       left_v[pos] = left_v[i];
-      left_v[i] = (i + 1);
     }
     if (right_v[i] != (i + 1)) {
       ++sol;
       int pos = right_m[i + 1];
-      right_m[i + 1] = i;
       right_m[right_v[i]] = pos;
       right_v[pos] = right_v[i];
-      right_v[i] = (i + 1);
     }
   }
 
