@@ -13,8 +13,10 @@
 \contentsline {subsection}{\numberline {2.2}Fibonacci}{7}{}%
 \contentsline {subsubsection}{\numberline {2.2.1}Linear ($O(n)$)}{7}{}%
 \contentsline {subsubsection}{\numberline {2.2.2}Logarithmic ($O(\log {n})$)}{7}{}%
-\contentsline {section}{\numberline {3}Data Structures}{8}{}%
-\contentsline {subsection}{\numberline {3.1}Union-Find Disjoint Set}{8}{}%
-\contentsline {section}{\numberline {4}Graphs}{8}{}%
-\contentsline {subsection}{\numberline {4.1}Maximum Matching on Bipartite Graph}{8}{}%
-\contentsline {subsubsection}{\numberline {4.1.1}Hopcroft–Karp $O(E \sqrt {V})$}{8}{}%
+\contentsline {subsection}{\numberline {2.3}Miller-Rabin primality test}{8}{}%
+\contentsline {subsection}{\numberline {2.4}Linear Sieve}{8}{}%
+\contentsline {section}{\numberline {3}Data Structures}{9}{}%
+\contentsline {subsection}{\numberline {3.1}Union-Find Disjoint Set}{9}{}%
+\contentsline {section}{\numberline {4}Graphs}{10}{}%
+\contentsline {subsection}{\numberline {4.1}Maximum Matching on Bipartite Graph}{10}{}%
+\contentsline {subsubsection}{\numberline {4.1.1}Hopcroft–Karp $O(E \sqrt {V})$}{10}{}%

@@ -515,6 +515,76 @@ long long fib(int n) {
 }
 \end{lstlisting}
 
+\subsection{Miller-Rabin primality test}
+
+\begin{lstlisting}
+using u64 = uint64_t;
+using u128 = __uint128_t;
+
+u64 binpower(u64 base, u64 e, u64 mod) {
+  u64 result = 1;
+  base %= mod;
+  while (e) {
+    if (e & 1) result = (u128)result * base % mod;
+    base = (u128)base * base % mod;
+    e >>= 1;
+  }
+  return result;
+}
+
+bool check_composite(u64 n, u64 a, u64 d, int s) {
+  u64 x = binpower(a, d, n);
+  if (x == 1 || x == n - 1) return false;
+  for (int r = 1; r < s; r++) {
+    x = (u128)x * x % n;
+    if (x == n - 1) return false;
+  }
+  return true;
+};
+
+bool MillerRabin(u64 n) {  // returns true if n is prime, else returns false.
+  if (n < 2) return false;
+
+  int r = 0;
+  u64 d = n - 1;
+  while ((d & 1) == 0) {
+    d >>= 1;
+    r++;
+  }
+
+  for (int a : {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37}) {
+    if (n == a) return true;
+    if (check_composite(n, a, d, r)) return false;
+  }
+  return true;
+}
+\end{lstlisting}
+
+\subsection{Linear Sieve}
+
+This is very slightly faster than the usual sieve, the advantage is that it
+also generates the neccesary info to factorize the numbers at the cost of more
+memory.
+
+\begin{lstlisting}
+const int N = 10000000;
+vector<int> lp(N + 1);
+vector<int> pr;
+
+for (int i = 2; i <= N; ++i) {
+  if (lp[i] == 0) {
+    lp[i] = i;
+    pr.push_back(i);
+  }
+  for (int j = 0; i * pr[j] <= N; ++j) {
+    lp[i * pr[j]] = pr[j];
+    if (pr[j] == lp[i]) {
+      break;
+    }
+  }
+}
+\end{lstlisting}
+
 \section{Data Structures}
 
 \subsection{Union-Find Disjoint Set}
