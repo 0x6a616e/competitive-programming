@@ -15,6 +15,7 @@
 \contentsline {subsubsection}{\numberline {2.2.2}Logarithmic ($O(\log {n})$)}{7}{}%
 \contentsline {subsection}{\numberline {2.3}Miller-Rabin primality test}{8}{}%
 \contentsline {subsection}{\numberline {2.4}Linear Sieve}{8}{}%
+\contentsline {subsection}{\numberline {2.5}Round up to the next highest power of 2}{9}{}%
 \contentsline {section}{\numberline {3}Data Structures}{9}{}%
 \contentsline {subsection}{\numberline {3.1}Union-Find Disjoint Set}{9}{}%
 \contentsline {section}{\numberline {4}Graphs}{10}{}%
