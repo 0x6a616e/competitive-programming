@@ -844,37 +844,6 @@ freopen("input.txt", "r", stdin);
 freopen("output.txt", "w", stdout);
 \end{lstlisting}
 
-\subsection{Tipos de dato y sus rangos}
-
-\begin{center}
-    \begin{tabular}{ |l|l|l| }
-         \hline
-         Tipo de dato & Tamaño (bytes) & Rango \\
-         \hline
-         short int & 2 & -32,768 to 32,767 \\
-         unsigned short int & 2 & 0 to 65,535 \\
-         unsigned int & 4 & 0 to 4,294,967,295 \\
-         int & 4 & -2,147,483,648 to 2,147,483,647 \\
-         long int & 4 & -2,147,483,648 to 2,147,483,647 \\
-         unsigned long int & 4 & 0 to 4,294,967,295 \\
-         long long int & 8 & -(2\textasciicircum63) to (2\textasciicircum63)-1 \\
-         unsigned long long int  & 8 & 0 to 18,446,744,073,709,551,615 \\
-         signed char & 1 & -128 to 127 \\
-         unsigned char & 1 & 0 to 255 \\
-         float & 4 & -3.4×10\textasciicircum38 to 3.4×10\textasciicircum38 \\
-         double & 8 & -1.7×10\textasciicircum308 to 1.7×10\textasciicircum308 \\
-         long double & 12 & -1.1×10\textasciicircum4932 to 1.1×10\textasciicircum4932 \\
-         \hline
-    \end{tabular}
-\end{center}
-
-Algo a considear es que \textit{long long} tiene un prefijo.
-
-\begin{lstlisting}
-long long x = 123456789123456789LL;
-\end{lstlisting}
-
-Pasa algo parecido a la división entera, el resultado de multiplicar dos enteros es un entero. 
 
 \subsection{Números flotantes}
 
