@@ -29,10 +29,8 @@ int main() {
     ++count[fi];
     max_fi = max(max_fi, fi);
   }
-  int curr = max_fi;
-  while (curr > 0) {
-    count[curr - digitSum(curr)] += count[curr];
-    --curr;
+  for (int i = max_fi; i > 0; --i) {
+    count[i - digitSum(i)] += count[i];
   }
 
   int i = max_fi;
