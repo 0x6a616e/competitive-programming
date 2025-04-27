@@ -1,5 +1,5 @@
-CFLAGS = -O2 -std=c++11 -Wall -Wextra -Wshadow
-CDFLAGS = --debug -std=c++11 -Wpedantic
+CFLAGS = -O2 -std=c++17 -Wall -Wextra -Wshadow
+CDFLAGS = --debug -std=c++17 -Wpedantic
 
 main: *.cpp
 	@echo "Compiling..."
