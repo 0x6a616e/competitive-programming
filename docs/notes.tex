@@ -5,9 +5,12 @@
 \usepackage{mathtools}
 \usepackage{tabularx}
 \usepackage{ragged2e}
+\usepackage{amsmath}
 
 \lstset{language=C++}
 \setlength{\parindent}{0pt}
+
+\newcommand{\stirlingi}{\genfrac{[}{]}{0pt}{}}
 
 \begin{document}
 
@@ -809,6 +812,47 @@ void BipGraph::addEdge(int u, int v) {
   adj[u].push_back(v);  // Add u to v's list.
 }
 \end{lstlisting}
+
+\section{Combinatorics}
+
+\subsection{Stirling Numbers of the First Kind}
+
+\subsubsection{Definition}
+
+In mathematics, especially in combinatorics, Stirling numbers of the first kind
+arise in the study of permutations. In particular, the unsigned Stirling numbers
+of the first kind count permutations according to their number of cycles
+(counting fixed points as cycles of length one).
+
+They represent the number of permutations of $n$ elements with $k$ disjoint
+cycles.
+
+For example, of the $3! = 6$ permutations of three elements, there is one
+permutation with three cycles (the identity permutation, given in one-line
+notation by 123 or in cycle notation by (1)(2)(3)), three permutations with two
+cycles (132 = (1)(23), 213 = (12)(3), and 321 = (13)(2) and two permutations
+with one cycle (312 = (132) and 231 = (123) ). Thus $\stirlingi{3}{3} = 1$,
+$\stirlingi{3}{2} = 3$, and $\stirlingi{3}{1} = 2$.
+
+\subsubsection{Recursive Relation}
+
+\begin{displaymath}
+\stirlingi{n + 1}{k} = n\stirlingi{n}{k} + \stirlingi{n}{k - 1}
+\end{displaymath}
+
+for $k > 0$, with the boundary conditions
+
+\begin{displaymath}
+\stirlingi{0}{0} = 1 \quad\text{and}\quad \stirlingi{n}{0} = \stirlingi{0}{n} = 0
+\end{displaymath}
+
+for $n > 0$.
+
+\subsubsection{Explicit Formula}
+
+\begin{displaymath}
+\stirlingi{n}{k} = \sum_{j = n}^{2n - k} \binom{j - 1}{k - 1} \binom{2n - k}{j} \sum_{m = 0}^{j - n} \frac{(-1)^{m + n - k} m^{j - k}}{m! (j - n - m)!}
+\end{displaymath}
 
 \end{document}
 
