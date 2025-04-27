@@ -469,7 +469,7 @@ int ceil(int a, int b) { return (a + b - 1) / b; }
 
 \subsection{Fibonacci}
 
-\subsubsection{Linear ($O(n)$)}
+\subsubsection{Naive (Linear)}
 
 \begin{lstlisting}
 int fib(int n) {
@@ -484,7 +484,7 @@ int fib(int n) {
 }
 \end{lstlisting}
 
-\subsubsection{Logarithmic ($O(\log{n})$)}
+\subsubsection{Matrix Exponentiation (Logarithmic)}
 
 \begin{lstlisting}
 struct matrix {
@@ -516,6 +516,25 @@ matrix matpow(matrix base, long long n) {
 long long fib(int n) {
   matrix base{{{1, 1}, {1, 0}}};
   return matpow(base, n).mat[0][1];
+}
+\end{lstlisting}
+
+\subsubsection{Fast Doubling Method (Logarithmic)}
+
+\begin{lstlisting}
+pair<int, int> fib (int n) {
+    if (n == 0) {
+        return {0, 1};
+    }
+
+    auto p = fib(n >> 1);
+    int c = p.first * (2 * p.second - p.first);
+    int d = p.first * p.first + p.second * p.second;
+    if (n & 1) {
+        return {d, c + d};
+    } else {
+        return {c, d};
+    }
 }
 \end{lstlisting}
 

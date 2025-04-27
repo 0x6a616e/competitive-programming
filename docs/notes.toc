@@ -11,10 +11,11 @@
 \contentsline {section}{\numberline {2}Useful Functions}{7}{}%
 \contentsline {subsection}{\numberline {2.1}Ceil}{7}{}%
 \contentsline {subsection}{\numberline {2.2}Fibonacci}{7}{}%
-\contentsline {subsubsection}{\numberline {2.2.1}Linear ($O(n)$)}{7}{}%
-\contentsline {subsubsection}{\numberline {2.2.2}Logarithmic ($O(\log {n})$)}{7}{}%
+\contentsline {subsubsection}{\numberline {2.2.1}Naive (Linear)}{7}{}%
+\contentsline {subsubsection}{\numberline {2.2.2}Matrix Exponentiation (Logarithmic)}{7}{}%
+\contentsline {subsubsection}{\numberline {2.2.3}Fast Doubling Method (Logarithmic)}{8}{}%
 \contentsline {subsection}{\numberline {2.3}Miller-Rabin primality test}{8}{}%
-\contentsline {subsection}{\numberline {2.4}Linear Sieve}{8}{}%
+\contentsline {subsection}{\numberline {2.4}Linear Sieve}{9}{}%
 \contentsline {subsection}{\numberline {2.5}Round up to the next highest power of 2}{9}{}%
 \contentsline {section}{\numberline {3}Data Structures}{9}{}%
 \contentsline {subsection}{\numberline {3.1}Union-Find Disjoint Set}{9}{}%
@@ -25,8 +26,8 @@
 \contentsline {subsection}{\numberline {5.1}Stirling Numbers of the First Kind}{13}{}%
 \contentsline {subsubsection}{\numberline {5.1.1}Definition}{13}{}%
 \contentsline {subsubsection}{\numberline {5.1.2}Recursive Relation}{13}{}%
-\contentsline {subsubsection}{\numberline {5.1.3}Explicit Formula}{13}{}%
-\contentsline {subsection}{\numberline {5.2}Stirling Numbers of the Second Kind}{13}{}%
-\contentsline {subsubsection}{\numberline {5.2.1}Definition}{13}{}%
-\contentsline {subsubsection}{\numberline {5.2.2}Recursive Relation}{13}{}%
+\contentsline {subsubsection}{\numberline {5.1.3}Explicit Formula}{14}{}%
+\contentsline {subsection}{\numberline {5.2}Stirling Numbers of the Second Kind}{14}{}%
+\contentsline {subsubsection}{\numberline {5.2.1}Definition}{14}{}%
+\contentsline {subsubsection}{\numberline {5.2.2}Recursive Relation}{14}{}%
 \contentsline {subsubsection}{\numberline {5.2.3}Explicit Formula}{14}{}%
