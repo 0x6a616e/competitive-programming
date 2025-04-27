@@ -11,6 +11,7 @@
 \setlength{\parindent}{0pt}
 
 \newcommand{\stirlingi}{\genfrac{[}{]}{0pt}{}}
+\newcommand{\stirlingii}{\genfrac{\{}{\}}{0pt}{}}
 
 \begin{document}
 
@@ -837,7 +838,7 @@ $\stirlingi{3}{2} = 3$, and $\stirlingi{3}{1} = 2$.
 \subsubsection{Recursive Relation}
 
 \begin{displaymath}
-\stirlingi{n + 1}{k} = n\stirlingi{n}{k} + \stirlingi{n}{k - 1}
+\stirlingi{n + 1}{k} = n \stirlingi{n}{k} + \stirlingi{n}{k - 1}
 \end{displaymath}
 
 for $k > 0$, with the boundary conditions
@@ -852,6 +853,32 @@ for $n > 0$.
 
 \begin{displaymath}
 \stirlingi{n}{k} = \sum_{j = n}^{2n - k} \binom{j - 1}{k - 1} \binom{2n - k}{j} \sum_{m = 0}^{j - n} \frac{(-1)^{m + n - k} m^{j - k}}{m! (j - n - m)!}
+\end{displaymath}
+
+\subsection{Stirling Numbers of the Second Kind}
+
+\subsubsection{Definition}
+
+In mathematics, particularly in combinatorics, a Stirling number of the second
+kind (or Stirling partition number) is the number of ways to partition a set of
+$n$ objects into $k$ non-empty subsets.
+
+\subsubsection{Recursive Relation}
+
+\begin{displaymath}
+\stirlingii{n + 1}{k} = k \stirlingii{n}{k} + \stirlingii{n}{k - 1} \quad\text{for } 0 < k < n
+\end{displaymath}
+
+with initial conditions
+
+\begin{displaymath}
+\stirlingii{n}{n} = 1 \quad\text{for } n \geq 0 \quad\text{and}\quad \stirlingii{n}{0} = \stirlingii{0}{n} = 0 \quad\text{for } n > 0
+\end{displaymath}
+
+\subsubsection{Explicit Formula}
+
+\begin{displaymath}
+\stirlingii{n}{k} = \frac{1}{k!} \sum_{j = 0}^{k} (-1)^{k - j} \binom{k}{j} j^{n} = \sum_{j = 0}^{k} \frac{(-1)^{k - j} j^{n}}{(k - j)! j!}
 \end{displaymath}
 
 \end{document}
