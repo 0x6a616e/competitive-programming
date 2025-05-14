@@ -11,12 +11,11 @@ int main() {
 
   bitset<26> freqs;
   vector<int> indexes(1 << 26, -1);
-  int ans = 1;
+  int ans = 0;
   for (int i = 0; i < n; ++i) {
     freqs.flip(s[i] - 'a');
 
-    if (((i + 1) % 2 == 0 && freqs.count() == 0) ||
-        ((i + 1) % 2 != 0 && freqs.count() == 1)) {
+    if (freqs.count() <= 1) {
       ans = max(ans, i + 1);
     }
 
@@ -30,9 +29,7 @@ int main() {
       freqs.flip(j);
       if (indexes[freqs.to_ulong()] != -1) {
         int d = i - indexes[freqs.to_ulong()];
-        if (d % 2 != 0) {
-          ans = max(ans, d);
-        }
+        ans = max(ans, d);
       }
       freqs.flip(j);
     }
