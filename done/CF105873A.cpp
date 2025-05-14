@@ -2,6 +2,18 @@
 
 using namespace std;
 
+string solve(string &s, string &p) {
+  if (p.size() % s.size() != 0) {
+    return "No";
+  }
+  for (int i = 0; i < (int)p.size(); ++i) {
+    if (p[i] != s[i % s.size()]) {
+      return "No";
+    }
+  }
+  return "Yes";
+}
+
 int main() {
   cin.tie(0);
   ios::sync_with_stdio(0);
@@ -13,16 +25,7 @@ int main() {
   for (int i = 0; i < n; ++i) {
     string p;
     cin >> p;
-    int m = p.size() / s.size();
-    string att = "";
-    while (m--) {
-      att += s;
-    }
-    if (att == p) {
-      cout << "Yes\n";
-    } else {
-      cout << "No\n";
-    }
+    cout << solve(s, p) << '\n';
   }
 
   return 0;
