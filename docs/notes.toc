@@ -19,17 +19,23 @@
 \contentsline {subsection}{\numberline {2.5}Round up to the next highest power of 2}{9}{}%
 \contentsline {subsection}{\numberline {2.6}Longest Increasing Subsequence}{9}{}%
 \contentsline {subsection}{\numberline {2.7}Maximum Subarray Sum}{10}{}%
-\contentsline {section}{\numberline {3}Data Structures}{10}{}%
-\contentsline {subsection}{\numberline {3.1}Union-Find Disjoint Set}{10}{}%
+\contentsline {subsection}{\numberline {2.8}Day of week of a date}{10}{}%
+\contentsline {subsubsection}{\numberline {2.8.1}Year Code}{10}{}%
+\contentsline {subsubsection}{\numberline {2.8.2}Month Code}{10}{}%
+\contentsline {subsubsection}{\numberline {2.8.3}Century Code}{10}{}%
+\contentsline {subsubsection}{\numberline {2.8.4}Date Number}{10}{}%
+\contentsline {subsubsection}{\numberline {2.8.5}Leap Year Modifier}{11}{}%
+\contentsline {section}{\numberline {3}Data Structures}{11}{}%
+\contentsline {subsection}{\numberline {3.1}Union-Find Disjoint Set}{11}{}%
 \contentsline {section}{\numberline {4}Graphs}{11}{}%
 \contentsline {subsection}{\numberline {4.1}Maximum Matching on Bipartite Graph}{11}{}%
 \contentsline {subsubsection}{\numberline {4.1.1}Hopcroft–Karp $O(E \sqrt {V})$}{11}{}%
 \contentsline {section}{\numberline {5}Combinatorics}{14}{}%
 \contentsline {subsection}{\numberline {5.1}Stirling Numbers of the First Kind}{14}{}%
 \contentsline {subsubsection}{\numberline {5.1.1}Definition}{14}{}%
-\contentsline {subsubsection}{\numberline {5.1.2}Recursive Relation}{14}{}%
-\contentsline {subsubsection}{\numberline {5.1.3}Explicit Formula}{14}{}%
-\contentsline {subsection}{\numberline {5.2}Stirling Numbers of the Second Kind}{14}{}%
-\contentsline {subsubsection}{\numberline {5.2.1}Definition}{14}{}%
+\contentsline {subsubsection}{\numberline {5.1.2}Recursive Relation}{15}{}%
+\contentsline {subsubsection}{\numberline {5.1.3}Explicit Formula}{15}{}%
+\contentsline {subsection}{\numberline {5.2}Stirling Numbers of the Second Kind}{15}{}%
+\contentsline {subsubsection}{\numberline {5.2.1}Definition}{15}{}%
 \contentsline {subsubsection}{\numberline {5.2.2}Recursive Relation}{15}{}%
 \contentsline {subsubsection}{\numberline {5.2.3}Explicit Formula}{15}{}%

@@ -669,6 +669,40 @@ for (int r = 0; r < n; ++r) {
 }
 \end{lstlisting}
 
+\subsection{Day of week of a date}
+
+Only works for gregorian calendar. A leap year is a year divisible by 4 and by both 100 and 400.
+
+\begin{displaymath}
+(\text{year code} + \text{month code} + \text{century code} + \text{date number} - \text{leap year modifier}) \bmod 7
+\end{displaymath}
+
+\subsubsection{Year Code}
+
+\begin{displaymath}
+(YY + (YY / 4)) \bmod 7
+\end{displaymath}
+
+Where YY are the last two digits of the year.
+
+\subsubsection{Month Code}
+
+Take the digits based on the month from this string.
+
+033 614 625 035
+
+\subsubsection{Century Code}
+
+It follows a 4206 pattern starting in the 1700s.
+
+\subsubsection{Date Number}
+
+The day of the month.
+
+\subsubsection{Leap Year Modifier}
+
+If it is a leap year and is a date in january or february then substract 1.
+
 \section{Data Structures}
 
 \subsection{Union-Find Disjoint Set}
