@@ -5,23 +5,20 @@
 using namespace std;
 
 int main() {
-    cin.tie(0);
-    ios::sync_with_stdio(0);
+    cin.tie(0)->sync_with_stdio(0);
 
-    int N, c = 0;
-    string num;
-
-    cin >> num;
-
-    N = stoi(num);
-
-    for (int i = 0; i < num.size(); i++) {
-        if (num[i] != '0' && N % (num[i] - '0') == 0) {
-            c++;
+    int n;
+    cin >> n;
+    int ans = 0;
+    int aux = n;
+    while (aux) {
+        int att = aux % 10;
+        if (att && n % att == 0) {
+            ++ans;
         }
+        aux /= 10;
     }
-
-    cout << c << '\n';
+    cout << ans << endl;
 
     return 0;
 }
