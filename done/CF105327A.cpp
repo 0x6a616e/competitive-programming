@@ -3,20 +3,11 @@
 using namespace std;
 
 int main() {
-    cin.tie(0);
-    ios::sync_with_stdio(0);
+    cin.tie(0)->sync_with_stdio(0);
 
-    int n;
-    cin >> n;
-
-    int k;
-    cin >> k;
-
-    int sol = k / n;
-    int rem = k % n;
-    if (rem < (n - 1)) --sol;
-
-    cout << sol << endl;
+    int n, k;
+    cin >> n >> k;
+    cout << (k - n + 1) / n << endl;
 
     return 0;
 }
