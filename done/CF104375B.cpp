@@ -4,16 +4,12 @@
 
 using namespace std;
 
-int main()
-{
-        cin.tie(0);
-        ios::sync_with_stdio(0);
+int main() {
+    cin.tie(0)->sync_with_stdio(0);
 
-        double N, K, L;
+    int n, k, l;
+    cin >> n >> k >> l;
+    cout << (n * k + l - 1) / l << endl;
 
-        cin >> N >> K >> L;
-
-        cout << ceil(N * K / L) << '\n';
-
-        return 0;
+    return 0;
 }
