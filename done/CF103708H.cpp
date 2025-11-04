@@ -1,25 +1,16 @@
-// https://codeforces.com/gym/103708/problem/H
-
-#include <bits/stdc++.h>
+#include <iostream>
 
 using namespace std;
 
 int main() {
-    cin.tie(0);
-    ios::sync_with_stdio(0);
+    cin.tie(0)->sync_with_stdio(0);
 
-    int N;
-
-    cin >> N;
-
-    if (N % 2 != 0) {
-        N--;
-    }
-    if (N % 4 == 0) {
-        cout << N / 4 * N / 4 << '\n';
-    } else {
-        cout << (N / 4) * (N / 4 + 1) << '\n';
-    }
+    int n;
+    cin >> n;
+    if (n % 2) --n;
+    int a = n / 4;
+    int b = (n + 3) / 4;
+    cout << a * b << endl;
 
     return 0;
 }
