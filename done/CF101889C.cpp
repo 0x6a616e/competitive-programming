@@ -2,112 +2,70 @@
 
 using namespace std;
 
+bool comparator(pair<int, int> &a, pair<int, int> &b) {
+    if (a.second == b.second) return a.first < b.first;
+    return a.second < b.second;
+}
+
 int main() {
-  cin.tie(0);
-  ios::sync_with_stdio(0);
+    cin.tie(0)->sync_with_stdio(0);
 
-  int k, n;
-  cin >> k >> n;
+    int k, n;
+    cin >> k >> n;
+    vector<int> freq(k + 1, 0);
+    for (int i = 0; i < n; ++i) {
+        int s;
+        cin >> s;
+        ++freq[s];
+    }
+    map<int, int> freq_freq;
+    for (int i = 1; i <= k; ++i) ++freq_freq[freq[i]];
 
-  vector<bool> exists(k + 1);
-  map<int, int> counter1;
-  for (int i = 0; i < n; ++i) {
-    int s;
-    cin >> s;
-    exists[s] = true;
-    ++counter1[s];
-  }
-
-  map<int, vector<int>> counter2;
-  for (pair<int, int> p : counter1) {
-    counter2[p.second].push_back(p.first);
-  }
-
-  int missing = 0;
-  for (int i = 1; i <= k; ++i)
-    if (!exists[i]) ++missing;
-
-  if (missing > 1) {
-    cout << "*\n";
-    return 0;
-  }
-  if (missing == 1) {
-    int sol = 0;
-    for (int i = 1; i <= k && !sol; ++i) {
-      if (!exists[i]) sol = i;
-    }
-    if (counter2.size() == 1 && counter2.begin()->first == 1) {
-      cout << "+" << sol << '\n';
-      return 0;
-    } else if (counter2.size() == 2) {
-      auto it1 = counter2.begin();
-      auto it2 = next(it1);
-      int diff = it2->first - it1->first;
-      if (it1->first == 1 && diff == 1 && it2->second.size() == 1) {
-        cout << "-" << it2->second[0] << " +" << sol << '\n';
-        return 0;
-      }
-    }
-    cout << "*\n";
-    return 0;
-  }
-  if (counter2.size() > 3) {
-    cout << "*\n";
-    return 0;
-  }
-  if (counter2.size() == 3) {
-    auto it1 = counter2.begin();
-    auto it2 = next(it1);
-    auto it3 = next(it2);
-    if (it2->first - it1->first > 1) {
-      cout << "*\n";
-      return 0;
-    }
-    if (it3->first - it2->first > 1) {
-      cout << "*\n";
-      return 0;
-    }
-    if (it1->second.size() != 1 || it3->second.size() != 1) {
-      cout << "*\n";
-      return 0;
-    }
-    cout << "-" << it3->second[0] << " +" << it1->second[0] << '\n';
-    return 0;
-  }
-  if (counter2.size() == 2) {
-    auto it1 = counter2.begin();
-    auto it2 = next(it1);
-    int diff = it2->first - it1->first;
-    if (diff > 2) {
-      cout << "*\n";
-      return 0;
-    }
-    if (diff == 2) {
-      if (it1->second.size() == 1 && it2->second.size() == 1) {
-        cout << "-" << it2->second[0] << " +" << it1->second[0] << '\n';
-        return 0;
-      } else {
-        cout << "*\n";
-        return 0;
-      }
-    }
-    if (diff == 1) {
-      if (it1->second.size() == 1 || it2->second.size() == 1) {
-        if (it1->second.size() == 1) {
-          cout << "+" << it1->second[0] << '\n';
-          return 0;
-        } else {
-          cout << "-" << it2->second[0] << '\n';
-          return 0;
+    pair<int, int> ans = {0, 0};
+    vector<pair<int, int>> pairs;
+    for (pair<int, int> p : freq_freq) pairs.push_back(p);
+    sort(pairs.begin(), pairs.end(), comparator);
+    if (freq_freq.size() == 2) {
+        if (pairs[0].second == 1 && pairs[0].first + 1 == pairs[1].first) {
+            for (int i = 1; i <= k; ++i) {
+                if (freq[i] == pairs[0].first) {
+                    ans = {i, 0};
+                    break;
+                }
+            }
+        } else if (pairs[0].second == 1 && pairs[0].first - 1 == pairs[1].first) {
+            for (int i = 1; i <= k; ++i) {
+                if (freq[i] == pairs[0].first) {
+                    ans = {-1 * i, 0};
+                    break;
+                }
+            }
+        } else if (pairs[0].second == 1 && pairs[1].second == 1 && pairs[1].second - pairs[0].second == 2) {
+            int a, b;
+            for (int i = 1; i <= k; ++i) {
+                if (freq[i] == pairs[0].first) a = i;
+                if (freq[i] == pairs[1].first) b = i;
+            }
+            ans = {-1 * b, a};
         }
-      } else {
-        cout << "*\n";
-        return 0;
-      }
+    } else if (freq_freq.size() == 3) {
+        sort(pairs.begin(), pairs.end());
+        if (pairs[0].second == 1 && pairs[2].second == 1 && pairs[0].first + 1 == pairs[1].first && pairs[2].first - 1 == pairs[1].first) {
+            int a, b;
+            for (int i = 1; i <= k; ++i) {
+                if (freq[i] == pairs[0].first) a = i;
+                if (freq[i] == pairs[2].first) b = i;
+            }
+            ans = {-1 * b, a};
+        }
     }
-  }
+    if (ans.first == 0) {
+        cout << "*\n";
+    } else {
+        cout << (ans.first > 0 ? "+" : "-") << abs(ans.first);
+        if (ans.second != 0) cout << (ans.second > 0 ? " +" : " -") << abs(ans.second);
+        cout << endl;
+    }
 
-  cout << "*\n";
-
-  return 0;
+    return 0;
 }
