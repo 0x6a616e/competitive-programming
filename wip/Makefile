@@ -11,5 +11,5 @@ debug: curr.cpp
 
 publish: curr.cpp
 	@echo "Generating file for upload..."
-	echo "#include <bits/stdc++.h> > upload.cpp"
-	tail -n 2 curr.cpp >> upload.cpp
+	echo "#include <bits/stdc++.h>" > upload.cpp
+	tail -n +2 curr.cpp >> upload.cpp
