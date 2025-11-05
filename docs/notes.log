@@ -1,14 +1,14 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025/nixos.org) (preloaded format=pdflatex 1980.1.1)  26 OCT 2025 20:31
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025/nixos.org) (preloaded format=pdflatex 1980.1.1)  5 NOV 2025 13:32
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
 **\nonstopmode \input{notes.tex}
 (./notes.tex
-(/nix/store/m11yhg90m5prd2hxj4s9g62467bpnk8i-texlive-2025-env-texmfdist/tex/lat
+(/nix/store/bghvqvaflq8383yhxgwc1q4ciaq5vi7f-texlive-2025-env-texmfdist/tex/lat
 ex/base/article.cls
 Document Class: article 2025/01/22 v1.4n Standard LaTeX document class
 
-(/nix/store/m11yhg90m5prd2hxj4s9g62467bpnk8i-texlive-2025-env-texmfdist/tex/lat
+(/nix/store/bghvqvaflq8383yhxgwc1q4ciaq5vi7f-texlive-2025-env-texmfdist/tex/lat
 ex/base/size10.clo
 File: size10.clo 2025/01/22 v1.4n Standard LaTeX file (size option)
 )
@@ -24,20 +24,20 @@ File: size10.clo 2025/01/22 v1.4n Standard LaTeX file (size option)
 \belowcaptionskip=\skip50
 \bibindent=\dimen148
 )
-(/nix/store/m11yhg90m5prd2hxj4s9g62467bpnk8i-texlive-2025-env-texmfdist/tex/lat
+(/nix/store/bghvqvaflq8383yhxgwc1q4ciaq5vi7f-texlive-2025-env-texmfdist/tex/lat
 ex/geometry/geometry.sty
 Package: geometry 2020/01/02 v5.9 Page Geometry
 
-(/nix/store/m11yhg90m5prd2hxj4s9g62467bpnk8i-texlive-2025-env-texmfdist/tex/lat
+(/nix/store/bghvqvaflq8383yhxgwc1q4ciaq5vi7f-texlive-2025-env-texmfdist/tex/lat
 ex/graphics/keyval.sty
 Package: keyval 2022/05/29 v1.15 key=value parser (DPC)
 \KV@toks@=\toks17
 )
-(/nix/store/m11yhg90m5prd2hxj4s9g62467bpnk8i-texlive-2025-env-texmfdist/tex/gen
+(/nix/store/bghvqvaflq8383yhxgwc1q4ciaq5vi7f-texlive-2025-env-texmfdist/tex/gen
 eric/iftex/ifvtex.sty
 Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
 
-(/nix/store/m11yhg90m5prd2hxj4s9g62467bpnk8i-texlive-2025-env-texmfdist/tex/gen
+(/nix/store/bghvqvaflq8383yhxgwc1q4ciaq5vi7f-texlive-2025-env-texmfdist/tex/gen
 eric/iftex/iftex.sty
 Package: iftex 2024/12/12 v1.0g TeX engine tests
 ))
@@ -54,32 +54,32 @@ Package: iftex 2024/12/12 v1.0g TeX engine tests
 \Gm@layoutvoffset=\dimen156
 \Gm@dimlist=\toks18
 )
-(/nix/store/m11yhg90m5prd2hxj4s9g62467bpnk8i-texlive-2025-env-texmfdist/tex/lat
+(/nix/store/bghvqvaflq8383yhxgwc1q4ciaq5vi7f-texlive-2025-env-texmfdist/tex/lat
 ex/graphics/graphicx.sty
 Package: graphicx 2024/12/31 v1.2e Enhanced LaTeX Graphics (DPC,SPQR)
 
-(/nix/store/m11yhg90m5prd2hxj4s9g62467bpnk8i-texlive-2025-env-texmfdist/tex/lat
+(/nix/store/bghvqvaflq8383yhxgwc1q4ciaq5vi7f-texlive-2025-env-texmfdist/tex/lat
 ex/graphics/graphics.sty
 Package: graphics 2024/08/06 v1.4g Standard LaTeX Graphics (DPC,SPQR)
 
-(/nix/store/m11yhg90m5prd2hxj4s9g62467bpnk8i-texlive-2025-env-texmfdist/tex/lat
+(/nix/store/bghvqvaflq8383yhxgwc1q4ciaq5vi7f-texlive-2025-env-texmfdist/tex/lat
 ex/graphics/trig.sty
 Package: trig 2023/12/02 v1.11 sin cos tan (DPC)
 )
-(/nix/store/m11yhg90m5prd2hxj4s9g62467bpnk8i-texlive-2025-env-texmfdist/tex/lat
+(/nix/store/bghvqvaflq8383yhxgwc1q4ciaq5vi7f-texlive-2025-env-texmfdist/tex/lat
 ex/graphics-cfg/graphics.cfg
 File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
 )
 Package graphics Info: Driver file: pdftex.def on input line 106.
 
-(/nix/store/m11yhg90m5prd2hxj4s9g62467bpnk8i-texlive-2025-env-texmfdist/tex/lat
+(/nix/store/bghvqvaflq8383yhxgwc1q4ciaq5vi7f-texlive-2025-env-texmfdist/tex/lat
 ex/graphics-def/pdftex.def
 File: pdftex.def 2024/04/13 v1.2c Graphics/color driver for pdftex
 ))
 \Gin@req@height=\dimen157
 \Gin@req@width=\dimen158
 )
-(/nix/store/m11yhg90m5prd2hxj4s9g62467bpnk8i-texlive-2025-env-texmfdist/tex/lat
+(/nix/store/bghvqvaflq8383yhxgwc1q4ciaq5vi7f-texlive-2025-env-texmfdist/tex/lat
 ex/listings/listings.sty
 \lst@mode=\count286
 \lst@gtempboxa=\box53
@@ -94,28 +94,28 @@ ex/listings/listings.sty
 \lst@lineno=\count291
 \lst@maxwidth=\dimen162
 
-(/nix/store/m11yhg90m5prd2hxj4s9g62467bpnk8i-texlive-2025-env-texmfdist/tex/lat
+(/nix/store/bghvqvaflq8383yhxgwc1q4ciaq5vi7f-texlive-2025-env-texmfdist/tex/lat
 ex/listings/lstpatch.sty
 File: lstpatch.sty 2024/09/23 1.10c (Carsten Heinz)
 )
-(/nix/store/m11yhg90m5prd2hxj4s9g62467bpnk8i-texlive-2025-env-texmfdist/tex/lat
+(/nix/store/bghvqvaflq8383yhxgwc1q4ciaq5vi7f-texlive-2025-env-texmfdist/tex/lat
 ex/listings/lstmisc.sty
 File: lstmisc.sty 2024/09/23 1.10c (Carsten Heinz)
 \c@lstnumber=\count292
 \lst@skipnumbers=\count293
 \lst@framebox=\box54
 )
-(/nix/store/m11yhg90m5prd2hxj4s9g62467bpnk8i-texlive-2025-env-texmfdist/tex/lat
+(/nix/store/bghvqvaflq8383yhxgwc1q4ciaq5vi7f-texlive-2025-env-texmfdist/tex/lat
 ex/listings/listings.cfg
 File: listings.cfg 2024/09/23 1.10c listings configuration
 ))
 Package: listings 2024/09/23 1.10c (Carsten Heinz)
 
-(/nix/store/m11yhg90m5prd2hxj4s9g62467bpnk8i-texlive-2025-env-texmfdist/tex/lat
+(/nix/store/bghvqvaflq8383yhxgwc1q4ciaq5vi7f-texlive-2025-env-texmfdist/tex/lat
 ex/mathtools/mathtools.sty
 Package: mathtools 2024/10/04 v1.31 mathematical typesetting tools
 
-(/nix/store/m11yhg90m5prd2hxj4s9g62467bpnk8i-texlive-2025-env-texmfdist/tex/lat
+(/nix/store/bghvqvaflq8383yhxgwc1q4ciaq5vi7f-texlive-2025-env-texmfdist/tex/lat
 ex/tools/calc.sty
 Package: calc 2025/03/01 v4.3b Infix arithmetic (KKT,FJ)
 \calc@Acount=\count294
@@ -129,33 +129,33 @@ LaTeX Info: Redefining \addtolength on input line 87.
 \calc@Ccount=\count296
 \calc@Cskip=\skip53
 )
-(/nix/store/m11yhg90m5prd2hxj4s9g62467bpnk8i-texlive-2025-env-texmfdist/tex/lat
+(/nix/store/bghvqvaflq8383yhxgwc1q4ciaq5vi7f-texlive-2025-env-texmfdist/tex/lat
 ex/mathtools/mhsetup.sty
 Package: mhsetup 2021/03/18 v1.4 programming setup (MH)
 )
-(/nix/store/m11yhg90m5prd2hxj4s9g62467bpnk8i-texlive-2025-env-texmfdist/tex/lat
+(/nix/store/bghvqvaflq8383yhxgwc1q4ciaq5vi7f-texlive-2025-env-texmfdist/tex/lat
 ex/amsmath/amsmath.sty
 Package: amsmath 2025/06/16 v2.17y AMS math features
 \@mathmargin=\skip54
 
 For additional information on amsmath, use the `?' option.
 
-(/nix/store/m11yhg90m5prd2hxj4s9g62467bpnk8i-texlive-2025-env-texmfdist/tex/lat
+(/nix/store/bghvqvaflq8383yhxgwc1q4ciaq5vi7f-texlive-2025-env-texmfdist/tex/lat
 ex/amsmath/amstext.sty
 Package: amstext 2024/11/17 v2.01 AMS text
 
-(/nix/store/m11yhg90m5prd2hxj4s9g62467bpnk8i-texlive-2025-env-texmfdist/tex/lat
+(/nix/store/bghvqvaflq8383yhxgwc1q4ciaq5vi7f-texlive-2025-env-texmfdist/tex/lat
 ex/amsmath/amsgen.sty
 File: amsgen.sty 1999/11/30 v2.0 generic functions
 \@emptytoks=\toks20
 \ex@=\dimen165
 ))
-(/nix/store/m11yhg90m5prd2hxj4s9g62467bpnk8i-texlive-2025-env-texmfdist/tex/lat
+(/nix/store/bghvqvaflq8383yhxgwc1q4ciaq5vi7f-texlive-2025-env-texmfdist/tex/lat
 ex/amsmath/amsbsy.sty
 Package: amsbsy 1999/11/29 v1.2d Bold Symbols
 \pmbraise@=\dimen166
 )
-(/nix/store/m11yhg90m5prd2hxj4s9g62467bpnk8i-texlive-2025-env-texmfdist/tex/lat
+(/nix/store/bghvqvaflq8383yhxgwc1q4ciaq5vi7f-texlive-2025-env-texmfdist/tex/lat
 ex/amsmath/amsopn.sty
 Package: amsopn 2022/04/08 v2.04 operator names
 )
@@ -219,11 +219,11 @@ LaTeX Info: Redefining \] on input line 2950.
 \xmathstrut@box=\box57
 \xmathstrut@dim=\dimen181
 )
-(/nix/store/m11yhg90m5prd2hxj4s9g62467bpnk8i-texlive-2025-env-texmfdist/tex/lat
+(/nix/store/bghvqvaflq8383yhxgwc1q4ciaq5vi7f-texlive-2025-env-texmfdist/tex/lat
 ex/tools/tabularx.sty
 Package: tabularx 2023/12/11 v2.12a `tabularx' package (DPC)
 
-(/nix/store/m11yhg90m5prd2hxj4s9g62467bpnk8i-texlive-2025-env-texmfdist/tex/lat
+(/nix/store/bghvqvaflq8383yhxgwc1q4ciaq5vi7f-texlive-2025-env-texmfdist/tex/lat
 ex/tools/array.sty
 Package: array 2025/06/08 v2.6j Tabular extension package (FMi)
 \col@sep=\dimen182
@@ -242,7 +242,7 @@ Package: array 2025/06/08 v2.6j Tabular extension package (FMi)
 \TX@cols=\count310
 \TX@ftn=\toks26
 )
-(/nix/store/m11yhg90m5prd2hxj4s9g62467bpnk8i-texlive-2025-env-texmfdist/tex/lat
+(/nix/store/bghvqvaflq8383yhxgwc1q4ciaq5vi7f-texlive-2025-env-texmfdist/tex/lat
 ex/ragged2e/ragged2e.sty
 Package: ragged2e 2023/06/22 v3.6 ragged2e Package
 \CenteringLeftskip=\skip60
@@ -260,19 +260,19 @@ Package: ragged2e 2023/06/22 v3.6 ragged2e Package
 \RaggedRightParindent=\skip72
 \JustifyingParindent=\skip73
 )
-(/nix/store/m11yhg90m5prd2hxj4s9g62467bpnk8i-texlive-2025-env-texmfdist/tex/lat
+(/nix/store/bghvqvaflq8383yhxgwc1q4ciaq5vi7f-texlive-2025-env-texmfdist/tex/lat
 ex/listings/lstlang1.sty
 File: lstlang1.sty 2024/09/23 1.10c listings language file
 )
-(/nix/store/m11yhg90m5prd2hxj4s9g62467bpnk8i-texlive-2025-env-texmfdist/tex/lat
+(/nix/store/bghvqvaflq8383yhxgwc1q4ciaq5vi7f-texlive-2025-env-texmfdist/tex/lat
 ex/listings/lstlang1.sty
 File: lstlang1.sty 2024/09/23 1.10c listings language file
 )
-(/nix/store/m11yhg90m5prd2hxj4s9g62467bpnk8i-texlive-2025-env-texmfdist/tex/lat
+(/nix/store/bghvqvaflq8383yhxgwc1q4ciaq5vi7f-texlive-2025-env-texmfdist/tex/lat
 ex/listings/lstmisc.sty
 File: lstmisc.sty 2024/09/23 1.10c (Carsten Heinz)
 )
-(/nix/store/m11yhg90m5prd2hxj4s9g62467bpnk8i-texlive-2025-env-texmfdist/tex/lat
+(/nix/store/bghvqvaflq8383yhxgwc1q4ciaq5vi7f-texlive-2025-env-texmfdist/tex/lat
 ex/l3backend/l3backend-pdftex.def
 File: l3backend-pdftex.def 2025-06-09 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count311
@@ -329,7 +329,7 @@ LaTeX Font Info:    ... okay on input line 16.
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
 
-(/nix/store/m11yhg90m5prd2hxj4s9g62467bpnk8i-texlive-2025-env-texmfdist/tex/con
+(/nix/store/bghvqvaflq8383yhxgwc1q4ciaq5vi7f-texlive-2025-env-texmfdist/tex/con
 text/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count312
@@ -344,13 +344,13 @@ text/base/mkii/supp-pdf.mkii
 \makeMPintoPDFobject=\count317
 \everyMPtoPDFconversion=\toks28
 )
-(/nix/store/m11yhg90m5prd2hxj4s9g62467bpnk8i-texlive-2025-env-texmfdist/tex/lat
+(/nix/store/bghvqvaflq8383yhxgwc1q4ciaq5vi7f-texlive-2025-env-texmfdist/tex/lat
 ex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 85.
 
-(/nix/store/m11yhg90m5prd2hxj4s9g62467bpnk8i-texlive-2025-env-texmfdist/tex/lat
+(/nix/store/bghvqvaflq8383yhxgwc1q4ciaq5vi7f-texlive-2025-env-texmfdist/tex/lat
 ex/latexconfig/epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
@@ -364,10 +364,10 @@ e
 
 [1
 
-{/nix/store/sdji4hp83pbdydbxg4mlp6x6iwyj3j8v-texlive-2025-env/share/texmf-var/f
+{/nix/store/2zwsngpna3xab5cdagqg6gpp674dhjgj-texlive-2025-env/share/texmf-var/f
 onts/map/pdftex/updmap/pdftex.map}]
 
-[2{/nix/store/m11yhg90m5prd2hxj4s9g62467bpnk8i-texlive-2025-env-texmfdist/fonts
+[2{/nix/store/bghvqvaflq8383yhxgwc1q4ciaq5vi7f-texlive-2025-env-texmfdist/fonts
 /enc/dvips/cm-super/cm-super-ts1.enc}]
 
 [3]
@@ -380,7 +380,7 @@ onts/map/pdftex/updmap/pdftex.map}]
 LaTeX Font Info:    Trying to load font information for OMS+cmr on input line 4
 67.
 
-(/nix/store/m11yhg90m5prd2hxj4s9g62467bpnk8i-texlive-2025-env-texmfdist/tex/lat
+(/nix/store/bghvqvaflq8383yhxgwc1q4ciaq5vi7f-texlive-2025-env-texmfdist/tex/lat
 ex/base/omscmr.fd
 File: omscmr.fd 2024/11/19 v2.5n Standard LaTeX font definitions
 )
@@ -389,7 +389,7 @@ LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
 LaTeX Font Info:    Trying to load font information for OML+cmr on input line 4
 78.
 
-(/nix/store/m11yhg90m5prd2hxj4s9g62467bpnk8i-texlive-2025-env-texmfdist/tex/lat
+(/nix/store/bghvqvaflq8383yhxgwc1q4ciaq5vi7f-texlive-2025-env-texmfdist/tex/lat
 ex/base/omlcmr.fd
 File: omlcmr.fd 2024/11/19 v2.5n Standard LaTeX font definitions
 )
@@ -413,7 +413,9 @@ LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <10> not available
 
 [14]
 
-[15] (./notes.aux)
+[15]
+
+[16] (./notes.aux)
  ***********
 LaTeX2e <2025-06-01> patch level 1
 L3 programming layer <2025-06-09>
@@ -427,28 +429,28 @@ Here is how much of TeX's memory you used:
  629855 words of font info for 50 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  74i,9n,82p,280b,1560s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</nix/store/m11yhg90m5prd2hxj4s9g62467bpnk8i-texlive-2025-env-texmfdist/fonts
-/type1/public/amsfonts/cm/cmbx10.pfb></nix/store/m11yhg90m5prd2hxj4s9g62467bpnk
-8i-texlive-2025-env-texmfdist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></nix/s
-tore/m11yhg90m5prd2hxj4s9g62467bpnk8i-texlive-2025-env-texmfdist/fonts/type1/pu
-blic/amsfonts/cm/cmex10.pfb></nix/store/m11yhg90m5prd2hxj4s9g62467bpnk8i-texliv
-e-2025-env-texmfdist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></nix/store/m11y
-hg90m5prd2hxj4s9g62467bpnk8i-texlive-2025-env-texmfdist/fonts/type1/public/amsf
-onts/cm/cmmi7.pfb></nix/store/m11yhg90m5prd2hxj4s9g62467bpnk8i-texlive-2025-env
--texmfdist/fonts/type1/public/amsfonts/cm/cmr10.pfb></nix/store/m11yhg90m5prd2h
-xj4s9g62467bpnk8i-texlive-2025-env-texmfdist/fonts/type1/public/amsfonts/cm/cmr
-7.pfb></nix/store/m11yhg90m5prd2hxj4s9g62467bpnk8i-texlive-2025-env-texmfdist/f
-onts/type1/public/amsfonts/cm/cmsy10.pfb></nix/store/m11yhg90m5prd2hxj4s9g62467
-bpnk8i-texlive-2025-env-texmfdist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></ni
-x/store/m11yhg90m5prd2hxj4s9g62467bpnk8i-texlive-2025-env-texmfdist/fonts/type1
-/public/amsfonts/cm/cmti10.pfb></nix/store/m11yhg90m5prd2hxj4s9g62467bpnk8i-tex
-live-2025-env-texmfdist/fonts/type1/public/cm-super/sfrm1000.pfb></nix/store/m1
-1yhg90m5prd2hxj4s9g62467bpnk8i-texlive-2025-env-texmfdist/fonts/type1/public/cm
+</nix/store/bghvqvaflq8383yhxgwc1q4ciaq5vi7f-texlive-2025-env-texmfdist/fonts
+/type1/public/amsfonts/cm/cmbx10.pfb></nix/store/bghvqvaflq8383yhxgwc1q4ciaq5vi
+7f-texlive-2025-env-texmfdist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></nix/s
+tore/bghvqvaflq8383yhxgwc1q4ciaq5vi7f-texlive-2025-env-texmfdist/fonts/type1/pu
+blic/amsfonts/cm/cmex10.pfb></nix/store/bghvqvaflq8383yhxgwc1q4ciaq5vi7f-texliv
+e-2025-env-texmfdist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></nix/store/bghv
+qvaflq8383yhxgwc1q4ciaq5vi7f-texlive-2025-env-texmfdist/fonts/type1/public/amsf
+onts/cm/cmmi7.pfb></nix/store/bghvqvaflq8383yhxgwc1q4ciaq5vi7f-texlive-2025-env
+-texmfdist/fonts/type1/public/amsfonts/cm/cmr10.pfb></nix/store/bghvqvaflq8383y
+hxgwc1q4ciaq5vi7f-texlive-2025-env-texmfdist/fonts/type1/public/amsfonts/cm/cmr
+7.pfb></nix/store/bghvqvaflq8383yhxgwc1q4ciaq5vi7f-texlive-2025-env-texmfdist/f
+onts/type1/public/amsfonts/cm/cmsy10.pfb></nix/store/bghvqvaflq8383yhxgwc1q4cia
+q5vi7f-texlive-2025-env-texmfdist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></ni
+x/store/bghvqvaflq8383yhxgwc1q4ciaq5vi7f-texlive-2025-env-texmfdist/fonts/type1
+/public/amsfonts/cm/cmti10.pfb></nix/store/bghvqvaflq8383yhxgwc1q4ciaq5vi7f-tex
+live-2025-env-texmfdist/fonts/type1/public/cm-super/sfrm1000.pfb></nix/store/bg
+hvqvaflq8383yhxgwc1q4ciaq5vi7f-texlive-2025-env-texmfdist/fonts/type1/public/cm
 -super/sfti1000.pfb>
-Output written on notes.pdf (15 pages, 192346 bytes).
+Output written on notes.pdf (16 pages, 195508 bytes).
 PDF statistics:
- 114 PDF objects out of 1000 (max. 8388607)
- 72 compressed objects within 1 object stream
+ 117 PDF objects out of 1000 (max. 8388607)
+ 74 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
