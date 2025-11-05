@@ -1,14 +1,15 @@
 CFLAGS = -O2 -std=c++17 -Wall -Wextra -Wshadow
 CDFLAGS = --debug -std=c++17 -Wpedantic
 
-main: *.cpp
+main: curr.cpp
 	@echo "Compiling..."
-	g++ $(CFLAGS) *.cpp -o main.out
+	g++ $(CFLAGS) curr.cpp -o main.out
 
-debug: *.cpp
+debug: curr.cpp
 	@echo "Compiling for debugging..."
-	g++ $(CDFLAGS) *.cpp -o main.out
+	g++ $(CDFLAGS) curr.cpp -o main.out
 
-clean:
-	@echo "Deleting files..."
-	rm main.out
+publish: curr.cpp
+	@echo "Generating file for upload..."
+	echo "#include <bits/stdc++.h> > upload.cpp"
+	tail -n 2 curr.cpp >> upload.cpp
