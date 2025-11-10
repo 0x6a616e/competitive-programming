@@ -8,8 +8,3 @@ main: curr.cpp
 debug: curr.cpp
 	@echo "Compiling for debugging..."
 	g++ $(CDFLAGS) curr.cpp -o main.out
-
-publish: curr.cpp
-	@echo "Generating file for upload..."
-	echo "#include <bits/stdc++.h>" > upload.cpp
-	tail -n +2 curr.cpp >> upload.cpp
