@@ -1,4 +1,12 @@
 wip/*.out
-wip/*.txt
-wip/*.cpp
-wip/*.hpp
+
+# Devenv
+.devenv*
+devenv.local.nix
+devenv.local.yaml
+
+# direnv
+.direnv
+
+# pre-commit
+.pre-commit-config.yaml
